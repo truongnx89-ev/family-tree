@@ -284,19 +284,29 @@ const onq=e=>{q=e.target.value.trim().toLowerCase();$('#qs').value=$('#gs').valu
 $('#qs').oninput=onq;$('#gs').oninput=onq;
 addEventListener('resize',()=>{applyZoom();lines()});
 
-  (function loadInitialData() {
-  const STORAGE_KEY = 'giapha_ngo_v2';
-  const existingData = localStorage.getItem(STORAGE_KEY);
+// Tự động nạp dữ liệu khởi tạo cho cả Gia phả và Danh sách người dùng
+(function loadInitialData() {
+  const fetchAndStore = (key, filePath) => {
+    const existingData = localStorage.getItem(key);
+    
+    // Nếu chưa có dữ liệu hoặc dữ liệu rỗng/null[cite: 3]
+    if (!existingData || existingData === '""' || existingData === 'null' || existingData === '[]') {
+      fetch(filePath)
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(data => {
+          localStorage.setItem(key, JSON.stringify(data));
+          console.log(`Đã nạp thành công ${key}`);
+          window.location.reload(); // Tải lại trang sau khi nạp xong
+        })
+        .catch(err => console.error(`Lỗi nạp file ${filePath}:`, err));
+    }
+  };
+
+  // Nạp dữ liệu Cây gia phả[cite: 3]
+  fetchAndStore('giapha_ngo_v1', './giapha_ngo_v1.json');
   
-  if (!existingData || existingData === '""' || existingData === 'null' || existingData === '[]') {
-    fetch('./giapha_ngo_v2.json')
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .then(data => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        window.location.reload();
-      })
-      .catch(err => console.error('Lỗi nạp JSON:', err));
-  }
+  // Nạp dữ liệu Danh sách tài khoản người dùng[cite: 3]
+  fetchAndStore('giapha_users_v1', './giapha_users_v1.json');
 })();
 
 
