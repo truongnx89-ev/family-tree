@@ -76,7 +76,7 @@ dialog label{display:block;margin:8px 0 2px;font-size:12px;color:var(--mu)}dialo
 </main>
 <dialog id="dlg"><form method="dialog" id="fm"></form></dialog>
 <script>
-const KEY='giapha_ngo_v2';
+const KEY='giapha_ngo_v1';
 const seed=()=>[];
 let M;try{M=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!Array.isArray(M)||!M.length||!M.every(m=>Array.isArray(m.sids)))M=seed();
 const save=()=>sv(KEY,M);
