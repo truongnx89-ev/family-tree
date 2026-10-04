@@ -84,6 +84,7 @@ dialog{padding:14px}.g2{grid-template-columns:1fr}
 #lb .lbs{width:100vw;height:70vh}.lbn{font-size:24px!important;padding:6px 10px!important}
 }
 .tg{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);min-width:24px;height:22px;border-radius:11px;border:1px solid var(--g);background:#fff;color:var(--g);font-size:12px;font-weight:700;cursor:pointer;padding:0 6px;z-index:4;line-height:1}.tg:hover{background:var(--g);color:#fff}
+#lines{z-index:0}.card.hl{border-color:#e8590c;box-shadow:0 0 0 3px #e8590c55}.card.fade{opacity:.4}.hlb{position:absolute;left:12px;top:10px;background:#fff;border:1px solid #e8590c;border-radius:8px;padding:4px 10px;font-size:12px;z-index:5;max-width:70%}
 </style></head><body>
 <header>
 <div class="logo"><svg width="46" height="52" viewBox="0 0 46 52"><circle cx="23" cy="18" r="16" fill="#1f7a57"/><circle cx="12" cy="24" r="9" fill="#2e8f69"/><circle cx="34" cy="24" r="9" fill="#2e8f69"/><rect x="20" y="28" width="6" height="22" fill="#14543b"/></svg><div><b>Cây Gia Phả</b><small>Gìn giữ cội nguồn - Kết nối yêu thương</small></div></div>
@@ -180,6 +181,8 @@ function hiddenSet(){const h=new Set();if(q)return h;const st=[...collapsed];
 function tgBtn(m){const k=kidsOf(m.id);if(!k.length)return'';
  if(m.g=='F'&&m.sids.some(s=>{const o=get(s);return o&&o.g=='M'&&k.every(c=>c.fid==o.id)}))return'';
  const c=collapsed.has(m.id);return`<button class="tg" data-tg="${m.id}" title="${c?'Mở rộng nhánh':'Thu gọn nhánh'}">${c?'+'+k.length:'−'}</button>`}
+let hlOn=false,HL=null,HLC=null;
+function lineage(id){const S=new Set([id]);const up=x=>{const m=get(x);if(!m)return;[m.fid,m.mid].forEach(p=>{if(p&&!S.has(p)){S.add(p);up(p)}})};up(id);const dn=x=>kidsOf(x).forEach(c=>{if(!S.has(c.id)){S.add(c.id);dn(c.id)}});dn(id);return S}
 let alb=0,lb=null;const curAlb=()=>C.albums.find(a=>a.id==alb);
 if(!C.albums){C.albums=[];if(C.gallery&&C.gallery.length)C.albums.push({id:1,name:'Ảnh chung',imgs:C.gallery})}delete C.gallery;
 function showLb(a,i){lb={a,i,z:1};drawLb()}
@@ -233,15 +236,16 @@ function order(){
  return rows;
 }
 const ring='<svg class="ring" viewBox="0 0 24 16"><circle cx="8" cy="8" r="6" fill="#fff" stroke="#1f7a57" stroke-width="2"/><circle cx="16" cy="8" r="6" fill="none" stroke="#1f7a57" stroke-width="2"/></svg>';
-const card=m=>`<div class="card ${m.g} ${m.id==sel?'sel':''} ${match(m)?'':'dim'}" data-id="${m.id}">${av(m)}<b>${esc(m.name)}</b><span>${years(m)||'&nbsp;'}</span><span>Đời ${m.gen} · ${role(m)}</span>${tgBtn(m)}</div>`;
+const card=m=>`<div class="card ${m.g} ${m.id==sel?'sel':''} ${match(m)?'':'dim'} ${HLC?(HLC.has(m.id)?'hl':'fade'):''}" data-id="${m.id}">${av(m)}<b>${esc(m.name)}</b><span>${years(m)||'&nbsp;'}</span><span>Đời ${m.gen} · ${role(m)}</span>${tgBtn(m)}</div>`;
 function renderTree(){
  if(!M.length){$('#body').innerHTML='<div class="pg" style="padding:60px;text-align:center;color:var(--mu)">Chưa có thành viên nào.<br>Đăng nhập tài khoản có quyền sửa rồi bấm “+ Thêm” hoặc “Nhập JSON”.<br><small>'+(window.__ld||'')+'</small></div>';return}
  const old=$('#vp'),sl=old?old.scrollLeft:0,st=old?old.scrollTop:0;
+ HL=hlOn&&get(sel)?lineage(sel):null;HLC=HL?new Set([...HL].flatMap(i=>[i,...((get(i)||{}).sids||[])])):null;
  const rows=order().filter(r=>!gen||r[0]==gen);
  let h='<div class="vpw"><div class="vp" id="vp"><div id="sz"><div id="cv"><svg id="lines"></svg>';
  rows.forEach(([g,U])=>{let c='',n=0;U.forEach(u=>{n+=u.length;c+=u.length>1?`<div class="pair">${u.map((m,i)=>(i?'<i class="rg">'+ring+'</i>':'')+card(m)).join('')}</div>`:card(u[0])});
   h+=`<div class="row"><span class="rl">Đời ${g} · ${n}</span>${c}</div>`});
- h+='</div></div></div><div class="zc"><button id="zo" title="Thu nhỏ">−</button><button id="zr" title="Về 100%">100%</button><button id="zi" title="Phóng to">+</button><button id="zf" title="Vừa khung">⛶</button></div></div>';
+ h+='</div></div></div><div class="zc"><button id="zo" title="Thu nhỏ">−</button><button id="zr" title="Về 100%">100%</button><button id="zi" title="Phóng to">+</button><button id="zf" title="Vừa khung">⛶</button></div>'+(HL?'<div class="hlb">Đang tô sáng nguồn gốc &amp; con cháu của <b>'+esc(get(sel).name)+'</b> · bấm vào nền để bỏ</div>':'')+'</div>';
  $('#body').innerHTML=h;applyZoom();const nv=$('#vp');nv.scrollLeft=sl;nv.scrollTop=st;lines();bindZoom();
 }
 function applyZoom(){const vp=$('#vp'),cv=$('#cv'),sz=$('#sz');if(!vp||!cv)return;cv.style.transform=`scale(${zoom})`;cv.style.minWidth=vp.clientWidth/zoom+'px';sz.style.width=cv.offsetWidth*zoom+'px';sz.style.height=cv.offsetHeight*zoom+'px';$('#zr').textContent=Math.round(zoom*100)+'%'}
@@ -257,28 +261,33 @@ function bindZoom(){const vp=$('#vp');if(!vp)return;let dr=null,mv=0,pd=0,pz=1;
  vp.addEventListener('touchstart',e=>{if(e.touches.length==2){pd=td(e);pz=zoom}},{passive:true});
  vp.addEventListener('touchmove',e=>{if(e.touches.length==2&&pd){e.preventDefault();const r=vp.getBoundingClientRect();setZoom(pz*td(e)/pd,(e.touches[0].clientX+e.touches[1].clientX)/2-r.left,(e.touches[0].clientY+e.touches[1].clientY)/2-r.top)}},{passive:false});
  vp.addEventListener('touchend',()=>{pd=0})}
-function lines(){
+function lines(pass=0){
  const cv=$('#cv'),svg=$('#lines');if(!cv)return;const o=cv.getBoundingClientRect(),z=zoom;
- svg.setAttribute('width',cv.scrollWidth);svg.setAttribute('height',cv.scrollHeight);
- const R=id=>{if(!id)return null;const e=cv.querySelector(`.card[data-id="${id}"]`);if(!e)return null;const r=e.getBoundingClientRect();return{x:(r.left-o.left)/z,y:(r.top-o.top)/z,w:r.width/z,h:r.height/z}};
+ const R=id=>{if(!id)return null;const e=cv.querySelector(`.card[data-id="${id}"]`);if(!e)return null;const r=e.getBoundingClientRect();return{x:(r.left-o.left)/z,y:(r.top-o.top)/z,w:r.width/z,h:r.height/z,row:e.closest('.row')}};
  const G={};
- M.forEach(c=>{if(!(c.fid||c.mid))return;const rc=R(c.id);if(!rc)return;const rf=R(c.fid),rm=R(c.mid);if(!rf&&!rm)return;const k=c.fid+'|'+c.mid;(G[k]=G[k]||{rf,rm,k:[],g:c.gen}).k.push(rc)});
+ M.forEach(c=>{if(!(c.fid||c.mid))return;const rc=R(c.id);if(!rc)return;const rf=R(c.fid),rm=R(c.mid);if(!rf&&!rm)return;const k=c.fid+'|'+c.mid,g=(G[k]=G[k]||{rf,rm,k:[],ids:[],g:c.gen,row:rc.row});g.k.push(rc);g.ids.push(c.id)});
  const byG={};Object.values(G).forEach(g=>(byG[g.g]=byG[g.g]||[]).push(g));
- let d='';
- Object.values(byG).forEach(L=>{const lanes=[];
+ const Ls=Object.values(byG);let chg=0;
+ Ls.forEach(L=>{const lanes=[];
   L.forEach(g=>{const both=g.rf&&g.rm,p=g.rf||g.rm;
    g.ax=both?((g.rf.x+g.rf.w/2)+(g.rm.x+g.rm.w/2))/2:p.x+p.w/2;
    g.sy=both?Math.max(g.rf.y,g.rm.y)+g.rf.h*.5:p.y+p.h;
    g.cx=g.k.map(r=>r.x+r.w/2);g.top=Math.min(...g.k.map(r=>r.y));
-   g.lo=Math.min(g.ax,...g.cx);g.hi=Math.max(g.ax,...g.cx)});
-  L.forEach(g=>g.lv=0);
+   g.lo=Math.min(g.ax,...g.cx);g.hi=Math.max(g.ax,...g.cx);g.lv=0});
   for(let it=0;it<L.length;it++)L.forEach(a=>L.forEach(b=>{if(a!==b&&a.ax>b.lo+4&&a.ax<b.hi-4&&a.lv<=b.lv&&a.lv<8)a.lv=b.lv+1}));
-  L.sort((a,b)=>a.lv-b.lv||a.lo-b.lo);
+  L.sort((a,b)=>a.lv-b.lv||a.lo-b.lo);let mx=0;
   L.forEach(g=>{let n=0;L.forEach(b=>{if(b.n!=null&&g.ax>b.lo+4&&g.ax<b.hi-4)n=Math.max(n,b.n+1)});
    for(;;n++){const u=(lanes[n]=lanes[n]||[]);if(!u.some(b=>g.lo<b.hi+10&&g.hi>b.lo-10))break}
-   g.n=n;lanes[n].push(g);const by=g.top-20-n*10;
-   d+=`M${g.ax},${g.sy}V${by}M${g.lo},${by}H${g.hi}`+g.cx.map((x,i)=>`M${x},${by}V${g.k[i].y}`).join('')});});
- svg.innerHTML=`<path d="${d}" fill="none" stroke="#1f7a57" stroke-width="1.6"/>`;
+   g.n=n;lanes[n].push(g);mx=Math.max(mx,n)});
+  const need=Math.max(64,44+9*mx),pr=L[0].row&&L[0].row.previousElementSibling;
+  if(pr&&pr.classList.contains('row')&&Math.abs((parseFloat(pr.style.marginBottom)||0)-need)>1){pr.style.marginBottom=need+'px';chg=1}});
+ if(chg&&pass<3){applyZoom();return lines(pass+1)}
+ svg.setAttribute('width',cv.scrollWidth);svg.setAttribute('height',cv.scrollHeight);
+ let d='',h='';
+ Ls.forEach(L=>L.forEach(g=>{const by=g.top-24-g.n*9;
+  d+=`M${g.ax},${g.sy}V${by}M${g.lo},${by}H${g.hi}`+g.cx.map((x,i)=>`M${x},${by}V${g.k[i].y}`).join('');
+  if(HL)g.ids.forEach((id,i)=>{const c=get(id);if(HL.has(id)&&((c.fid&&HL.has(c.fid))||(c.mid&&HL.has(c.mid))))h+=`M${g.ax},${g.sy}V${by}M${Math.min(g.ax,g.cx[i])},${by}H${Math.max(g.ax,g.cx[i])}M${g.cx[i]},${by}V${g.k[i].y}`})}));
+ svg.innerHTML=`<path d="${d}" fill="none" stroke="#1f7a57" stroke-width="1.6"/>`+(h?`<path d="${h}" fill="none" stroke="#e8590c" stroke-width="3" stroke-linejoin="round"/>`:'');
 }
 function renderList(){
  const L=M.filter(m=>(!gen||m.gen==gen)&&match(m)).sort((a,b)=>a.gen-b.gen||a.id-b.id);
@@ -316,11 +325,12 @@ function form(m,isNew){
 }
 document.addEventListener('click',e=>{
  if(e.target.id=='lb'||e.target.className=='lbs'){lb=null;drawLb();return}
+ if(hlOn&&e.target.closest('#vp')&&!e.target.closest('.card')&&!e.target.closest('button')){hlOn=false;render();return}
  const t=e.target.closest('[data-id],[data-p],[data-g],[data-t],[data-act],[data-lb],button');if(!t)return;
  if(t.dataset.lb){lbAct(t.dataset.lb);return}
  if(t.dataset.tg){const i=+t.dataset.tg;collapsed.has(i)?collapsed.delete(i):collapsed.add(i);saveCol();render();return}
  if(t.dataset.act){act(t.dataset.act,t.dataset.i);return}
- if(t.dataset.id&&!t.closest('dialog')){sel=+t.dataset.id;render();$('#side').classList.add('open');return}
+ if(t.dataset.id&&!t.closest('dialog')){sel=+t.dataset.id;hlOn=true;render();$('#side').classList.add('open');return}
  if(t.dataset.p){page=t.dataset.p;render();return}
  if(t.dataset.g!=null){gen=+t.dataset.g;render();return}
  if(t.dataset.t!=null){tab=+t.dataset.t;renderSide();return}
