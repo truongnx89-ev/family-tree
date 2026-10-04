@@ -59,6 +59,30 @@ dialog label{display:block;margin:8px 0 2px;font-size:12px;color:var(--mu)}dialo
 .lbx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px}.lbn{position:absolute;top:50%;font-size:30px!important}.lbn.l{left:8px}.lbn.r{right:8px}.lbc{position:absolute;bottom:calc(12px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#fff}
 .al{position:relative}.ac{display:block;width:100%;border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:#fff;padding:0;cursor:pointer;text-align:left;font:inherit;color:inherit}.ac img{width:100%;height:160px;object-fit:cover;display:block}
 .ib{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}.hd img{max-width:100%}
+
+.sx{display:none}.vp{touch-action:pan-x pan-y}button,a.btn{touch-action:manipulation}
+@media(max-width:800px){
+html,body{height:100dvh}input,select,textarea{font-size:16px}
+header{gap:6px 10px;padding:8px 12px}.logo{order:1;flex:1;min-width:0}.logo b{font-size:20px}.logo small{display:none}.logo svg{width:32px;height:36px}
+.hu{order:2}.hu .btn{padding:6px 10px;font-size:13px}.hu span{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+nav{order:3;width:100%;flex:none;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:2px}nav a{padding:6px 12px;white-space:nowrap;font-size:13px}
+.hs{order:4;width:100%}.hs input{width:100%}
+main{padding:8px;gap:8px}.center{min-height:0}
+.ch{padding:8px 10px}.ch h2{font-size:17px}#ctb .btn{padding:6px 10px;font-size:13px}
+.tb{padding:0 10px 8px}.tb input{width:100%}.tb>span{display:none}.chips{flex-wrap:nowrap;overflow-x:auto;width:100%}.chip{white-space:nowrap;flex:none}
+.vpw{margin:0 8px 8px}.zc{right:10px;bottom:10px}.zc button{width:44px;height:44px}
+#cv{padding:16px 14px 50px}.row{gap:14px;margin-bottom:56px}.pair{gap:8px}
+.card{width:118px;padding:8px 4px}.card svg,.card img{width:44px;height:44px}.card b{font-size:12px;min-height:30px}.card span{font-size:11px}
+#side{display:none;position:fixed;left:0;right:0;bottom:0;width:auto;max-height:62vh;z-index:30;border-radius:16px 16px 0 0;box-shadow:0 -6px 24px #0003;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+#side.open{display:block}.sx{display:block;margin:0 0 8px auto}
+.kv{grid-template-columns:96px 1fr}
+.pg{padding:0 10px 12px}.hero{padding:16px}.hero h1{font-size:22px}
+.grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.grid img,.ac img{height:120px}
+.ev img{width:100%;height:auto;max-height:200px}.dt{min-width:0}
+th,td{padding:6px}.adm{margin:0 8px 8px}
+dialog{padding:14px}.g2{grid-template-columns:1fr}
+#lb .lbs{width:100vw;height:70vh}.lbn{font-size:24px!important;padding:6px 10px!important}
+}
 </style></head><body>
 <header>
 <div class="logo"><svg width="46" height="52" viewBox="0 0 46 52"><circle cx="23" cy="18" r="16" fill="#1f7a57"/><circle cx="12" cy="24" r="9" fill="#2e8f69"/><circle cx="34" cy="24" r="9" fill="#2e8f69"/><rect x="20" y="28" width="6" height="22" fill="#14543b"/></svg><div><b>Cây Gia Phả</b><small>Gìn giữ cội nguồn - Kết nối yêu thương</small></div></div>
@@ -80,7 +104,7 @@ const KEY='giapha_ngo_v1';
 const seed=()=>[];
 let M;try{M=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!Array.isArray(M)||!M.length||!M.every(m=>Array.isArray(m.sids)))M=seed();
 const save=()=>sv(KEY,M);
-let sel=M[0]?.id,view='tree',gen=0,q='',zoom=1,tab=0,page='home';
+let sel=M[0]?.id,view='tree',gen=0,q='',zoom=1,tab=0,page='home';if(innerWidth<800)zoom=.6;
 const $=s=>document.querySelector(s),get=id=>M.find(m=>m.id==id);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const role=m=>m.g=='M'?'Nam':'Nữ';
@@ -112,6 +136,7 @@ document.addEventListener('change',e=>{const t=e.target,u=t.dataset&&t.dataset.u
  if(t.dataset.k=='role'){if(x.role=='admin'&&t.value!='admin'&&users.filter(y=>y.role=='admin').length<2){alert('Phải còn ít nhất một Admin.');render();return}x.role=t.value}else x[t.dataset.k]=t.checked;
  sv(UK,users);render()});
 function act(a,i){const ct=can('content');
+ if(a=='sc'){$('#side').classList.remove('open');return}
  if(a=='open'){showLb(curAlb(),+i);return}
  if(a=='oa'){alb=+i;return render()}
  if(a=='ob'){alb=0;return render()}
@@ -243,7 +268,7 @@ function renderSide(){
  if(tab==0)b=`<h4>Thông tin cá nhân</h4><div class="kv"><i>Mã ID</i><span>${m.id}</span><i>Họ và tên</i><span>${esc(m.name)}</span><i>Năm sinh</i><span>${esc(m.by||'—')}</span><i>Năm mất</i><span>${esc(m.dy||'—')}</span><i>Giới tính</i><span>${role(m)}</span><i>Đời thứ</i><span>${m.gen}</span><i>Quê quán</i><span>${esc(m.home||'—')}</span><i>Nghề nghiệp</i><span>${esc(m.job||'—')}</span></div>`;
  else if(tab==1)b=`<h4>Quan hệ gia đình</h4><div class="kv" style="grid-template-columns:90px 1fr"><i>Là con của</i><div>${rel(get(m.fid))}${rel(get(m.mid))}${!m.fid&&!m.mid?'<span style="color:var(--mu)">Chưa có thông tin</span>':''}</div><i>Vợ/Chồng</i><div>${m.sids.map(i=>rel(get(i))).join('')}${m.sids.length?'':'<span style="color:var(--mu)">Chưa có thông tin</span>'}</div><i>Con cái</i><div>${kids.map(rel).join('')||'<span style="color:var(--mu)">Chưa có thông tin</span>'}</div></div>`;
  else b=`<h4>Ghi chú</h4><p style="white-space:pre-wrap">${esc(m.note||'Chưa có ghi chú.')}</p>`;
- $('#side').innerHTML=`<div class="ph">${av(m)}<div style="flex:1"><h3>${esc(m.name)}</h3><div>${years(m)}</div><div style="color:var(--mu)">Đời ${m.gen} · ${role(m)}</div></div>${can('edit')?'<button class="btn" id="ed">✏️ Chỉnh sửa</button>':''}</div><div class="tabs">${['Thông tin','Quan hệ','Ghi chú'].map((t,i)=>`<a data-t="${i}" class="${i==tab?'on':''}">${t}</a>`).join('')}</div>${b}${can('edit')?'<button class="btn p" id="full" style="width:100%;margin-top:12px">Chỉnh sửa đầy đủ</button>':''}`;
+ $('#side').innerHTML=`<button class="btn sx" data-act="sc">✕ Đóng</button><div class="ph">${av(m)}<div style="flex:1"><h3>${esc(m.name)}</h3><div>${years(m)}</div><div style="color:var(--mu)">Đời ${m.gen} · ${role(m)}</div></div>${can('edit')?'<button class="btn" id="ed">✏️ Chỉnh sửa</button>':''}</div><div class="tabs">${['Thông tin','Quan hệ','Ghi chú'].map((t,i)=>`<a data-t="${i}" class="${i==tab?'on':''}">${t}</a>`).join('')}</div>${b}${can('edit')?'<button class="btn p" id="full" style="width:100%;margin-top:12px">Chỉnh sửa đầy đủ</button>':''}`;
 }
 function renderPlaceholder(){const t=MENU.find(x=>x[0]==page)[2];$('#body').innerHTML=`<div style="padding:60px;text-align:center;color:var(--mu)">Mục “${t}” đang được phát triển.<br>Hãy dùng Cây gia phả hoặc Danh sách thành viên.</div>`}
 function render(){chrome();$('#side').style.display=(page=='tree'||page=='list')&&cur?'':'none';
@@ -270,7 +295,7 @@ document.addEventListener('click',e=>{
  const t=e.target.closest('[data-id],[data-p],[data-g],[data-t],[data-act],[data-lb],button');if(!t)return;
  if(t.dataset.lb){lbAct(t.dataset.lb);return}
  if(t.dataset.act){act(t.dataset.act,t.dataset.i);return}
- if(t.dataset.id&&!t.closest('dialog')){sel=+t.dataset.id;render();return}
+ if(t.dataset.id&&!t.closest('dialog')){sel=+t.dataset.id;render();$('#side').classList.add('open');return}
  if(t.dataset.p){page=t.dataset.p;render();return}
  if(t.dataset.g!=null){gen=+t.dataset.g;render();return}
  if(t.dataset.t!=null){tab=+t.dataset.t;renderSide();return}
