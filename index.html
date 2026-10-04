@@ -26,7 +26,7 @@ aside h4{margin:12px 0 4px}aside input{width:100%;padding:9px 12px;border:1px so
 .vpw{position:relative;flex:1;min-height:0;margin:0 12px 12px}.vp{position:absolute;inset:0;overflow:auto;border-radius:10px;background:#f7faf8;cursor:grab;user-select:none}.vp.dg{cursor:grabbing}
 #cv{position:relative;transform-origin:0 0;padding:20px 30px 60px;width:max-content}
 #lines{position:absolute;left:0;top:0;pointer-events:none}
-.row{display:flex;justify-content:center;gap:26px;margin-bottom:72px;position:relative;z-index:1}
+.row{display:flex;justify-content:center;gap:26px;margin-bottom:84px;position:relative;z-index:1}
 .rl{position:absolute;left:-6px;top:-20px;font-size:11px;color:var(--g);font-weight:700;background:var(--gl);padding:2px 10px;border-radius:10px;z-index:2}
 .pair{display:flex;gap:14px;position:relative}.rg{width:0;position:relative;align-self:stretch}.ring{position:absolute;left:-19px;top:38%;width:24px;height:16px;z-index:3}
 .card{width:158px;border-radius:8px;text-align:center;padding:10px 6px 8px;cursor:pointer;border:1px solid;position:relative;background:var(--m);border-color:var(--mb)}
@@ -71,7 +71,7 @@ main{padding:8px;gap:8px}.center{min-height:0}
 .ch{padding:8px 10px}.ch h2{font-size:17px}#ctb .btn{padding:6px 10px;font-size:13px}
 .tb{padding:0 10px 8px}.tb input{width:100%}.tb>span{display:none}.chips{flex-wrap:nowrap;overflow-x:auto;width:100%}.chip{white-space:nowrap;flex:none}
 .vpw{margin:0 8px 8px}.zc{right:10px;bottom:10px}.zc button{width:44px;height:44px}
-#cv{padding:16px 14px 50px}.row{gap:14px;margin-bottom:56px}.pair{gap:8px}
+#cv{padding:16px 14px 50px}.row{gap:14px;margin-bottom:66px}.pair{gap:8px}
 .card{width:118px;padding:8px 4px}.card svg,.card img{width:44px;height:44px}.card b{font-size:12px;min-height:30px}.card span{font-size:11px}
 #side{display:none;position:fixed;left:0;right:0;bottom:0;width:auto;max-height:62vh;z-index:30;border-radius:16px 16px 0 0;box-shadow:0 -6px 24px #0003;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
 #side.open{display:block}.sx{display:block;margin:0 0 8px auto}
@@ -83,6 +83,7 @@ th,td{padding:6px}.adm{margin:0 8px 8px}
 dialog{padding:14px}.g2{grid-template-columns:1fr}
 #lb .lbs{width:100vw;height:70vh}.lbn{font-size:24px!important;padding:6px 10px!important}
 }
+.tg{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);min-width:24px;height:22px;border-radius:11px;border:1px solid var(--g);background:#fff;color:var(--g);font-size:12px;font-weight:700;cursor:pointer;padding:0 6px;z-index:4;line-height:1}.tg:hover{background:var(--g);color:#fff}
 </style></head><body>
 <header>
 <div class="logo"><svg width="46" height="52" viewBox="0 0 46 52"><circle cx="23" cy="18" r="16" fill="#1f7a57"/><circle cx="12" cy="24" r="9" fill="#2e8f69"/><circle cx="34" cy="24" r="9" fill="#2e8f69"/><rect x="20" y="28" width="6" height="22" fill="#14543b"/></svg><div><b>Cây Gia Phả</b><small>Gìn giữ cội nguồn - Kết nối yêu thương</small></div></div>
@@ -92,7 +93,7 @@ dialog{padding:14px}.g2{grid-template-columns:1fr}
 <main>
 <section class="center">
 <div class="ch"><h2 id="ct">🌿 Cây gia phả dòng họ Ngô</h2>
-<div id="ctb" style="display:flex;gap:8px;flex-wrap:wrap"><span id="inf" style="display:contents"></span><button class="btn p" id="vt">Dạng cây</button><button class="btn" id="vl">Dạng danh sách</button><button class="btn" id="add">+ Thêm</button><button class="btn" id="imp">Nhập JSON</button><button class="btn" id="exp">Xuất JSON</button><button class="btn" id="rst">Xóa tất cả</button></div></div>
+<div id="ctb" style="display:flex;gap:8px;flex-wrap:wrap"><span id="inf" style="display:contents"></span><button class="btn" id="cA" title="Thu gọn tất cả các nhánh">⊟ Thu gọn</button><button class="btn" id="eA" title="Mở rộng tất cả các nhánh">⊞ Mở rộng</button><button class="btn p" id="vt">Dạng cây</button><button class="btn" id="vl">Dạng danh sách</button><button class="btn" id="add">+ Thêm</button><button class="btn" id="imp">Nhập JSON</button><button class="btn" id="exp">Xuất JSON</button><button class="btn" id="rst">Xóa tất cả</button></div></div>
 <div class="tb"><input id="qs" placeholder="Tìm kiếm nhanh theo tên..."><span style="color:var(--mu);font-size:13px">Thế hệ:</span><div class="chips" id="chips"></div></div>
 <div id="body" style="flex:1;display:flex;flex-direction:column;min-height:0;position:relative"></div>
 </section>
@@ -169,6 +170,15 @@ function doImport(txt){let j;try{j=JSON.parse(txt)}catch(e){return alert('Không
 function impForm(){$('#fm').innerHTML=`<h3 style="margin-top:0">Nhập JSON</h3><p style="color:var(--mu);margin:0 0 8px">Dán JSON hoặc chọn file (mảng thành viên: id, name, g, fid, mid, sids…; cũng nhận tên cột tiếng Việt như “Họ tên”, “Cha ID”).</p><textarea id="i_t" rows="8" placeholder='[{"id":150010,"name":"Ngô Xuân Trường","g":"M","sids":[]}]'></textarea><label>Hoặc chọn file .json</label><input type="file" id="i_f" accept=".json,application/json">${btns}<button type="button" class="btn" id="i_cx">Hủy</button> <button class="btn p">Nhập</button></div>`;
  $('#dlg').showModal();$('#i_cx').onclick=()=>$('#dlg').close();
  $('#fm').onsubmit=async e=>{e.preventDefault();const f=$('#i_f').files[0];const t=f?await f.text():$('#i_t').value.trim();if(!t)return alert('Hãy dán JSON hoặc chọn file.');doImport(t)}}
+const kidsOf=id=>M.filter(c=>c.fid==id||c.mid==id);
+let collapsed=new Set(ld('giapha_col',[])),hid=new Set();
+const saveCol=()=>{try{localStorage.setItem('giapha_col',JSON.stringify([...collapsed]))}catch(e){}};
+function hiddenSet(){const h=new Set();if(q)return h;const st=[...collapsed];
+ while(st.length){const id=st.pop();M.forEach(c=>{if((c.fid==id||c.mid==id)&&!h.has(c.id)){h.add(c.id);st.push(c.id);c.sids.forEach(sp=>{const o=get(sp);if(o&&!o.fid&&!o.mid)h.add(o.id)})}})}
+ return h}
+function tgBtn(m){const k=kidsOf(m.id);if(!k.length)return'';
+ if(m.g=='F'&&m.sids.some(s=>{const o=get(s);return o&&o.g=='M'&&k.every(c=>c.fid==o.id)}))return'';
+ const c=collapsed.has(m.id);return`<button class="tg" data-tg="${m.id}" title="${c?'Mở rộng nhánh':'Thu gọn nhánh'}">${c?'+'+k.length:'−'}</button>`}
 let alb=0,lb=null;const curAlb=()=>C.albums.find(a=>a.id==alb);
 if(!C.albums){C.albums=[];if(C.gallery&&C.gallery.length)C.albums.push({id:1,name:'Ảnh chung',imgs:C.gallery})}delete C.gallery;
 function showLb(a,i){lb={a,i,z:1};drawLb()}
@@ -204,11 +214,11 @@ function chrome(){
  $('#vt').className='btn'+(view=='tree'?' p':'');$('#vl').className='btn'+(view=='list'?' p':'');
 }
 function order(){
- const gens=[...new Set(M.map(m=>m.gen))].sort((a,b)=>a-b),pos={},rows=[];
- gens.forEach(g=>{const L=M.filter(m=>m.gen==g),seen=new Set(),U=[];
+ hid=hiddenSet();const V=M.filter(m=>!hid.has(m.id)),gens=[...new Set(V.map(m=>m.gen))].sort((a,b)=>a-b),pos={},rows=[];
+ gens.forEach(g=>{const L=V.filter(m=>m.gen==g),seen=new Set(),U=[];
   const pp=m=>{const a=[m.fid,m.mid].filter(x=>x&&pos[x]!=null).map(x=>pos[x]);return a.length?Math.min(...a):null};
   L.forEach(m=>{if(seen.has(m.id))return;const comp=[m];seen.add(m.id);
-   for(let i=0;i<comp.length;i++)comp[i].sids.forEach(s=>{const o=get(s);if(o&&o.gen==g&&!seen.has(o.id)){seen.add(o.id);comp.push(o)}});
+   for(let i=0;i<comp.length;i++)comp[i].sids.forEach(s=>{const o=get(s);if(o&&o.gen==g&&!seen.has(o.id)&&!hid.has(o.id)){seen.add(o.id);comp.push(o)}});
    const ks=comp.map(pp).filter(k=>k!=null);
    comp.sort((a,b)=>(pp(b)!=null)-(pp(a)!=null)||(a.g=='M'?-1:1)-(b.g=='M'?-1:1)||a.id-b.id);
    if(comp.length==2&&comp[0].g=='F'&&comp[1].g=='M')comp.reverse();
@@ -219,7 +229,7 @@ function order(){
  return rows;
 }
 const ring='<svg class="ring" viewBox="0 0 24 16"><circle cx="8" cy="8" r="6" fill="#fff" stroke="#1f7a57" stroke-width="2"/><circle cx="16" cy="8" r="6" fill="none" stroke="#1f7a57" stroke-width="2"/></svg>';
-const card=m=>`<div class="card ${m.g} ${m.id==sel?'sel':''} ${match(m)?'':'dim'}" data-id="${m.id}">${av(m)}<b>${esc(m.name)}</b><span>${years(m)||'&nbsp;'}</span><span>Đời ${m.gen} · ${role(m)}</span></div>`;
+const card=m=>`<div class="card ${m.g} ${m.id==sel?'sel':''} ${match(m)?'':'dim'}" data-id="${m.id}">${av(m)}<b>${esc(m.name)}</b><span>${years(m)||'&nbsp;'}</span><span>Đời ${m.gen} · ${role(m)}</span>${tgBtn(m)}</div>`;
 function renderTree(){
  if(!M.length){$('#body').innerHTML='<div class="pg" style="padding:60px;text-align:center;color:var(--mu)">Chưa có thành viên nào.<br>Đăng nhập tài khoản có quyền sửa rồi bấm “+ Thêm” hoặc “Nhập JSON”.</div>';return}
  const old=$('#vp'),sl=old?old.scrollLeft:0,st=old?old.scrollTop:0;
@@ -246,14 +256,20 @@ function bindZoom(){const vp=$('#vp');if(!vp)return;let dr=null,mv=0,pd=0,pz=1;
 function lines(){
  const cv=$('#cv'),svg=$('#lines');if(!cv)return;const o=cv.getBoundingClientRect(),z=zoom;
  svg.setAttribute('width',cv.scrollWidth);svg.setAttribute('height',cv.scrollHeight);
- const R=id=>{const e=cv.querySelector(`.card[data-id="${id}"]`);if(!e)return null;const r=e.getBoundingClientRect();return{x:(r.left-o.left)/z,y:(r.top-o.top)/z,w:r.width/z,h:r.height/z}};
+ const R=id=>{if(!id)return null;const e=cv.querySelector(`.card[data-id="${id}"]`);if(!e)return null;const r=e.getBoundingClientRect();return{x:(r.left-o.left)/z,y:(r.top-o.top)/z,w:r.width/z,h:r.height/z}};
+ const G={};
+ M.forEach(c=>{if(!(c.fid||c.mid))return;const rc=R(c.id);if(!rc)return;const rf=R(c.fid),rm=R(c.mid);if(!rf&&!rm)return;const k=c.fid+'|'+c.mid;(G[k]=G[k]||{rf,rm,k:[],g:c.gen}).k.push(rc)});
+ const byG={};Object.values(G).forEach(g=>(byG[g.g]=byG[g.g]||[]).push(g));
  let d='';
- M.forEach(c=>{const rc=R(c.id);if(!rc)return;const f=get(c.fid),m=get(c.mid);let ax,ay;
-  const rf=f&&R(f.id),rm=m&&R(m.id);
-  if(rf&&rm){ax=(rf.x+rf.w/2+rm.x+rm.w/2)/2;ay=Math.max(rf.y,rm.y)+rf.h*0.5}
-  else{const r=rf||rm;if(!r)return;ax=r.x+r.w/2;ay=r.y+r.h*0.5}
-  const sy=Math.max(ay,(rf||rm).y+(rf||rm).h),cy=rc.y,my=cy-28;
-  d+=`M${ax},${rf&&rm?ay:sy}V${sy}${rf&&rm?'':''}V${my}H${rc.x+rc.w/2}V${cy} `});
+ Object.values(byG).forEach(L=>{const lanes=[];
+  L.forEach(g=>{const both=g.rf&&g.rm,p=g.rf||g.rm;
+   g.ax=both?((g.rf.x+g.rf.w/2)+(g.rm.x+g.rm.w/2))/2:p.x+p.w/2;
+   g.sy=both?Math.max(g.rf.y,g.rm.y)+g.rf.h*.5:p.y+p.h;
+   g.cx=g.k.map(r=>r.x+r.w/2);g.top=Math.min(...g.k.map(r=>r.y));
+   g.lo=Math.min(g.ax,...g.cx);g.hi=Math.max(g.ax,...g.cx)});
+  L.sort((a,b)=>a.lo-b.lo);
+  L.forEach(g=>{let n=0;while(lanes[n]!=null&&lanes[n]>g.lo-8)n++;lanes[n]=g.hi;const by=g.top-18-(n%5)*9;
+   d+=`M${g.ax},${g.sy}V${by}M${g.lo},${by}H${g.hi}`+g.cx.map((x,i)=>`M${x},${by}V${g.k[i].y}`).join('')})});
  svg.innerHTML=`<path d="${d}" fill="none" stroke="#1f7a57" stroke-width="1.6"/>`;
 }
 function renderList(){
@@ -294,6 +310,7 @@ document.addEventListener('click',e=>{
  if(e.target.id=='lb'||e.target.className=='lbs'){lb=null;drawLb();return}
  const t=e.target.closest('[data-id],[data-p],[data-g],[data-t],[data-act],[data-lb],button');if(!t)return;
  if(t.dataset.lb){lbAct(t.dataset.lb);return}
+ if(t.dataset.tg){const i=+t.dataset.tg;collapsed.has(i)?collapsed.delete(i):collapsed.add(i);saveCol();render();return}
  if(t.dataset.act){act(t.dataset.act,t.dataset.i);return}
  if(t.dataset.id&&!t.closest('dialog')){sel=+t.dataset.id;render();$('#side').classList.add('open');return}
  if(t.dataset.p){page=t.dataset.p;render();return}
@@ -301,7 +318,7 @@ document.addEventListener('click',e=>{
  if(t.dataset.t!=null){tab=+t.dataset.t;renderSide();return}
  const id=t.id;
  if(id=='li')authForm(0);else if(id=='rg')authForm(1);else if(id=='lo'){cur=null;try{localStorage.removeItem('giapha_sess')}catch(e){}render()}
- else if(id=='eh')hform();else if(id=='ah')pickImg(900,d=>{C.home.imgs.push(d);csave();render()},1);else if(id=='ag')pickImg(900,d=>{curAlb().imgs.push({src:d,cap:''});csave();render()},1);else if(id=='ae')eform();else if(id=='lk'&&can('content'))linkForm();else if(id=='aa'&&can('content')){const n=prompt('Tên album');if(n&&n.trim()){C.albums.push({id:Math.max(0,...C.albums.map(x=>x.id))+1,name:n.trim(),imgs:[]});csave();render()}}
+ else if(id=='eh')hform();else if(id=='ah')pickImg(900,d=>{C.home.imgs.push(d);csave();render()},1);else if(id=='ag')pickImg(900,d=>{curAlb().imgs.push({src:d,cap:''});csave();render()},1);else if(id=='ae')eform();else if(id=='lk'&&can('content'))linkForm();else if(id=='cA'){M.forEach(m=>{if(kidsOf(m.id).length)collapsed.add(m.id)});saveCol();render()}else if(id=='eA'){collapsed.clear();saveCol();render()}else if(id=='aa'&&can('content')){const n=prompt('Tên album');if(n&&n.trim()){C.albums.push({id:Math.max(0,...C.albums.map(x=>x.id))+1,name:n.trim(),imgs:[]});csave();render()}}
  else if(id=='vt'){view='tree';page='tree';render()}
  else if(id=='vl'){view='list';page='tree';render()}
  else if(id=='add'&&can('edit'))form({name:'',g:'M',gen:get(sel)?.gen||1,by:'',dy:'',home:'',job:'',note:'',fid:0,mid:0,sids:[]},true);
