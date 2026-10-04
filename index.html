@@ -86,6 +86,8 @@ dialog{padding:14px}.g2{grid-template-columns:1fr}
 .tg{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);min-width:24px;height:22px;border-radius:11px;border:1px solid var(--g);background:#fff;color:var(--g);font-size:12px;font-weight:700;cursor:pointer;padding:0 6px;z-index:4;line-height:1}.tg:hover{background:var(--g);color:#fff}
 #lines{z-index:0}.card.hl{border-color:#e8590c;box-shadow:0 0 0 3px #e8590c55}.card.fade{opacity:.4}.hlb{position:absolute;left:12px;top:10px;background:#fff;border:1px solid #e8590c;border-radius:8px;padding:4px 10px;font-size:12px;z-index:5;max-width:70%}
 .sr{display:none;position:fixed;z-index:60;background:#fff;border:1px solid var(--bd);border-radius:10px;box-shadow:0 8px 24px #0003;max-height:50vh;overflow:auto}.sri{padding:8px 12px;cursor:pointer;border-bottom:1px solid #eef2f0}.sri:hover{background:var(--gl)}.sri small{display:block;color:var(--mu)}
+#pr{display:none}
+@media print{html,body{height:auto!important;overflow:visible!important;background:#fff!important}body>*:not(#pr){display:none!important}#pr{display:block!important;overflow:hidden}#pr *{-webkit-print-color-adjust:exact;print-color-adjust:exact}#pr .tg{display:none}}
 </style></head><body>
 <header>
 <div class="logo"><svg width="46" height="52" viewBox="0 0 46 52"><circle cx="23" cy="18" r="16" fill="#1f7a57"/><circle cx="12" cy="24" r="9" fill="#2e8f69"/><circle cx="34" cy="24" r="9" fill="#2e8f69"/><rect x="20" y="28" width="6" height="22" fill="#14543b"/></svg><div><b>Cây Gia Phả</b><small>Gìn giữ cội nguồn - Kết nối yêu thương</small></div></div>
@@ -96,7 +98,7 @@ dialog{padding:14px}.g2{grid-template-columns:1fr}
 <main>
 <section class="center">
 <div class="ch"><h2 id="ct">🌿 Cây gia phả dòng họ Ngô</h2>
-<div id="ctb" style="display:flex;gap:8px;flex-wrap:wrap"><span id="inf" style="display:contents"></span><button class="btn" id="cA" title="Thu gọn tất cả các nhánh">⊟ Thu gọn</button><button class="btn" id="eA" title="Mở rộng tất cả các nhánh">⊞ Mở rộng</button><button class="btn p" id="vt">Dạng cây</button><button class="btn" id="vl">Dạng danh sách</button><button class="btn" id="add">+ Thêm</button><button class="btn" id="rl" title="Tải lại dữ liệu từ giapha_ngo_v1.json trên máy chủ">⟳ Nạp lại từ file</button><button class="btn" id="imp">Nhập JSON</button><button class="btn" id="exu" title="Tải giapha_users_v1.json">Xuất tài khoản</button><button class="btn" id="exc" title="Tải giapha_content_v1.json">Xuất nội dung</button><button class="btn" id="exp">Xuất JSON</button><button class="btn" id="rst">Xóa tất cả</button></div></div>
+<div id="ctb" style="display:flex;gap:8px;flex-wrap:wrap"><span id="inf" style="display:contents"></span><button class="btn" id="cA" title="Thu gọn tất cả các nhánh">⊟ Thu gọn</button><button class="btn" id="eA" title="Mở rộng tất cả các nhánh">⊞ Mở rộng</button><button class="btn" id="pdf" title="Xuất cây đang xem ra PDF">⬇ Xuất PDF</button><button class="btn p" id="vt">Dạng cây</button><button class="btn" id="vl">Dạng danh sách</button><button class="btn" id="add">+ Thêm</button><button class="btn" id="rl" title="Tải lại dữ liệu từ giapha_ngo_v1.json trên máy chủ">⟳ Nạp lại từ file</button><button class="btn" id="imp">Nhập JSON</button><button class="btn" id="exu" title="Tải giapha_users_v1.json">Xuất tài khoản</button><button class="btn" id="exc" title="Tải giapha_content_v1.json">Xuất nội dung</button><button class="btn" id="exp">Xuất JSON</button><button class="btn" id="rst">Xóa tất cả</button></div></div>
 <div class="tb"><div style="position:relative"><input id="qs" placeholder="Tìm kiếm nhanh theo tên..."></div><span style="color:var(--mu);font-size:13px">Thế hệ:</span><div class="chips" id="chips"></div></div>
 <div id="body" style="flex:1;display:flex;flex-direction:column;min-height:0;position:relative"></div>
 </section>
@@ -141,6 +143,7 @@ document.addEventListener('change',e=>{const t=e.target,u=t.dataset&&t.dataset.u
  if(t.dataset.k=='role'){if(x.role=='admin'&&t.value!='admin'&&users.filter(y=>y.role=='admin').length<2){alert('Phải còn ít nhất một Admin.');render();return}x.role=t.value}else x[t.dataset.k]=t.checked;
  sv(UK,users);render()});
 function act(a,i){const ct=can('content');
+ if(a=='bigimg'){const m=get(+i);if(m&&m.img)showLb({imgs:[{src:m.img,cap:m.name}]},0);return}
  if(a=='sc'){showDetail=false;render();return}
  if(a=='open'){showLb(curAlb(),+i);return}
  if(a=='oa'){alb=+i;return render()}
@@ -193,13 +196,23 @@ function showSr(inp){const sr=$('#sr'),v=inp.value.trim().toLowerCase();if(!cur|
  sr.innerHTML=L.length?L.map(m=>{const f=get(m.fid),mo=get(m.mid);return`<div class="sri" data-pick="${m.id}"><b>${esc(m.name)}</b><small>Đời ${m.gen} · ${role(m)}${f?' · Cha: '+esc(f.name):''}${mo?' · Mẹ: '+esc(mo.name):''}${m.by?' · '+esc(m.by):''} · ID ${m.id}</small></div>`}).join(''):'<div class="sri" style="color:var(--mu);cursor:default">Không tìm thấy</div>';
  const r=inp.getBoundingClientRect();Object.assign(sr.style,{display:'block',left:Math.max(8,Math.min(r.left,innerWidth-Math.max(r.width,280)-8))+'px',top:r.bottom+4+'px',width:Math.max(r.width,280)+'px'})}
 function lineage(id){const S=new Set([id]);const up=x=>{const m=get(x);if(!m)return;[m.fid,m.mid].forEach(p=>{if(p&&!S.has(p)){S.add(p);up(p)}})};up(id);const dn=x=>kidsOf(x).forEach(c=>{if(!S.has(c.id)){S.add(c.id);dn(c.id)}});dn(id);return S}
+function exportPdf(){const cv=$('#cv');if(!cv||!cur)return alert('Hãy mở Cây gia phả (Dạng cây) để xuất PDF.');
+ const W=cv.offsetWidth,H=cv.offsetHeight,HD=64,s=Math.min(1,8000/Math.max(W,H+HD,1));
+ const c=cv.cloneNode(true);c.style.transform='none';c.style.minWidth='0';c.style.width=W+'px';c.style.height=H+'px';
+ const sub=FS&&get(focus)?'Nguồn gốc &amp; các con của '+esc(get(focus).name):'Toàn bộ cây'+(gen?' · Đời '+gen:'');
+ const pr=document.createElement('div');pr.id='pr';pr.style.cssText=`width:${W*s}px;height:${(H+HD)*s}px`;
+ pr.innerHTML=`<div style="width:${W}px;transform:scale(${s});transform-origin:0 0"><div style="height:${HD}px;padding:12px 30px 0;box-sizing:border-box"><div style="font-size:22px;font-weight:700;color:#14543b">${esc((C.home&&C.home.title)||'Gia phả')} — ${sub}</div><div style="font-size:12px;color:#666">Xuất ngày ${new Date().toLocaleDateString('vi-VN')} · ${cv.querySelectorAll('.card').length} thành viên hiển thị</div></div></div>`;
+ pr.firstChild.appendChild(c);
+ const st=document.createElement('style');st.id='pg';st.textContent=`@page{size:${Math.ceil(W*s)}px ${Math.ceil((H+HD)*s)}px;margin:0}`;
+ document.body.append(pr);document.head.append(st);
+ addEventListener('afterprint',()=>{pr.remove();st.remove()},{once:true});setTimeout(()=>print(),150)}
 let alb=0,lb=null;const curAlb=()=>C.albums.find(a=>a.id==alb);
 if(!C.albums){C.albums=[];if(C.gallery&&C.gallery.length)C.albums.push({id:1,name:'Ảnh chung',imgs:C.gallery})}delete C.gallery;
 function showLb(a,i){lb={a,i,z:1};drawLb()}
 function drawLb(){let o=document.getElementById('lb');if(!lb){if(o)o.remove();return}
  if(!o){o=document.createElement('div');o.id='lb';o.addEventListener('wheel',e=>{if(e.ctrlKey&&lb){e.preventDefault();lbAct(e.deltaY<0?'+':'-')}},{passive:false});document.body.appendChild(o)}
  const im=lb.a.imgs[lb.i];if(!im){lb=null;return drawLb()}
- o.innerHTML=`<button class="lbx" data-lb="x">✕</button><button class="lbn l" data-lb="p">‹</button><div class="lbs"><img src="${im.src}" style="${lb.z==1?'max-width:100%;max-height:100%':`width:${lb.z*100}%;max-width:none`}"></div><button class="lbn r" data-lb="n">›</button><div class="lbc">${esc(im.cap||'')} ${lb.i+1}/${lb.a.imgs.length} <button data-lb="-">−</button><button data-lb="0">${Math.round(lb.z*100)}%</button><button data-lb="+">+</button></div>`}
+ o.innerHTML=`<button class="lbx" data-lb="x">✕</button><button class="lbn l" data-lb="p">‹</button><div class="lbs"><img src="${im.src}" style="${lb.z==1?'width:100%;height:100%;object-fit:contain':`width:${lb.z*100}%;max-width:none;height:auto`}"></div><button class="lbn r" data-lb="n">›</button><div class="lbc">${esc(im.cap||'')} ${lb.i+1}/${lb.a.imgs.length} <button data-lb="-">−</button><button data-lb="0">${Math.round(lb.z*100)}%</button><button data-lb="+">+</button></div>`}
 function lbAct(k){if(!lb)return;const n=lb.a.imgs.length;if(k=='x')lb=null;else if(k=='p'){lb.i=(lb.i+n-1)%n;lb.z=1}else if(k=='n'){lb.i=(lb.i+1)%n;lb.z=1}else if(k=='+')lb.z=Math.min(5,lb.z+.5);else if(k=='-')lb.z=Math.max(1,lb.z-.5);else lb.z=1;drawLb()}
 addEventListener('keydown',e=>{if(!lb)return;if(e.key=='Escape')lbAct('x');else if(e.key=='ArrowLeft')lbAct('p');else if(e.key=='ArrowRight')lbAct('n')});
 if(typeof C.link!='string')C.link='';
@@ -232,7 +245,7 @@ function chrome(){
  $('#nav').innerHTML=NAV.map((n,i)=>`<a data-p="${n[0]}" class="${n[0]==page?'on':''}">${n[1]}<br>${n[2]}</a>`).join('');
  banner();const tl=(page=='tree'||page=='list')&&!!cur;$('.tb').style.display=tl?'':'none';$('#ctb').style.display=tl?'':'none';
  $('#ct').textContent={home:'🏠 Trang chủ',tree:'🌿 Cây gia phả dòng họ Ngô',list:'👥 Danh sách thành viên',img:'🖼️ Hình ảnh',ev:'📅 Sự kiện',set:'⚙️ Cài đặt'}[page];
- $('#inf').innerHTML=infoBtn();$('#add').style.display=can('edit')?'':'none';$('#rst').style.display=$('#rl').style.display=$('#exu').style.display=$('#exc').style.display=adm()?'':'none';$('#imp').style.display=can('edit')?'':'none';
+ $('#inf').innerHTML=infoBtn();$('#pdf').style.display=view=='tree'&&page=='tree'?'':'none';$('#add').style.display=can('edit')?'':'none';$('#rst').style.display=$('#rl').style.display=$('#exu').style.display=$('#exc').style.display=adm()?'':'none';$('#imp').style.display=can('edit')?'':'none';
  $('#hu').innerHTML=cur?`<span>👤 ${esc(cur.name)} <small style="color:var(--mu)">(${adm()?'Admin':can('edit')||can('content')?'Biên tập':'Thành viên'})</small></span><button class="btn" id="lo">Đăng xuất</button>`:'<button class="btn" id="li">Đăng nhập</button><button class="btn p" id="rg">Đăng ký</button>';
  const gens=[...new Set(M.map(m=>m.gen))].sort((a,b)=>a-b);
  $('#chips').innerHTML=`<div class="chip ${!gen?'on':''}" data-g="0">Tất cả</div>`+gens.map(g=>`<div class="chip ${gen==g?'on':''}" data-g="${g}">Đời ${g}</div>`).join('');
@@ -319,7 +332,7 @@ function renderSide(){
  if(tab==0)b=`<h4>Thông tin cá nhân</h4><div class="kv"><i>Mã ID</i><span>${m.id}</span><i>Họ và tên</i><span>${esc(m.name)}</span><i>Năm sinh</i><span>${esc(m.by||'—')}</span><i>Năm mất</i><span>${esc(m.dy||'—')}</span><i>Giới tính</i><span>${role(m)}</span><i>Đời thứ</i><span>${m.gen}</span><i>Quê quán</i><span>${esc(m.home||'—')}</span><i>Nghề nghiệp</i><span>${esc(m.job||'—')}</span></div>`;
  else if(tab==1)b=`<h4>Quan hệ gia đình</h4><div class="kv" style="grid-template-columns:90px 1fr"><i>Là con của</i><div>${rel(get(m.fid))}${rel(get(m.mid))}${!m.fid&&!m.mid?'<span style="color:var(--mu)">Chưa có thông tin</span>':''}</div><i>Vợ/Chồng</i><div>${m.sids.map(i=>rel(get(i))).join('')}${m.sids.length?'':'<span style="color:var(--mu)">Chưa có thông tin</span>'}</div><i>Con cái</i><div>${kids.map(rel).join('')||'<span style="color:var(--mu)">Chưa có thông tin</span>'}</div></div>`;
  else b=`<h4>Ghi chú</h4><p style="white-space:pre-wrap">${esc(m.note||'Chưa có ghi chú.')}</p>`;
- $('#side').innerHTML=`<button class="btn sx" data-act="sc">✕ Đóng</button><div class="ph">${av(m)}<div style="flex:1"><h3>${esc(m.name)}</h3><div>${years(m)}</div><div style="color:var(--mu)">Đời ${m.gen} · ${role(m)}</div></div>${can('edit')?'<button class="btn" id="ed">✏️ Chỉnh sửa</button>':''}</div><div class="tabs">${['Thông tin','Quan hệ','Ghi chú'].map((t,i)=>`<a data-t="${i}" class="${i==tab?'on':''}">${t}</a>`).join('')}</div>${b}${can('edit')?'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" id="ac" style="flex:1">➕ Thêm con</button><button class="btn" id="asp" style="flex:1">💍 Thêm vợ/chồng</button></div>':''}${can('edit')?'<button class="btn p" id="full" style="width:100%;margin-top:12px">Chỉnh sửa đầy đủ</button>':''}`;
+ $('#side').innerHTML=`<button class="btn sx" data-act="sc">✕ Đóng</button><div class="ph">${m.img?`<span data-act="bigimg" data-i="${m.id}" title="Bấm để xem ảnh lớn" style="cursor:zoom-in">${av(m)}</span>`:av(m)}<div style="flex:1"><h3>${esc(m.name)}</h3><div>${years(m)}</div><div style="color:var(--mu)">Đời ${m.gen} · ${role(m)}</div></div>${can('edit')?'<button class="btn" id="ed">✏️ Chỉnh sửa</button>':''}</div><div class="tabs">${['Thông tin','Quan hệ','Ghi chú'].map((t,i)=>`<a data-t="${i}" class="${i==tab?'on':''}">${t}</a>`).join('')}</div>${b}${can('edit')?'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" id="ac" style="flex:1">➕ Thêm con</button><button class="btn" id="asp" style="flex:1">💍 Thêm vợ/chồng</button></div>':''}${can('edit')?'<button class="btn p" id="full" style="width:100%;margin-top:12px">Chỉnh sửa đầy đủ</button>':''}`;
 }
 function renderPlaceholder(){const t=MENU.find(x=>x[0]==page)[2];$('#body').innerHTML=`<div style="padding:60px;text-align:center;color:var(--mu)">Mục “${t}” đang được phát triển.<br>Hãy dùng Cây gia phả hoặc Danh sách thành viên.</div>`}
 function render(){chrome();$('#side').style.display=(page=='tree'||page=='list')&&cur&&showDetail?'':'none';$('#side').classList.toggle('open',showDetail);
@@ -333,7 +346,7 @@ function form(m,isNew){
  $('#fm').innerHTML=`<h3 style="margin-top:0">${isNew?(formT||'Thêm thành viên'):'Chỉnh sửa thành viên'}</h3><label>Họ và tên</label><input id="f_name" required value="${esc(m.name)}"><div class="g2"><div><label>Giới tính</label><select id="f_g"><option value="M" ${m.g=='M'?'selected':''}>Nam</option><option value="F" ${m.g=='F'?'selected':''}>Nữ</option></select></div><div><label>Đời thứ</label><input id="f_gen" type="number" min="1" value="${m.gen}"></div><div><label>Năm sinh</label><input id="f_by" value="${esc(m.by)}"></div><div><label>Năm mất</label><input id="f_dy" value="${esc(m.dy)}"></div><div><label>Quê quán</label><input id="f_home" value="${esc(m.home)}"></div><div><label>Nghề nghiệp</label><input id="f_job" value="${esc(m.job)}"></div><div><label>Cha</label><select id="f_fid">${opts(m.fid,x=>x.g=='M')}</select></div><div><label>Mẹ</label><select id="f_mid">${opts(m.mid,x=>x.g=='F')}</select></div></div><label>Vợ/Chồng (giữ Ctrl/Cmd để chọn nhiều)</label><select id="f_sid" multiple size="4">${M.filter(x=>x.id!=m.id&&x.g!=m.g).map(x=>`<option value="${x.id}" ${m.sids.includes(x.id)?'selected':''}>${esc(x.name)} (${x.id})</option>`).join('')}</select><label>Ảnh đại diện</label><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span id="f_pv">${av({g:m.g,img:timg})}</span><input type="file" id="f_img" accept="image/*" style="width:auto"><button type="button" class="btn" id="f_rm">Xóa ảnh</button></div><label>Ghi chú</label><textarea id="f_note" rows="3">${esc(m.note)}</textarea><div style="display:flex;gap:8px;margin-top:14px;justify-content:space-between"><span>${isNew?'':'<button type="button" class="btn d" id="f_del">Xóa</button>'}</span><span><button type="button" class="btn" id="f_cx">Hủy</button> <button class="btn p" id="f_ok" value="ok">Lưu</button></span></div>`;
  $('#dlg').showModal();formT='';
  $('#f_cx').onclick=()=>$('#dlg').close();
- $('#f_img').onchange=e=>e.target.files[0]&&shrink(e.target.files[0],240,d=>{timg=d;$('#f_pv').innerHTML=av({g:$('#f_g').value,img:d})});$('#f_rm').onclick=()=>{timg='';$('#f_pv').innerHTML=av({g:$('#f_g').value})};
+ $('#f_img').onchange=e=>e.target.files[0]&&shrink(e.target.files[0],480,d=>{timg=d;$('#f_pv').innerHTML=av({g:$('#f_g').value,img:d})});$('#f_rm').onclick=()=>{timg='';$('#f_pv').innerHTML=av({g:$('#f_g').value})};
  const dl=$('#f_del');if(dl)dl.onclick=()=>{if(!confirm('Xóa thành viên này?'))return;M=M.filter(x=>x.id!=m.id);M.forEach(x=>{['fid','mid'].forEach(k=>{if(x[k]==m.id)x[k]=0});x.sids=x.sids.filter(i=>i!=m.id)});sel=M[0]?.id;save();$('#dlg').close();render()};
  $('#fm').onsubmit=e=>{const v=k=>$('#f_'+k).value.trim();if(!v('name'))return;
   Object.assign(m,{name:v('name'),g:v('g'),gen:+v('gen')||m.gen,by:v('by'),dy:v('dy'),home:v('home'),job:v('job'),note:v('note'),fid:+v('fid'),mid:+v('mid'),img:timg});
@@ -373,6 +386,7 @@ document.addEventListener('click',e=>{
  else if(id=='ac'&&can('edit'))addRel('child',get(sel))
  else if(id=='asp'&&can('edit'))addRel('spouse',get(sel))
  else if(id=='fx'){focus=0;showDetail=false;render()}
+ else if(id=='pdf')exportPdf()
  else if((id=='exu'||id=='exc')&&adm())dlJson(id=='exu'?users:C,id=='exu'?'giapha_users_v1.json':'giapha_content_v1.json')
  else if(id=='dc'&&adm()){if(confirm('Bỏ các thay đổi chưa đưa lên GitHub trên trình duyệt này và tải lại dữ liệu mới nhất?')){['giapha_ngo_v1','giapha_users_v1','giapha_content_v1'].forEach(k=>{localStorage.removeItem(k);localStorage.removeItem('dirty_'+k)});location.reload()}}
  else if(id=='rl'&&adm()){fetch('./giapha_ngo_v1.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject('HTTP '+r.status)).then(t=>doImport(t)).catch(e=>alert('Không nạp được file giapha_ngo_v1.json: '+e))}
