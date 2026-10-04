@@ -60,7 +60,7 @@ dialog label{display:block;margin:8px 0 2px;font-size:12px;color:var(--mu)}dialo
 .al{position:relative}.ac{display:block;width:100%;border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:#fff;padding:0;cursor:pointer;text-align:left;font:inherit;color:inherit}.ac img{width:100%;height:160px;object-fit:cover;display:block}
 .ib{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}.hd img{max-width:100%}
 
-.sx{display:none}.vp{touch-action:pan-x pan-y}button,a.btn{touch-action:manipulation}
+.sx{display:block;margin:0 0 8px auto}.vp{touch-action:pan-x pan-y}button,a.btn{touch-action:manipulation}
 @media(max-width:800px){
 html,body{height:100dvh}input,select,textarea{font-size:16px}
 header{gap:6px 10px;padding:8px 12px}.logo{order:1;flex:1;min-width:0}.logo b{font-size:20px}.logo small{display:none}.logo svg{width:32px;height:36px}
@@ -85,6 +85,7 @@ dialog{padding:14px}.g2{grid-template-columns:1fr}
 }
 .tg{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);min-width:24px;height:22px;border-radius:11px;border:1px solid var(--g);background:#fff;color:var(--g);font-size:12px;font-weight:700;cursor:pointer;padding:0 6px;z-index:4;line-height:1}.tg:hover{background:var(--g);color:#fff}
 #lines{z-index:0}.card.hl{border-color:#e8590c;box-shadow:0 0 0 3px #e8590c55}.card.fade{opacity:.4}.hlb{position:absolute;left:12px;top:10px;background:#fff;border:1px solid #e8590c;border-radius:8px;padding:4px 10px;font-size:12px;z-index:5;max-width:70%}
+.sr{display:none;position:fixed;z-index:60;background:#fff;border:1px solid var(--bd);border-radius:10px;box-shadow:0 8px 24px #0003;max-height:50vh;overflow:auto}.sri{padding:8px 12px;cursor:pointer;border-bottom:1px solid #eef2f0}.sri:hover{background:var(--gl)}.sri small{display:block;color:var(--mu)}
 </style></head><body>
 <header>
 <div class="logo"><svg width="46" height="52" viewBox="0 0 46 52"><circle cx="23" cy="18" r="16" fill="#1f7a57"/><circle cx="12" cy="24" r="9" fill="#2e8f69"/><circle cx="34" cy="24" r="9" fill="#2e8f69"/><rect x="20" y="28" width="6" height="22" fill="#14543b"/></svg><div><b>Cây Gia Phả</b><small>Gìn giữ cội nguồn - Kết nối yêu thương</small></div></div>
@@ -96,11 +97,12 @@ dialog{padding:14px}.g2{grid-template-columns:1fr}
 <section class="center">
 <div class="ch"><h2 id="ct">🌿 Cây gia phả dòng họ Ngô</h2>
 <div id="ctb" style="display:flex;gap:8px;flex-wrap:wrap"><span id="inf" style="display:contents"></span><button class="btn" id="cA" title="Thu gọn tất cả các nhánh">⊟ Thu gọn</button><button class="btn" id="eA" title="Mở rộng tất cả các nhánh">⊞ Mở rộng</button><button class="btn p" id="vt">Dạng cây</button><button class="btn" id="vl">Dạng danh sách</button><button class="btn" id="add">+ Thêm</button><button class="btn" id="rl" title="Tải lại dữ liệu từ giapha_ngo_v1.json trên máy chủ">⟳ Nạp lại từ file</button><button class="btn" id="imp">Nhập JSON</button><button class="btn" id="exu" title="Tải giapha_users_v1.json">Xuất tài khoản</button><button class="btn" id="exc" title="Tải giapha_content_v1.json">Xuất nội dung</button><button class="btn" id="exp">Xuất JSON</button><button class="btn" id="rst">Xóa tất cả</button></div></div>
-<div class="tb"><input id="qs" placeholder="Tìm kiếm nhanh theo tên..."><span style="color:var(--mu);font-size:13px">Thế hệ:</span><div class="chips" id="chips"></div></div>
+<div class="tb"><div style="position:relative"><input id="qs" placeholder="Tìm kiếm nhanh theo tên..."></div><span style="color:var(--mu);font-size:13px">Thế hệ:</span><div class="chips" id="chips"></div></div>
 <div id="body" style="flex:1;display:flex;flex-direction:column;min-height:0;position:relative"></div>
 </section>
 <div id="side"></div>
 </main>
+<div id="sr" class="sr"></div>
 <dialog id="dlg"><form method="dialog" id="fm"></form></dialog>
 <script>
 const KEY='giapha_ngo_v1';
@@ -139,7 +141,7 @@ document.addEventListener('change',e=>{const t=e.target,u=t.dataset&&t.dataset.u
  if(t.dataset.k=='role'){if(x.role=='admin'&&t.value!='admin'&&users.filter(y=>y.role=='admin').length<2){alert('Phải còn ít nhất một Admin.');render();return}x.role=t.value}else x[t.dataset.k]=t.checked;
  sv(UK,users);render()});
 function act(a,i){const ct=can('content');
- if(a=='sc'){$('#side').classList.remove('open');return}
+ if(a=='sc'){showDetail=false;render();return}
  if(a=='open'){showLb(curAlb(),+i);return}
  if(a=='oa'){alb=+i;return render()}
  if(a=='ob'){alb=0;return render()}
@@ -175,13 +177,21 @@ function impForm(){$('#fm').innerHTML=`<h3 style="margin-top:0">Nhập JSON</h3>
 const kidsOf=id=>M.filter(c=>c.fid==id||c.mid==id);
 let collapsed=new Set(ld('giapha_col',[])),hid=new Set();
 const saveCol=()=>{try{localStorage.setItem('giapha_col',JSON.stringify([...collapsed]))}catch(e){}};
-function hiddenSet(){const h=new Set();if(q)return h;const st=[...collapsed];
+function hiddenSet(){const h=new Set();if(q||FS)return h;const st=[...collapsed];
  while(st.length){const id=st.pop();M.forEach(c=>{if((c.fid==id||c.mid==id)&&!h.has(c.id)){h.add(c.id);st.push(c.id);c.sids.forEach(sp=>{const o=get(sp);if(o&&!o.fid&&!o.mid)h.add(o.id)})}})}
  return h}
-function tgBtn(m){const k=kidsOf(m.id);if(!k.length)return'';
+function tgBtn(m){const k=kidsOf(m.id);if(FS||!k.length)return'';
  if(m.g=='F'&&m.sids.some(s=>{const o=get(s);return o&&o.g=='M'&&k.every(c=>c.fid==o.id)}))return'';
  const c=collapsed.has(m.id);return`<button class="tg" data-tg="${m.id}" title="${c?'Mở rộng nhánh':'Thu gọn nhánh'}">${c?'+'+k.length:'−'}</button>`}
-let hlOn=false,HL=null,HLC=null;
+let focus=0,FS=null,showDetail=false,HL=null,HLC=null;
+function focusSet(id){const S=new Set([id]);const up=x=>{const m=get(x);if(!m)return;[m.fid,m.mid].forEach(p=>{if(p&&!S.has(p)){S.add(p);up(p)}})};up(id);
+ const m=get(id);(m.sids||[]).forEach(sp=>S.add(sp));
+ [id,...(m.sids||[])].forEach(p=>kidsOf(p).forEach(c=>{const o=c.fid==p?c.mid:c.fid;if(p==id||!o||o==id)S.add(c.id)}));return S}
+function pick(id){q='';$('#qs').value=$('#gs').value='';$('#sr').style.display='none';page='tree';view='tree';gen=0;sel=id;focus=id;showDetail=false;render()}
+function showSr(inp){const sr=$('#sr'),v=inp.value.trim().toLowerCase();if(!cur||!v){sr.style.display='none';sr.__L=[];return}
+ const L=M.filter(m=>(m.name+' '+m.id).toLowerCase().includes(v)).slice(0,12);sr.__L=L;
+ sr.innerHTML=L.length?L.map(m=>{const f=get(m.fid),mo=get(m.mid);return`<div class="sri" data-pick="${m.id}"><b>${esc(m.name)}</b><small>Đời ${m.gen} · ${role(m)}${f?' · Cha: '+esc(f.name):''}${mo?' · Mẹ: '+esc(mo.name):''}${m.by?' · '+esc(m.by):''} · ID ${m.id}</small></div>`}).join(''):'<div class="sri" style="color:var(--mu);cursor:default">Không tìm thấy</div>';
+ const r=inp.getBoundingClientRect();Object.assign(sr.style,{display:'block',left:Math.max(8,Math.min(r.left,innerWidth-Math.max(r.width,280)-8))+'px',top:r.bottom+4+'px',width:Math.max(r.width,280)+'px'})}
 function lineage(id){const S=new Set([id]);const up=x=>{const m=get(x);if(!m)return;[m.fid,m.mid].forEach(p=>{if(p&&!S.has(p)){S.add(p);up(p)}})};up(id);const dn=x=>kidsOf(x).forEach(c=>{if(!S.has(c.id)){S.add(c.id);dn(c.id)}});dn(id);return S}
 let alb=0,lb=null;const curAlb=()=>C.albums.find(a=>a.id==alb);
 if(!C.albums){C.albums=[];if(C.gallery&&C.gallery.length)C.albums.push({id:1,name:'Ảnh chung',imgs:C.gallery})}delete C.gallery;
@@ -229,11 +239,11 @@ function chrome(){
  $('#vt').className='btn'+(view=='tree'?' p':'');$('#vl').className='btn'+(view=='list'?' p':'');
 }
 function order(){
- hid=hiddenSet();const V=M.filter(m=>!hid.has(m.id)),gens=[...new Set(V.map(m=>m.gen))].sort((a,b)=>a-b),pos={},rows=[];
+ hid=hiddenSet();const V=M.filter(m=>!hid.has(m.id)&&(!FS||FS.has(m.id))),gens=[...new Set(V.map(m=>m.gen))].sort((a,b)=>a-b),pos={},rows=[];
  gens.forEach(g=>{const L=V.filter(m=>m.gen==g),seen=new Set(),U=[];
   const pp=m=>{const a=[m.fid,m.mid].filter(x=>x&&pos[x]!=null).map(x=>pos[x]);return a.length?Math.min(...a):null};
   L.forEach(m=>{if(seen.has(m.id))return;const comp=[m];seen.add(m.id);
-   for(let i=0;i<comp.length;i++)comp[i].sids.forEach(s=>{const o=get(s);if(o&&o.gen==g&&!seen.has(o.id)&&!hid.has(o.id)){seen.add(o.id);comp.push(o)}});
+   for(let i=0;i<comp.length;i++)comp[i].sids.forEach(s=>{const o=get(s);if(o&&o.gen==g&&!seen.has(o.id)&&!hid.has(o.id)&&(!FS||FS.has(o.id))){seen.add(o.id);comp.push(o)}});
    const ks=comp.map(pp).filter(k=>k!=null);
    comp.sort((a,b)=>(pp(b)!=null)-(pp(a)!=null)||(a.g=='M'?-1:1)-(b.g=='M'?-1:1)||a.id-b.id);
    if(comp.length==2&&comp[0].g=='F'&&comp[1].g=='M')comp.reverse();
@@ -248,12 +258,12 @@ const card=m=>`<div class="card ${m.g} ${m.id==sel?'sel':''} ${match(m)?'':'dim'
 function renderTree(){
  if(!M.length){$('#body').innerHTML='<div class="pg" style="padding:60px;text-align:center;color:var(--mu)">Chưa có thành viên nào.<br>Đăng nhập tài khoản có quyền sửa rồi bấm “+ Thêm” hoặc “Nhập JSON”.<br><small>'+(window.__ld||'')+'</small></div>';return}
  const old=$('#vp'),sl=old?old.scrollLeft:0,st=old?old.scrollTop:0;
- HL=hlOn&&get(sel)?lineage(sel):null;HLC=HL?new Set([...HL].flatMap(i=>[i,...((get(i)||{}).sids||[])])):null;
+ FS=focus&&get(focus)?focusSet(focus):null;
  const rows=order().filter(r=>!gen||r[0]==gen);
  let h='<div class="vpw"><div class="vp" id="vp"><div id="sz"><div id="cv"><svg id="lines"></svg>';
  rows.forEach(([g,U])=>{let c='',n=0;U.forEach(u=>{n+=u.length;c+=u.length>1?`<div class="pair">${u.map((m,i)=>(i?'<i class="rg">'+ring+'</i>':'')+card(m)).join('')}</div>`:card(u[0])});
   h+=`<div class="row"><span class="rl">Đời ${g} · ${n}</span>${c}</div>`});
- h+='</div></div></div><div class="zc"><button id="zo" title="Thu nhỏ">−</button><button id="zr" title="Về 100%">100%</button><button id="zi" title="Phóng to">+</button><button id="zf" title="Vừa khung">⛶</button></div>'+(HL?'<div class="hlb">Đang tô sáng nguồn gốc &amp; con cháu của <b>'+esc(get(sel).name)+'</b> · bấm vào nền để bỏ</div>':'')+'</div>';
+ h+='</div></div></div><div class="zc"><button id="zo" title="Thu nhỏ">−</button><button id="zr" title="Về 100%">100%</button><button id="zi" title="Phóng to">+</button><button id="zf" title="Vừa khung">⛶</button></div>'+(FS?'<div class="hlb">Đang xem nguồn gốc &amp; các con của <b>'+esc(get(focus).name)+'</b> · bấm lần nữa để xem chi tiết <button class="btn" id="fx" style="padding:2px 8px;margin-left:6px">Xem toàn bộ cây</button></div>':'')+'</div>';
  $('#body').innerHTML=h;applyZoom();const nv=$('#vp');nv.scrollLeft=sl;nv.scrollTop=st;lines();bindZoom();
 }
 function applyZoom(){const vp=$('#vp'),cv=$('#cv'),sz=$('#sz');if(!vp||!cv)return;cv.style.transform=`scale(${zoom})`;cv.style.minWidth=vp.clientWidth/zoom+'px';sz.style.width=cv.offsetWidth*zoom+'px';sz.style.height=cv.offsetHeight*zoom+'px';$('#zr').textContent=Math.round(zoom*100)+'%'}
@@ -312,7 +322,7 @@ function renderSide(){
  $('#side').innerHTML=`<button class="btn sx" data-act="sc">✕ Đóng</button><div class="ph">${av(m)}<div style="flex:1"><h3>${esc(m.name)}</h3><div>${years(m)}</div><div style="color:var(--mu)">Đời ${m.gen} · ${role(m)}</div></div>${can('edit')?'<button class="btn" id="ed">✏️ Chỉnh sửa</button>':''}</div><div class="tabs">${['Thông tin','Quan hệ','Ghi chú'].map((t,i)=>`<a data-t="${i}" class="${i==tab?'on':''}">${t}</a>`).join('')}</div>${b}${can('edit')?'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" id="ac" style="flex:1">➕ Thêm con</button><button class="btn" id="asp" style="flex:1">💍 Thêm vợ/chồng</button></div>':''}${can('edit')?'<button class="btn p" id="full" style="width:100%;margin-top:12px">Chỉnh sửa đầy đủ</button>':''}`;
 }
 function renderPlaceholder(){const t=MENU.find(x=>x[0]==page)[2];$('#body').innerHTML=`<div style="padding:60px;text-align:center;color:var(--mu)">Mục “${t}” đang được phát triển.<br>Hãy dùng Cây gia phả hoặc Danh sách thành viên.</div>`}
-function render(){chrome();$('#side').style.display=(page=='tree'||page=='list')&&cur?'':'none';
+function render(){chrome();$('#side').style.display=(page=='tree'||page=='list')&&cur&&showDetail?'':'none';$('#side').classList.toggle('open',showDetail);
  if((page=='tree'||page=='list')&&!cur){$('#body').innerHTML='<div class="pg" style="padding:60px 16px;text-align:center;color:var(--mu)"><div style="font-size:42px">🔒</div><p>Cây gia phả chỉ dành cho thành viên đã đăng nhập.</p><p style="font-size:12px">Đã nạp '+M.length+' thành viên · '+users.length+' tài khoản.</p><button class="btn p" id="li">Đăng nhập</button> <button class="btn" id="rg">Đăng ký</button></div>';return}
  if(page=='tree'||page=='list'){view=page=='list'?'list':view;chrome();view=='tree'?renderTree():renderList();renderSide()}
  else if(page=='home')renderHome();else if(page=='img')renderGallery();else if(page=='ev')renderEvents();else renderPlaceholder()}
@@ -333,12 +343,19 @@ function form(m,isNew){
 }
 document.addEventListener('click',e=>{
  if(e.target.id=='lb'||e.target.className=='lbs'){lb=null;drawLb();return}
- if(hlOn&&e.target.closest('#vp')&&!e.target.closest('.card')&&!e.target.closest('button')){hlOn=false;render();return}
- const t=e.target.closest('[data-id],[data-p],[data-g],[data-t],[data-act],[data-lb],button');if(!t)return;
+ if(!e.target.closest('#sr')&&!e.target.closest('#qs')&&!e.target.closest('#gs'))$('#sr').style.display='none';
+ if(focus&&e.target.closest('#vp')&&!e.target.closest('.card')&&!e.target.closest('button')){focus=0;showDetail=false;render();return}
+ const t=e.target.closest('[data-id],[data-p],[data-g],[data-t],[data-act],[data-lb],[data-pick],button');if(!t)return;
+ if(t.dataset.pick){pick(+t.dataset.pick);return}
  if(t.dataset.lb){lbAct(t.dataset.lb);return}
  if(t.dataset.tg){const i=+t.dataset.tg;collapsed.has(i)?collapsed.delete(i):collapsed.add(i);saveCol();render();return}
  if(t.dataset.act){act(t.dataset.act,t.dataset.i);return}
- if(t.dataset.id&&!t.closest('dialog')){sel=+t.dataset.id;hlOn=true;render();$('#side').classList.add('open');return}
+ if(t.dataset.id&&!t.closest('dialog')){const id=+t.dataset.id;
+  if(t.tagName=='TR'){sel=id;showDetail=true}
+  else if(t.closest('#side')){sel=id;focus=id;showDetail=true}
+  else if(focus==id){sel=id;showDetail=true}
+  else{sel=id;focus=id;showDetail=false}
+  render();return}
  if(t.dataset.p){page=t.dataset.p;render();return}
  if(t.dataset.g!=null){gen=+t.dataset.g;render();return}
  if(t.dataset.t!=null){tab=+t.dataset.t;renderSide();return}
@@ -355,14 +372,16 @@ document.addEventListener('click',e=>{
  else if(id=='imp'&&can('edit'))impForm()
  else if(id=='ac'&&can('edit'))addRel('child',get(sel))
  else if(id=='asp'&&can('edit'))addRel('spouse',get(sel))
+ else if(id=='fx'){focus=0;showDetail=false;render()}
  else if((id=='exu'||id=='exc')&&adm())dlJson(id=='exu'?users:C,id=='exu'?'giapha_users_v1.json':'giapha_content_v1.json')
  else if(id=='dc'&&adm()){if(confirm('Bỏ các thay đổi chưa đưa lên GitHub trên trình duyệt này và tải lại dữ liệu mới nhất?')){['giapha_ngo_v1','giapha_users_v1','giapha_content_v1'].forEach(k=>{localStorage.removeItem(k);localStorage.removeItem('dirty_'+k)});location.reload()}}
  else if(id=='rl'&&adm()){fetch('./giapha_ngo_v1.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject('HTTP '+r.status)).then(t=>doImport(t)).catch(e=>alert('Không nạp được file giapha_ngo_v1.json: '+e))}
  else if(id=='rst'&&adm()){if(confirm('Xóa toàn bộ thành viên? Hãy xuất JSON để sao lưu trước.')){M=[];sel=undefined;save();render()}}
  else if(id=='exp'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(M,null,1)],{type:'application/json'}));a.download='giapha_ngo_v1.json';a.click()}
 });
-const onq=e=>{q=e.target.value.trim().toLowerCase();$('#qs').value=$('#gs').value=e.target.value;render()};
+const onq=e=>{q=e.target.value.trim().toLowerCase();$('#qs').value=$('#gs').value=e.target.value;showSr(e.target);render()};
 $('#qs').oninput=onq;$('#gs').oninput=onq;
+[$('#qs'),$('#gs')].forEach(i=>i.addEventListener('keydown',e=>{if(e.key=='Enter'){const L=$('#sr').__L||[];if(L.length==1)pick(L[0].id)}}));
 addEventListener('resize',()=>{applyZoom();lines()});
 
 // Đồng bộ với file JSON trên máy chủ/GitHub mỗi lần tải trang
