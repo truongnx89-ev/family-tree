@@ -1,7 +1,7 @@
 [
  {
   "id": 150010,
-  "name": "Ngô Xuân Húy Tường",
+  "name": "Ngô Xuân Tường",
   "g": "M",
   "by": "",
   "dy": "",
@@ -16,7 +16,7 @@
  },
  {
   "id": 160010,
-  "name": "Ngô Xuân Húy Tới",
+  "name": "Ngô Xuân Tới",
   "g": "M",
   "by": "",
   "dy": "",
@@ -33,7 +33,7 @@
  },
  {
   "id": 160020,
-  "name": "Nguyễn Thị Húy Dâu",
+  "name": "Nguyễn Thị Dâu",
   "g": "F",
   "by": "",
   "dy": "",
@@ -50,7 +50,7 @@
  },
  {
   "id": 160030,
-  "name": "Ngô Xuân Húy Nhỏ",
+  "name": "Ngô Xuân Nhỏ",
   "g": "M",
   "by": "",
   "dy": "",
@@ -65,7 +65,7 @@
  },
  {
   "id": 160040,
-  "name": "Ngô Thị Húy Y",
+  "name": "Ngô Thị Y",
   "g": "F",
   "by": "",
   "dy": "",
@@ -80,7 +80,7 @@
  },
  {
   "id": 160050,
-  "name": "Ngô Xuân Húy Bân",
+  "name": "Ngô Xuân Bân",
   "g": "M",
   "by": "",
   "dy": "",
@@ -97,7 +97,7 @@
  },
  {
   "id": 160060,
-  "name": "Ngô Thị Húy Dâu",
+  "name": "Ngô Thị Dâu",
   "g": "F",
   "by": "",
   "dy": "",
@@ -114,7 +114,7 @@
  },
  {
   "id": 170010,
-  "name": "Ngô Xuân Húy Tế",
+  "name": "Ngô Xuân Tế",
   "g": "M",
   "by": "",
   "dy": "",
@@ -131,7 +131,7 @@
  },
  {
   "id": 170020,
-  "name": "Ngô Thị Húy Thân",
+  "name": "Ngô Thị Thân",
   "g": "F",
   "by": "",
   "dy": "",
@@ -148,7 +148,7 @@
  },
  {
   "id": 170030,
-  "name": "Ngô Xuân Húy Tửu",
+  "name": "Ngô Xuân Tửu",
   "g": "M",
   "by": "",
   "dy": "",
@@ -163,7 +163,7 @@
  },
  {
   "id": 170040,
-  "name": "Ngô Thị Húy Chuột",
+  "name": "Ngô Thị Chuột",
   "g": "F",
   "by": "",
   "dy": "",
@@ -178,7 +178,7 @@
  },
  {
   "id": 170050,
-  "name": "Ngô Thị Húy Nhắt",
+  "name": "Ngô Thị Nhắt",
   "g": "F",
   "by": "",
   "dy": "",
@@ -193,7 +193,7 @@
  },
  {
   "id": 170060,
-  "name": "Ngô Thị Húy Nhí",
+  "name": "Ngô Thị Nhí",
   "g": "F",
   "by": "",
   "dy": "",
@@ -208,7 +208,7 @@
  },
  {
   "id": 170070,
-  "name": "Ngô Xuân Húy Nhiễm",
+  "name": "Ngô Xuân Nhiễm",
   "g": "M",
   "by": "",
   "dy": "",
@@ -223,7 +223,7 @@
  },
  {
   "id": 170080,
-  "name": "Ngô Xuân Húy Thái",
+  "name": "Ngô Xuân Thái",
   "g": "M",
   "by": "",
   "dy": "",
@@ -238,7 +238,7 @@
  },
  {
   "id": 170090,
-  "name": "Ngô Thị Húy Xấu",
+  "name": "Ngô Thị Xấu",
   "g": "F",
   "by": "",
   "dy": "",
@@ -255,7 +255,7 @@
  },
  {
   "id": 170100,
-  "name": "Nguyễn Văn Húy Hóa",
+  "name": "Nguyễn Văn Hóa",
   "g": "M",
   "by": "",
   "dy": "",
@@ -272,7 +272,7 @@
  },
  {
   "id": 170110,
-  "name": "Ngô Xuân Húy Vân",
+  "name": "Ngô Xuân Vân",
   "g": "M",
   "by": "",
   "dy": "",
@@ -290,7 +290,7 @@
  },
  {
   "id": 170120,
-  "name": "Trần Thị Húy Lỳ",
+  "name": "Trần Thị Lỳ",
   "g": "F",
   "by": "",
   "dy": "",
@@ -307,7 +307,7 @@
  },
  {
   "id": 170130,
-  "name": "Bùi Thị Húy Kẹo",
+  "name": "Bùi Thị Kẹo",
   "g": "F",
   "by": "",
   "dy": "",
@@ -324,7 +324,7 @@
  },
  {
   "id": 170140,
-  "name": "Ngô Thị Húy È",
+  "name": "Ngô Thị È",
   "g": "F",
   "by": "",
   "dy": "",
@@ -341,7 +341,7 @@
  },
  {
   "id": 170150,
-  "name": "Ngô Doân Húy Thiện",
+  "name": "Ngô Doân Thiện",
   "g": "M",
   "by": "",
   "dy": "",
@@ -358,7 +358,7 @@
  },
  {
   "id": 170160,
-  "name": "Ngô Xuân Húy Nghĩa",
+  "name": "Ngô Xuân Nghĩa",
   "g": "M",
   "by": "",
   "dy": "",
@@ -376,7 +376,7 @@
  },
  {
   "id": 170170,
-  "name": "Lại Thị Húy Quách",
+  "name": "Lại Thị Quách",
   "g": "F",
   "by": "",
   "dy": "",
@@ -393,7 +393,7 @@
  },
  {
   "id": 170180,
-  "name": "Tống Thị Húy Nhót",
+  "name": "Tống Thị Nhót",
   "g": "F",
   "by": "",
   "dy": "",
@@ -410,7 +410,7 @@
  },
  {
   "id": 170190,
-  "name": "Ngô Xuân Húy Kỳ",
+  "name": "Ngô Xuân Kỳ",
   "g": "M",
   "by": "",
   "dy": "",
@@ -428,7 +428,7 @@
  },
  {
   "id": 170200,
-  "name": "Ngô Thị Húy Chắt",
+  "name": "Ngô Thị Chắt",
   "g": "F",
   "by": "",
   "dy": "",
@@ -445,7 +445,7 @@
  },
  {
   "id": 170210,
-  "name": "Tống Thị Húy Rúc",
+  "name": "Tống Thị Rúc",
   "g": "F",
   "by": "",
   "dy": "",
@@ -462,7 +462,7 @@
  },
  {
   "id": 170220,
-  "name": "Ngô Thị Húy Xí",
+  "name": "Ngô Thị Xí",
   "g": "F",
   "by": "",
   "dy": "",
@@ -479,7 +479,7 @@
  },
  {
   "id": 170230,
-  "name": "Bùi Đắc Húy Điếm",
+  "name": "Bùi Đắc Điếm",
   "g": "M",
   "by": "",
   "dy": "",
@@ -496,7 +496,7 @@
  },
  {
   "id": 170240,
-  "name": "Ngô Thị Húy Rụt",
+  "name": "Ngô Thị Rụt",
   "g": "F",
   "by": "",
   "dy": "",
@@ -513,7 +513,7 @@
  },
  {
   "id": 170250,
-  "name": "Phạm Đức Húy Thi",
+  "name": "Phạm Đức Thi",
   "g": "M",
   "by": "",
   "dy": "",
@@ -530,7 +530,7 @@
  },
  {
   "id": 170260,
-  "name": "Ngô Xuân Húy Thuyên",
+  "name": "Ngô Xuân Thuyên",
   "g": "M",
   "by": "",
   "dy": "",
@@ -548,7 +548,7 @@
  },
  {
   "id": 180010,
-  "name": "Trần Húy Vắt",
+  "name": "Trần Vắt",
   "g": "F",
   "by": "",
   "dy": "",
@@ -565,7 +565,7 @@
  },
  {
   "id": 180020,
-  "name": "Ngô Thị Húy Quýt",
+  "name": "Ngô Thị Quýt",
   "g": "F",
   "by": "",
   "dy": "",
@@ -582,7 +582,7 @@
  },
  {
   "id": 180030,
-  "name": "Ngô Thị Húy Nhí",
+  "name": "Ngô Thị Nhí",
   "g": "F",
   "by": "",
   "dy": "",
@@ -597,7 +597,7 @@
  },
  {
   "id": 180040,
-  "name": "Ngô Thị Húy Gấm",
+  "name": "Ngô Thị Gấm",
   "g": "F",
   "by": "",
   "dy": "",
@@ -614,7 +614,7 @@
  },
  {
   "id": 180050,
-  "name": "Phạm Đức Húy Đỗi",
+  "name": "Phạm Đức Đỗi",
   "g": "M",
   "by": "",
   "dy": "",
@@ -631,7 +631,7 @@
  },
  {
   "id": 180060,
-  "name": "Ngô Thị Húy Cún",
+  "name": "Ngô Thị Cún",
   "g": "F",
   "by": "",
   "dy": "",
@@ -648,7 +648,7 @@
  },
  {
   "id": 180070,
-  "name": "Hồ Sỹ Húy Hạnh",
+  "name": "Hồ Sỹ Hạnh",
   "g": "M",
   "by": "",
   "dy": "",
@@ -665,7 +665,7 @@
  },
  {
   "id": 180080,
-  "name": "Ngô Xuân Húy Dân",
+  "name": "Ngô Xuân Dân",
   "g": "M",
   "by": "",
   "dy": "",
@@ -699,7 +699,7 @@
  },
  {
   "id": 180100,
-  "name": "Ngô Xuân Húy Dốc",
+  "name": "Ngô Xuân Dốc",
   "g": "M",
   "by": "",
   "dy": "",
@@ -716,7 +716,7 @@
  },
  {
   "id": 180110,
-  "name": "Ngô Thị Húy Huận",
+  "name": "Ngô Thị Huận",
   "g": "F",
   "by": "",
   "dy": "",
@@ -767,7 +767,7 @@
  },
  {
   "id": 180140,
-  "name": "Ngô Xuân Húy Ninh",
+  "name": "Ngô Xuân Ninh",
   "g": "M",
   "by": "",
   "dy": "",
@@ -782,7 +782,7 @@
  },
  {
   "id": 180150,
-  "name": "Ngô Thị Húy Tôm",
+  "name": "Ngô Thị Tôm",
   "g": "F",
   "by": "",
   "dy": "",
@@ -816,7 +816,7 @@
  },
  {
   "id": 180170,
-  "name": "Ngô Xuân Húy Tập",
+  "name": "Ngô Xuân Tập",
   "g": "M",
   "by": "",
   "dy": "",
@@ -833,7 +833,7 @@
  },
  {
   "id": 180180,
-  "name": "Ngô Thị Húy Dắt",
+  "name": "Ngô Thị Dắt",
   "g": "F",
   "by": "",
   "dy": "",
@@ -850,7 +850,7 @@
  },
  {
   "id": 180190,
-  "name": "Ngô Xuân Húy Tuyết",
+  "name": "Ngô Xuân Tuyết",
   "g": "M",
   "by": "",
   "dy": "",
@@ -865,7 +865,7 @@
  },
  {
   "id": 180200,
-  "name": "Ngô Xuân Húy Ba",
+  "name": "Ngô Xuân Ba",
   "g": "M",
   "by": "",
   "dy": "",
@@ -880,7 +880,7 @@
  },
  {
   "id": 180210,
-  "name": "Ngô Xuân Húy Dũng",
+  "name": "Ngô Xuân Dũng",
   "g": "M",
   "by": "",
   "dy": "",
@@ -999,7 +999,7 @@
  },
  {
   "id": 180280,
-  "name": "Ngô Doãn Húy Bản",
+  "name": "Ngô Doãn Bản",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1016,7 +1016,7 @@
  },
  {
   "id": 180290,
-  "name": "Ngô Xuân Húy Nghi",
+  "name": "Ngô Xuân Nghi",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1033,7 +1033,7 @@
  },
  {
   "id": 180300,
-  "name": "Vũ Thị Húy Miến",
+  "name": "Vũ Thị Miến",
   "g": "F",
   "by": "",
   "dy": "",
@@ -1050,7 +1050,7 @@
  },
  {
   "id": 180310,
-  "name": "Ngô Xuân Húy Nga",
+  "name": "Ngô Xuân Nga",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1067,7 +1067,7 @@
  },
  {
   "id": 180320,
-  "name": "Tống Thị Húy Rụt",
+  "name": "Tống Thị Rụt",
   "g": "F",
   "by": "",
   "dy": "",
@@ -1084,7 +1084,7 @@
  },
  {
   "id": 180330,
-  "name": "Ngô Xuân Húy Đảo",
+  "name": "Ngô Xuân Đảo",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1101,7 +1101,7 @@
  },
  {
   "id": 180340,
-  "name": "Trần Thị Húy Mọc",
+  "name": "Trần Thị Mọc",
   "g": "F",
   "by": "",
   "dy": "",
@@ -1118,7 +1118,7 @@
  },
  {
   "id": 180350,
-  "name": "Ngô Xuân Húy Lộc",
+  "name": "Ngô Xuân Lộc",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1254,7 +1254,7 @@
  },
  {
   "id": 190030,
-  "name": "Ngô Thị Húy Nếm",
+  "name": "Ngô Thị Nếm",
   "g": "F",
   "by": "",
   "dy": "",
@@ -1269,7 +1269,7 @@
  },
  {
   "id": 190040,
-  "name": "Ngô Xuân Húy Huấn",
+  "name": "Ngô Xuân Huấn",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1284,7 +1284,7 @@
  },
  {
   "id": 190050,
-  "name": "Ngô Xuân Húy Quý",
+  "name": "Ngô Xuân Quý",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1318,7 +1318,7 @@
  },
  {
   "id": 190070,
-  "name": "Ngô Xuân Húy Hải",
+  "name": "Ngô Xuân Hải",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1620,7 +1620,7 @@
  },
  {
   "id": 190250,
-  "name": "Ngô Xuân Húy Luyện",
+  "name": "Ngô Xuân Luyện",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1654,7 +1654,7 @@
  },
  {
   "id": 190270,
-  "name": "Ngô Xuân Húy Dần",
+  "name": "Ngô Xuân Dần",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1703,7 +1703,7 @@
  },
  {
   "id": 190300,
-  "name": "Ngô Xuân Húy Đoàn",
+  "name": "Ngô Xuân Đoàn",
   "g": "M",
   "by": "",
   "dy": "",
@@ -1737,7 +1737,7 @@
  },
  {
   "id": 190320,
-  "name": "Ngô Thị Húy Đào",
+  "name": "Ngô Thị Đào",
   "g": "F",
   "by": "",
   "dy": "",
@@ -1907,7 +1907,7 @@
  },
  {
   "id": 190420,
-  "name": "Ngô Xuân Húy Thanh",
+  "name": "Ngô Xuân Thanh",
   "g": "M",
   "by": "",
   "dy": "",
@@ -2009,7 +2009,7 @@
  },
  {
   "id": 190480,
-  "name": "Ngô Xuân Húy Thành",
+  "name": "Ngô Xuân Thành",
   "g": "M",
   "by": "",
   "dy": "",
@@ -2058,7 +2058,7 @@
  },
  {
   "id": 190510,
-  "name": "Ngô Xuân Húy Lý",
+  "name": "Ngô Xuân Lý",
   "g": "M",
   "by": "",
   "dy": "",
@@ -2211,7 +2211,7 @@
  },
  {
   "id": 190600,
-  "name": "Vũ Văn Húy Quân",
+  "name": "Vũ Văn Quân",
   "g": "M",
   "by": "",
   "dy": "",
@@ -2279,7 +2279,7 @@
  },
  {
   "id": 190640,
-  "name": "Trần Văn Húy Chiến",
+  "name": "Trần Văn Chiến",
   "g": "M",
   "by": "",
   "dy": "",
@@ -2364,7 +2364,7 @@
  },
  {
   "id": 190690,
-  "name": "Ngô Xuân Húy Hà",
+  "name": "Ngô Xuân Hà",
   "g": "M",
   "by": "",
   "dy": "",
@@ -2381,7 +2381,7 @@
  },
  {
   "id": 190700,
-  "name": "Nguyễn Thị Húy Kim",
+  "name": "Nguyễn Thị Kim",
   "g": "F",
   "by": "",
   "dy": "",
@@ -2466,7 +2466,7 @@
  },
  {
   "id": 190750,
-  "name": "Ngô Xuân Húy Tiến",
+  "name": "Ngô Xuân Tiến",
   "g": "M",
   "by": "",
   "dy": "",
@@ -2549,7 +2549,7 @@
  },
  {
   "id": 190800,
-  "name": "Ngô Xuân Húy Dương",
+  "name": "Ngô Xuân Dương",
   "g": "M",
   "by": "",
   "dy": "",
@@ -2564,7 +2564,7 @@
  },
  {
   "id": 190810,
-  "name": "Ngô Xuân Húy Nhâm",
+  "name": "Ngô Xuân Nhâm",
   "g": "M",
   "by": "",
   "dy": "",
@@ -2613,7 +2613,7 @@
  },
  {
   "id": 190840,
-  "name": "Ngô Thị Húy Mơ",
+  "name": "Ngô Thị Mơ",
   "g": "F",
   "by": "",
   "dy": "",
