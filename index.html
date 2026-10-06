@@ -98,7 +98,7 @@ dialog{padding:14px}.g2{grid-template-columns:1fr}
 <main>
 <section class="center">
 <div class="ch"><h2 id="ct">🌿 Cây gia phả dòng họ Ngô</h2>
-<div id="ctb" style="display:flex;gap:8px;flex-wrap:wrap"><span id="inf" style="display:contents"></span><button class="btn" id="cA" title="Thu gọn tất cả các nhánh">⊟ Thu gọn</button><button class="btn" id="eA" title="Mở rộng tất cả các nhánh">⊞ Mở rộng</button><button class="btn" id="pdf" title="Xuất cây đang xem ra PDF">⬇ Xuất PDF</button><button class="btn p" id="vt">Dạng cây</button><button class="btn" id="vl">Dạng danh sách</button><button class="btn" id="add">+ Thêm</button><button class="btn" id="rl" title="Tải lại dữ liệu từ giapha_ngo_v1.json trên máy chủ">⟳ Nạp lại từ file</button><button class="btn" id="imp">Nhập JSON</button><button class="btn" id="exu" title="Tải giapha_users_v1.json">Xuất tài khoản</button><button class="btn" id="exc" title="Tải giapha_content_v1.json">Xuất nội dung</button><button class="btn" id="exp">Xuất JSON</button><button class="btn" id="rst">Xóa tất cả</button></div></div>
+<div id="ctb" style="display:flex;gap:8px;flex-wrap:wrap"><span id="inf" style="display:contents"></span><button class="btn" id="fx" style="display:none" title="Quay lại toàn bộ cây">⤢ Toàn bộ cây</button><button class="btn" id="pdf" title="Xuất cây đang xem ra PDF">⬇ Xuất PDF</button><button class="btn p" id="vt">Dạng cây</button><button class="btn" id="vl">Dạng danh sách</button><button class="btn" id="add">+ Thêm</button><button class="btn" id="rl" title="Tải lại dữ liệu từ giapha_ngo_v1.json trên máy chủ">⟳ Nạp lại từ file</button><button class="btn" id="imp">Nhập JSON</button><button class="btn" id="exu" title="Tải giapha_users_v1.json">Xuất tài khoản</button><button class="btn" id="exc" title="Tải giapha_content_v1.json">Xuất nội dung</button><button class="btn" id="exp">Xuất JSON</button><button class="btn" id="rst">Xóa tất cả</button></div></div>
 <div class="tb"><div style="position:relative"><input id="qs" placeholder="Tìm kiếm nhanh theo tên..."></div><span style="color:var(--mu);font-size:13px">Thế hệ:</span><div class="chips" id="chips"></div></div>
 <div id="body" style="flex:1;display:flex;flex-direction:column;min-height:0;position:relative"></div>
 </section>
@@ -121,7 +121,7 @@ const match=m=>!q||(m.name+' '+m.id+' '+m.by+' '+m.home).toLowerCase().includes(
 const MENU=[['set','','Cài đặt']];
 const NAV=[['home','🏠','Trang chủ'],['tree','🌳','Cây gia phả'],['img','🖼️','Hình ảnh'],['ev','📅','Sự kiện']];
 function ld(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
-function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));localStorage.setItem('dirty_'+k,'1');return true}catch(e){alert('Bộ nhớ trình duyệt đầy — hãy dùng ảnh nhỏ hơn hoặc xóa bớt ảnh.');return false}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));localStorage.setItem('dirty_'+k,'1');try{sessionStorage.setItem('sd_'+k,'1')}catch(e){}return true}catch(e){alert('Bộ nhớ trình duyệt đầy — hãy dùng ảnh nhỏ hơn hoặc xóa bớt ảnh.');return false}}
 const UK='giapha_users_v1';let users=ld(UK,[]),cur=null;if(!Array.isArray(users))users=users.users||[];
 try{cur=users.find(u=>u.u==localStorage.getItem('giapha_sess'))||null}catch(e){}
 const can=k=>!!cur&&(cur.role=='admin'||!!cur[k]),adm=()=>cur?.role=='admin';
@@ -131,18 +131,28 @@ const csave=()=>sv('giapha_content_v1',C);
 function shrink(f,max,cb){const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.78))};im.src=r.result};r.readAsDataURL(f)}
 function pickImg(max,cb,multi){const i=document.createElement('input');i.type='file';i.accept='image/*';i.multiple=!!multi;i.onchange=()=>[...i.files].forEach(f=>shrink(f,max,cb));i.click()}
 const btns='<div style="margin-top:14px;text-align:right">';
-function authForm(reg){$('#fm').innerHTML=`<h3 style="margin-top:0">${reg?'Tạo tài khoản':'Đăng nhập'}</h3>${reg&&!users.length?'<p style="color:var(--g)">Tài khoản đầu tiên sẽ là Admin.</p>':''}${reg?'<label>Tên hiển thị</label><input id="a_n">':''}<label>Tên đăng nhập</label><input id="a_u" required autocomplete="username"><label>Mật khẩu</label><input id="a_p" type="password" required autocomplete="${reg?'new-password':'current-password'}">${btns}<button type="button" class="btn" id="a_cx">Hủy</button> <button class="btn p">${reg?'Đăng ký':'Đăng nhập'}</button></div>`;
+function userForm(){$('#fm').innerHTML=`<h3 style="margin-top:0">Thêm tài khoản</h3><label>Tên đăng nhập</label><input id="u_u" required autocomplete="off"><label>Tên hiển thị</label><input id="u_n"><label>Mật khẩu (≥ 6 ký tự)</label><input id="u_p" type="password" required autocomplete="new-password"><label>Vai trò</label><select id="u_r"><option value="user">Người dùng</option><option value="admin">Admin</option></select>${btns}<button type="button" class="btn" id="u_cx">Hủy</button> <button class="btn p">Lưu</button></div>`;
+ $('#dlg').showModal();$('#u_cx').onclick=()=>$('#dlg').close();
+ $('#fm').onsubmit=async e=>{e.preventDefault();if(!adm())return;const u=$('#u_u').value.trim().toLowerCase(),p=$('#u_p').value;
+  if(u.length<3||p.length<6)return alert('Tên đăng nhập ≥ 3 ký tự, mật khẩu ≥ 6 ký tự.');if(users.some(x=>x.u==u))return alert('Tên đăng nhập đã tồn tại.');
+  const salt=crypto.randomUUID();users.push({u,name:$('#u_n').value.trim()||u,salt,h:await hash(p,salt),role:$('#u_r').value,edit:false,content:false});sv(UK,users);$('#dlg').close();render()}}
+function pwForm(u){const x=users.find(y=>y.u==u);if(!x)return;$('#fm').innerHTML=`<h3 style="margin-top:0">Đổi mật khẩu: ${esc(x.u)}</h3><label>Mật khẩu mới (≥ 6 ký tự)</label><input id="w_p" type="password" required autocomplete="new-password">${btns}<button type="button" class="btn" id="w_cx">Hủy</button> <button class="btn p">Lưu</button></div>`;
+ $('#dlg').showModal();$('#w_cx').onclick=()=>$('#dlg').close();
+ $('#fm').onsubmit=async e=>{e.preventDefault();if(!adm())return;const p=$('#w_p').value;if(p.length<6)return alert('Mật khẩu phải có ít nhất 6 ký tự.');
+  x.salt=crypto.randomUUID();x.h=await hash(p,x.salt);sv(UK,users);$('#dlg').close();alert('Đã đổi mật khẩu cho '+x.u+'.')}}
+function authForm(reg){if(reg&&users.length)return;$('#fm').innerHTML=`<h3 style="margin-top:0">${reg?'Tạo tài khoản':'Đăng nhập'}</h3>${reg&&!users.length?'<p style="color:var(--g)">Tài khoản đầu tiên sẽ là Admin.</p>':''}${reg?'<label>Tên hiển thị</label><input id="a_n">':''}<label>Tên đăng nhập</label><input id="a_u" required autocomplete="username"><label>Mật khẩu</label><input id="a_p" type="password" required autocomplete="${reg?'new-password':'current-password'}">${btns}<button type="button" class="btn" id="a_cx">Hủy</button> <button class="btn p">${reg?'Đăng ký':'Đăng nhập'}</button></div>`;
  $('#dlg').showModal();$('#a_cx').onclick=()=>$('#dlg').close();
  $('#fm').onsubmit=async e=>{e.preventDefault();const u=$('#a_u').value.trim().toLowerCase(),p=$('#a_p').value;
   if(reg){if(u.length<3||p.length<6)return alert('Tên đăng nhập ≥ 3 ký tự, mật khẩu ≥ 6 ký tự.');if(users.some(x=>x.u==u))return alert('Tên đăng nhập đã tồn tại.');const salt=crypto.randomUUID();users.push({u,name:$('#a_n').value.trim()||u,salt,h:await hash(p,salt),role:users.length?'user':'admin',edit:false,content:false});sv(UK,users);cur=users[users.length-1]}
   else{const x=users.find(y=>y.u==u);if(!x||x.h!=await hash(p,x.salt))return alert('Sai tên đăng nhập hoặc mật khẩu.');cur=x}
   try{localStorage.setItem('giapha_sess',cur.u)}catch(e){}$('#dlg').close();render()}}
 function adminPanel(){if(!adm())return'';const ck=(x,k)=>`<input type="checkbox" data-u="${esc(x.u)}" data-k="${k}" ${x[k]||x.role=='admin'?'checked':''} ${x.role=='admin'?'disabled':''}>`;
- return`<div class="adm"><b>🛡️ Bảng điều khiển phân quyền</b> <small style="color:var(--mu)">Admin: toàn quyền · Người dùng: chỉ xem trừ khi được cấp quyền</small><div style="max-height:190px;overflow:auto"><table><thead><tr><th>Tài khoản</th><th>Tên</th><th>Vai trò</th><th>Sửa thành viên</th><th>Sửa nội dung/ảnh</th><th></th></tr></thead><tbody>${users.map(x=>`<tr><td>${esc(x.u)}</td><td>${esc(x.name)}</td><td><select data-u="${esc(x.u)}" data-k="role"><option value="user" ${x.role=='user'?'selected':''}>Người dùng</option><option value="admin" ${x.role=='admin'?'selected':''}>Admin</option></select></td><td>${ck(x,'edit')}</td><td>${ck(x,'content')}</td><td>${x.u==cur.u?'':`<button class="btn d" data-act="udel" data-i="${esc(x.u)}">Xóa</button>`}</td></tr>`).join('')}</tbody></table></div></div>`}
+ return`<div class="adm"><b>🛡️ Bảng điều khiển phân quyền</b> <button class="btn p" id="nu">+ Thêm tài khoản</button> <small style="color:var(--mu)">Admin: toàn quyền · Người dùng: chỉ xem trừ khi được cấp quyền</small><div style="max-height:190px;overflow:auto"><table><thead><tr><th>Tài khoản</th><th>Tên</th><th>Vai trò</th><th>Sửa thành viên</th><th>Sửa nội dung/ảnh</th><th></th></tr></thead><tbody>${users.map(x=>`<tr><td>${esc(x.u)}</td><td>${esc(x.name)}</td><td><select data-u="${esc(x.u)}" data-k="role"><option value="user" ${x.role=='user'?'selected':''}>Người dùng</option><option value="admin" ${x.role=='admin'?'selected':''}>Admin</option></select></td><td>${ck(x,'edit')}</td><td>${ck(x,'content')}</td><td><button class="btn" data-act="upw" data-i="${esc(x.u)}">Đổi mật khẩu</button> ${x.u==cur.u?'':`<button class="btn d" data-act="udel" data-i="${esc(x.u)}">Xóa</button>`}</td></tr>`).join('')}</tbody></table></div></div>`}
 document.addEventListener('change',e=>{const t=e.target,u=t.dataset&&t.dataset.u;if(!u||!adm())return;const x=users.find(y=>y.u==u);if(!x)return;
  if(t.dataset.k=='role'){if(x.role=='admin'&&t.value!='admin'&&users.filter(y=>y.role=='admin').length<2){alert('Phải còn ít nhất một Admin.');render();return}x.role=t.value}else x[t.dataset.k]=t.checked;
  sv(UK,users);render()});
 function act(a,i){const ct=can('content');
+ if(a=='upw'&&adm()){pwForm(i);return}
  if(a=='bigimg'){const m=get(+i);if(m&&m.img)showLb({imgs:[{src:m.img,cap:m.name}]},0);return}
  if(a=='sc'){showDetail=false;render();return}
  if(a=='open'){showLb(curAlb(),+i);return}
@@ -180,12 +190,8 @@ function impForm(){$('#fm').innerHTML=`<h3 style="margin-top:0">Nhập JSON</h3>
 const kidsOf=id=>M.filter(c=>c.fid==id||c.mid==id);
 let collapsed=new Set(ld('giapha_col',[])),hid=new Set();
 const saveCol=()=>{try{localStorage.setItem('giapha_col',JSON.stringify([...collapsed]))}catch(e){}};
-function hiddenSet(){const h=new Set();if(q||FS)return h;const st=[...collapsed];
- while(st.length){const id=st.pop();M.forEach(c=>{if((c.fid==id||c.mid==id)&&!h.has(c.id)){h.add(c.id);st.push(c.id);c.sids.forEach(sp=>{const o=get(sp);if(o&&!o.fid&&!o.mid)h.add(o.id)})}})}
- return h}
-function tgBtn(m){const k=kidsOf(m.id);if(FS||!k.length)return'';
- if(m.g=='F'&&m.sids.some(s=>{const o=get(s);return o&&o.g=='M'&&k.every(c=>c.fid==o.id)}))return'';
- const c=collapsed.has(m.id);return`<button class="tg" data-tg="${m.id}" title="${c?'Mở rộng nhánh':'Thu gọn nhánh'}">${c?'+'+k.length:'−'}</button>`}
+function hiddenSet(){return new Set()}
+function tgBtn(){return''}
 let focus=0,FS=null,showDetail=false,HL=null,HLC=null;
 function focusSet(id){const S=new Set([id]);const up=x=>{const m=get(x);if(!m)return;[m.fid,m.mid].forEach(p=>{if(p&&!S.has(p)){S.add(p);up(p)}})};up(id);
  const m=get(id);(m.sids||[]).forEach(sp=>S.add(sp));
@@ -223,8 +229,8 @@ function linkForm(){$('#fm').innerHTML=`<h3 style="margin-top:0">Gán link cho n
  $('#dlg').showModal();$('#l_cx').onclick=()=>$('#dlg').close();
  $('#fm').onsubmit=e=>{const v=$('#l_u').value.trim();let u='';if(v){try{const x=new URL(/^[a-z]+:/i.test(v)?v:'https://'+v);if(!/^https?:$/.test(x.protocol))throw 0;u=x.href}catch(_){e.preventDefault();return alert('Link không hợp lệ.')}}C.link=u;csave();render()}}
 function dlJson(o,n){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o,null,1)],{type:'application/json'}));a.download=n;a.click()}
-function banner(){const el=$('#bn');if(!el)return;const nm={giapha_ngo_v1:'thành viên',giapha_users_v1:'tài khoản',giapha_content_v1:'nội dung'},dk=Object.keys(nm).filter(k=>localStorage.getItem('dirty_'+k));
- el.innerHTML=adm()&&dk.length?`⚠ Trình duyệt này có thay đổi chưa đưa lên GitHub (${dk.map(k=>nm[k]).join(', ')}) nên trang không tự lấy dữ liệu mới. Hãy xuất file JSON rồi upload lên GitHub, hoặc <button class="btn" id="dc">Bỏ thay đổi &amp; lấy dữ liệu mới nhất</button>`:'';el.style.display=el.innerHTML?'':'none'}
+function banner(){const el=$('#bn');if(!el)return;const nm={giapha_ngo_v1:'thành viên',giapha_users_v1:'tài khoản',giapha_content_v1:'nội dung'},dk=Object.keys(nm).filter(k=>k=='giapha_ngo_v1'?localStorage.getItem('dirty_'+k):sessionStorage.getItem('sd_'+k));
+ el.innerHTML=adm()&&dk.length?`⚠ Trình duyệt này có thay đổi chưa đưa lên GitHub (${dk.map(k=>nm[k]).join(', ')}) nên trang chưa lấy dữ liệu mới (tài khoản và nội dung chưa upload sẽ mất ở lần mở trang sau). Hãy xuất file JSON rồi upload lên GitHub, hoặc <button class="btn" id="dc">Bỏ thay đổi &amp; lấy dữ liệu mới nhất</button>`:'';el.style.display=el.innerHTML?'':'none'}
 let formT='';
 function addRel(kind,p){if(!p||!can('edit'))return;
  const b={name:'',g:'M',gen:p.gen,by:'',dy:'',home:'',job:'',note:'',fid:0,mid:0,sids:[],img:''};
@@ -245,14 +251,14 @@ function chrome(){
  $('#nav').innerHTML=NAV.map((n,i)=>`<a data-p="${n[0]}" class="${n[0]==page?'on':''}">${n[1]}<br>${n[2]}</a>`).join('');
  banner();const tl=(page=='tree'||page=='list')&&!!cur;$('.tb').style.display=tl?'':'none';$('#ctb').style.display=tl?'':'none';
  $('#ct').textContent={home:'🏠 Trang chủ',tree:'🌿 Cây gia phả dòng họ Ngô',list:'👥 Danh sách thành viên',img:'🖼️ Hình ảnh',ev:'📅 Sự kiện',set:'⚙️ Cài đặt'}[page];
- $('#inf').innerHTML=infoBtn();$('#pdf').style.display=view=='tree'&&page=='tree'?'':'none';$('#add').style.display=can('edit')?'':'none';$('#rst').style.display=$('#rl').style.display=$('#exu').style.display=$('#exc').style.display=adm()?'':'none';$('#imp').style.display=can('edit')?'':'none';
- $('#hu').innerHTML=cur?`<span>👤 ${esc(cur.name)} <small style="color:var(--mu)">(${adm()?'Admin':can('edit')||can('content')?'Biên tập':'Thành viên'})</small></span><button class="btn" id="lo">Đăng xuất</button>`:'<button class="btn" id="li">Đăng nhập</button><button class="btn p" id="rg">Đăng ký</button>';
+ $('#inf').innerHTML=infoBtn();$('#exp').style.display=adm()?'':'none';$('#pdf').style.display=view=='tree'&&page=='tree'?'':'none';$('#fx').style.display=focus&&view=='tree'&&page=='tree'?'':'none';$('#add').style.display=can('edit')?'':'none';$('#rst').style.display=$('#rl').style.display=$('#exu').style.display=$('#exc').style.display=adm()?'':'none';$('#imp').style.display=can('edit')?'':'none';
+ $('#hu').innerHTML=cur?`<span>👤 ${esc(cur.name)} <small style="color:var(--mu)">(${adm()?'Admin':can('edit')||can('content')?'Biên tập':'Thành viên'})</small></span><button class="btn" id="lo">Đăng xuất</button>`:'<button class="btn" id="li">Đăng nhập</button>'+(users.length?'':'<button class="btn p" id="rg">Tạo tài khoản Admin</button>');
  const gens=[...new Set(M.map(m=>m.gen))].sort((a,b)=>a-b);
  $('#chips').innerHTML=`<div class="chip ${!gen?'on':''}" data-g="0">Tất cả</div>`+gens.map(g=>`<div class="chip ${gen==g?'on':''}" data-g="${g}">Đời ${g}</div>`).join('');
  $('#vt').className='btn'+(view=='tree'?' p':'');$('#vl').className='btn'+(view=='list'?' p':'');
 }
-function order(){
- hid=hiddenSet();const V=M.filter(m=>!hid.has(m.id)&&(!FS||FS.has(m.id))),gens=[...new Set(V.map(m=>m.gen))].sort((a,b)=>a-b),pos={},rows=[];
+function orderBase(V,gens){
+ const pos={},rows=[];
  gens.forEach(g=>{const L=V.filter(m=>m.gen==g),seen=new Set(),U=[];
   const pp=m=>{const a=[m.fid,m.mid].filter(x=>x&&pos[x]!=null).map(x=>pos[x]);return a.length?Math.min(...a):null};
   L.forEach(m=>{if(seen.has(m.id))return;const comp=[m];seen.add(m.id);
@@ -266,6 +272,42 @@ function order(){
   rows.push([g,U.map(u=>u.c)])});
  return rows;
 }
+
+/* Sắp xếp lại thứ tự thẻ trong từng đời để giảm tối đa số đường nối cắt nhau.
+   Bắt đầu từ thứ tự gốc (orderBase), lặp các lượt quét xuống/lên theo "trọng tâm"
+   cha mẹ/con cái, tự lật chiều vợ-chồng khi giúp bớt cắt nhau, và chỉ giữ kết quả nếu ít cắt hơn. */
+function order(){
+ hid=hiddenSet();
+ const V=M.filter(m=>!hid.has(m.id)&&(!FS||FS.has(m.id))),gens=[...new Set(V.map(m=>m.gen))].sort((a,b)=>a-b);
+ const rows=orderBase(V,gens);
+ if(rows.length<2)return rows;
+ const gm=rows.map(r=>r[1].map(u=>u.slice())),n=gm.length,R={};
+ rows.forEach((r,i)=>r[1].forEach(u=>u.forEach(m=>R[m.id]=i)));
+ const kids={};V.forEach(m=>[m.fid,m.mid].forEach(p=>{if(p&&R[p]!=null&&R[m.id]==R[p]+1)(kids[p]=kids[p]||[]).push(m.id)}));
+ const place=()=>{const P={},N=[];gm.forEach((us,i)=>{let p=0;us.forEach(u=>u.forEach(m=>P[m.id]=p++));N[i]=p});return{P,N}};
+ const upA=(m,i,pl)=>{const a=[m.fid,m.mid].filter(x=>x&&R[x]==i-1&&pl.P[x]!=null).map(x=>(pl.P[x]+.5)/pl.N[i-1]);return a.length?a.reduce((x,y)=>x+y)/a.length:null};
+ const dnA=(m,i,pl)=>{const k=(kids[m.id]||[]).map(x=>(pl.P[x]+.5)/pl.N[i+1]);return k.length?k.reduce((x,y)=>x+y)/k.length:null};
+ const cost=()=>{const pl=place();let c=0;
+  for(let i=1;i<n;i++){const L=[];gm[i].forEach(u=>u.forEach(m=>{const a=upA(m,i,pl);if(a!=null)L.push([a,(pl.P[m.id]+.5)/pl.N[i]])}));
+   for(let x=0;x<L.length;x++)for(let y=x+1;y<L.length;y++)if((L[x][0]-L[y][0])*(L[x][1]-L[y][1])<-1e-9)c+=1000;
+   L.forEach(l=>c+=Math.abs(l[0]-l[1]))}
+  return c};
+ const inv=(v)=>{let a=0,b=0;for(let x=0;x<v.length;x++)for(let y=x+1;y<v.length;y++){if(v[x]==null||v[y]==null)continue;if(v[x]>v[y]+1e-9)a++;else if(v[x]<v[y]-1e-9)b++}return[a,b]};
+ const sweep=(i,A)=>{const pl=place();
+  const key=u=>{const v=u.map(m=>A(m,i,pl)).filter(x=>x!=null);return v.length?v.reduce((x,y)=>x+y)/v.length:null};
+  gm[i].forEach(u=>{if(u.length<2)return;const[a,b]=inv(u.map(m=>A(m,i,pl)));if(b<a)u.reverse()});
+  const cur=new Map();let p=0;gm[i].forEach(u=>{cur.set(u,(p+u.length/2)/pl.N[i]);p+=u.length});
+  gm[i]=gm[i].map((u,j)=>({u,j,k:key(u)??cur.get(u)})).sort((x,y)=>x.k-y.k||x.j-y.j).map(o=>o.u)};
+ const snap=()=>gm.map(us=>us.map(u=>u.slice()));
+ let best=snap(),bc=cost();
+ for(let it=0;it<8;it++){
+  for(let i=1;i<n;i++)sweep(i,upA);
+  let c=cost();if(c<bc-1e-9){bc=c;best=snap()}
+  for(let i=n-2;i>=0;i--)sweep(i,dnA);
+  c=cost();if(c<bc-1e-9){bc=c;best=snap()}
+ }
+ return rows.map((r,i)=>[r[0],best[i]]);
+}
 const ring='<svg class="ring" viewBox="0 0 24 16"><circle cx="8" cy="8" r="6" fill="#fff" stroke="#1f7a57" stroke-width="2"/><circle cx="16" cy="8" r="6" fill="none" stroke="#1f7a57" stroke-width="2"/></svg>';
 const card=m=>`<div class="card ${m.g} ${m.id==sel?'sel':''} ${match(m)?'':'dim'} ${HLC?(HLC.has(m.id)?'hl':'fade'):''}" data-id="${m.id}">${av(m)}<b>${esc(m.name)}</b><span>${years(m)||'&nbsp;'}</span><span>Đời ${m.gen} · ${role(m)}</span>${tgBtn(m)}</div>`;
 function renderTree(){
@@ -276,7 +318,7 @@ function renderTree(){
  let h='<div class="vpw"><div class="vp" id="vp"><div id="sz"><div id="cv"><svg id="lines"></svg>';
  rows.forEach(([g,U])=>{let c='',n=0;U.forEach(u=>{n+=u.length;c+=u.length>1?`<div class="pair">${u.map((m,i)=>(i?'<i class="rg">'+ring+'</i>':'')+card(m)).join('')}</div>`:card(u[0])});
   h+=`<div class="row"><span class="rl">Đời ${g} · ${n}</span>${c}</div>`});
- h+='</div></div></div><div class="zc"><button id="zo" title="Thu nhỏ">−</button><button id="zr" title="Về 100%">100%</button><button id="zi" title="Phóng to">+</button><button id="zf" title="Vừa khung">⛶</button></div>'+(FS?'<div class="hlb">Đang xem nguồn gốc &amp; các con của <b>'+esc(get(focus).name)+'</b> · bấm lần nữa để xem chi tiết <button class="btn" id="fx" style="padding:2px 8px;margin-left:6px">Xem toàn bộ cây</button></div>':'')+'</div>';
+ h+='</div></div></div><div class="zc"><button id="zo" title="Thu nhỏ">−</button><button id="zr" title="Về 100%">100%</button><button id="zi" title="Phóng to">+</button><button id="zf" title="Vừa khung">⛶</button></div>'+''+'</div>';
  $('#body').innerHTML=h;applyZoom();const nv=$('#vp');nv.scrollLeft=sl;nv.scrollTop=st;lines();bindZoom();
 }
 function applyZoom(){const vp=$('#vp'),cv=$('#cv'),sz=$('#sz');if(!vp||!cv)return;cv.style.transform=`scale(${zoom})`;cv.style.minWidth=vp.clientWidth/zoom+'px';sz.style.width=cv.offsetWidth*zoom+'px';sz.style.height=cv.offsetHeight*zoom+'px';$('#zr').textContent=Math.round(zoom*100)+'%'}
@@ -305,20 +347,30 @@ function lines(pass=0){
    g.sy=both?Math.max(g.rf.y,g.rm.y)+g.rf.h*.5:p.y+p.h;
    g.cx=g.k.map(r=>r.x+r.w/2);g.top=Math.min(...g.k.map(r=>r.y));
    g.lo=Math.min(g.ax,...g.cx);g.hi=Math.max(g.ax,...g.cx);g.lv=0});
-  for(let it=0;it<L.length;it++)L.forEach(a=>L.forEach(b=>{if(a!==b&&a.ax>b.lo+4&&a.ax<b.hi-4&&a.lv<=b.lv&&a.lv<8)a.lv=b.lv+1}));
+  const ab=(a,b)=>a!==b&&((a.ax>=b.lo-3&&a.ax<=b.hi+3)||b.cx.some(x=>x>=a.lo-3&&x<=a.hi+3));
+  for(let it=0;it<L.length;it++)L.forEach(a=>L.forEach(b=>{if(ab(a,b)&&a.lv<=b.lv&&a.lv<10)a.lv=b.lv+1}));
   L.sort((a,b)=>a.lv-b.lv||a.lo-b.lo);let mx=0;
-  L.forEach(g=>{let n=0;L.forEach(b=>{if(b.n!=null&&g.ax>b.lo+4&&g.ax<b.hi-4)n=Math.max(n,b.n+1)});
-   for(;;n++){const u=(lanes[n]=lanes[n]||[]);if(!u.some(b=>g.lo<b.hi+10&&g.hi>b.lo-10))break}
+  L.forEach(g=>{let n=0;L.forEach(b=>{if(b.n!=null&&ab(g,b))n=Math.max(n,b.n+1)});
+   for(;;n++){const u=(lanes[n]=lanes[n]||[]);if(!u.some(b=>g.lo<b.hi+26&&g.hi>b.lo-26))break}
    g.n=n;lanes[n].push(g);mx=Math.max(mx,n)});
-  const need=Math.max(64,44+9*mx),pr=L[0].row&&L[0].row.previousElementSibling;
+  const need=Math.max(70,50+14*mx),pr=L[0].row&&L[0].row.previousElementSibling;
   if(pr&&pr.classList.contains('row')&&Math.abs((parseFloat(pr.style.marginBottom)||0)-need)>1){pr.style.marginBottom=need+'px';chg=1}});
  if(chg&&pass<3){applyZoom();return lines(pass+1)}
  svg.setAttribute('width',cv.scrollWidth);svg.setAttribute('height',cv.scrollHeight);
- let d='',h='';
- Ls.forEach(L=>L.forEach(g=>{const by=g.top-24-g.n*9;
-  d+=`M${g.ax},${g.sy}V${by}M${g.lo},${by}H${g.hi}`+g.cx.map((x,i)=>`M${x},${by}V${g.k[i].y}`).join('');
-  if(HL)g.ids.forEach((id,i)=>{const c=get(id);if(HL.has(id)&&((c.fid&&HL.has(c.fid))||(c.mid&&HL.has(c.mid))))h+=`M${g.ax},${g.sy}V${by}M${Math.min(g.ax,g.cx[i])},${by}H${Math.max(g.ax,g.cx[i])}M${g.cx[i]},${by}V${g.k[i].y}`})}));
- svg.innerHTML=`<path d="${d}" fill="none" stroke="#1f7a57" stroke-width="1.6"/>`+(h?`<path d="${h}" fill="none" stroke="#e8590c" stroke-width="3" stroke-linejoin="round"/>`:'');
+ const all=[];
+ Ls.forEach(L=>L.forEach(g=>{g.by=g.top-24-g.n*14;all.push(g)}));
+ const T=all.map(g=>({x:g.ax,y1:g.sy,y2:g.by,g})),V=[...T];
+ all.forEach(g=>{g.dx=g.cx.map((x0,i)=>{const r=g.k[i],lim=Math.max(0,r.w/2-14);let best=x0;
+   for(const off of [0,12,-12,24,-24,36,-36]){if(Math.abs(off)>lim)continue;const x=x0+off;
+    if(!T.some(t=>t.g!==g&&Math.abs(t.x-x)<9&&t.y1<r.y&&t.y2>g.by)){best=x;break}}
+   V.push({x:best,y1:g.by,y2:r.y,g});return best});
+  g.lo=Math.min(g.ax,...g.dx);g.hi=Math.max(g.ax,...g.dx)});
+ let d='';
+ all.forEach(g=>{const own=[g.ax,...g.dx];
+  d+=`M${g.ax},${g.sy}V${g.by}M${g.lo},${g.by}`;let x0=g.lo;
+  V.filter(v=>v.g!==g&&v.y1<g.by-1&&v.y2>g.by+1&&v.x>g.lo+8&&v.x<g.hi-8&&!own.some(x=>Math.abs(x-v.x)<12)).map(v=>v.x).sort((a,b)=>a-b).forEach(x=>{if(x-6>x0+1){d+=`H${x-6}A6 6 0 0 1 ${x+6} ${g.by}`;x0=x+6}});
+  d+=`H${g.hi}`;g.dx.forEach((x,i)=>{d+=`M${x},${g.by}V${g.k[i].y}`})});
+ svg.innerHTML=`<path d="${d}" fill="none" stroke="#1f7a57" stroke-width="1.6" stroke-linejoin="round"/>`;
 }
 function renderList(){
  const L=M.filter(m=>(!gen||m.gen==gen)&&match(m)).sort((a,b)=>a.gen-b.gen||a.id-b.id);
@@ -336,7 +388,7 @@ function renderSide(){
 }
 function renderPlaceholder(){const t=MENU.find(x=>x[0]==page)[2];$('#body').innerHTML=`<div style="padding:60px;text-align:center;color:var(--mu)">Mục “${t}” đang được phát triển.<br>Hãy dùng Cây gia phả hoặc Danh sách thành viên.</div>`}
 function render(){chrome();$('#side').style.display=(page=='tree'||page=='list')&&cur&&showDetail?'':'none';$('#side').classList.toggle('open',showDetail);
- if((page=='tree'||page=='list')&&!cur){$('#body').innerHTML='<div class="pg" style="padding:60px 16px;text-align:center;color:var(--mu)"><div style="font-size:42px">🔒</div><p>Cây gia phả chỉ dành cho thành viên đã đăng nhập.</p><p style="font-size:12px">Đã nạp '+M.length+' thành viên · '+users.length+' tài khoản.</p><button class="btn p" id="li">Đăng nhập</button> <button class="btn" id="rg">Đăng ký</button></div>';return}
+ if((page=='tree'||page=='list')&&!cur){$('#body').innerHTML='<div class="pg" style="padding:60px 16px;text-align:center;color:var(--mu)"><div style="font-size:42px">🔒</div><p>Cây gia phả chỉ dành cho thành viên đã đăng nhập. Liên hệ Admin để được cấp tài khoản.</p><p style="font-size:12px">Đã nạp '+M.length+' thành viên · '+users.length+' tài khoản.</p><button class="btn p" id="li">Đăng nhập</button></div>';return}
  if(page=='tree'||page=='list'){view=page=='list'?'list':view;chrome();view=='tree'?renderTree():renderList();renderSide()}
  else if(page=='home')renderHome();else if(page=='img')renderGallery();else if(page=='ev')renderEvents();else renderPlaceholder()}
 function select(id){sel=+id;tab=tab;render();}
@@ -361,7 +413,6 @@ document.addEventListener('click',e=>{
  const t=e.target.closest('[data-id],[data-p],[data-g],[data-t],[data-act],[data-lb],[data-pick],button');if(!t)return;
  if(t.dataset.pick){pick(+t.dataset.pick);return}
  if(t.dataset.lb){lbAct(t.dataset.lb);return}
- if(t.dataset.tg){const i=+t.dataset.tg;collapsed.has(i)?collapsed.delete(i):collapsed.add(i);saveCol();render();return}
  if(t.dataset.act){act(t.dataset.act,t.dataset.i);return}
  if(t.dataset.id&&!t.closest('dialog')){const id=+t.dataset.id;
   if(t.tagName=='TR'){sel=id;showDetail=true}
@@ -374,7 +425,7 @@ document.addEventListener('click',e=>{
  if(t.dataset.t!=null){tab=+t.dataset.t;renderSide();return}
  const id=t.id;
  if(id=='li')authForm(0);else if(id=='rg')authForm(1);else if(id=='lo'){cur=null;try{localStorage.removeItem('giapha_sess')}catch(e){}render()}
- else if(id=='eh')hform();else if(id=='ah')pickImg(900,d=>{C.home.imgs.push(d);csave();render()},1);else if(id=='ag')pickImg(900,d=>{curAlb().imgs.push({src:d,cap:''});csave();render()},1);else if(id=='ae')eform();else if(id=='lk'&&can('content'))linkForm();else if(id=='nl')alert('Quản trị viên chưa gán link cho nút này.');else if(id=='cA'){M.forEach(m=>{if(kidsOf(m.id).length)collapsed.add(m.id)});saveCol();render()}else if(id=='eA'){collapsed.clear();saveCol();render()}else if(id=='aa'&&can('content')){const n=prompt('Tên album');if(n&&n.trim()){C.albums.push({id:Math.max(0,...C.albums.map(x=>x.id))+1,name:n.trim(),imgs:[]});csave();render()}}
+ else if(id=='eh')hform();else if(id=='ah')pickImg(900,d=>{C.home.imgs.push(d);csave();render()},1);else if(id=='ag')pickImg(900,d=>{curAlb().imgs.push({src:d,cap:''});csave();render()},1);else if(id=='ae')eform();else if(id=='lk'&&can('content'))linkForm();else if(id=='nl')alert('Quản trị viên chưa gán link cho nút này.');else if(id=='aa'&&can('content')){const n=prompt('Tên album');if(n&&n.trim()){C.albums.push({id:Math.max(0,...C.albums.map(x=>x.id))+1,name:n.trim(),imgs:[]});csave();render()}}
  else if(id=='vt'){view='tree';page='tree';render()}
  else if(id=='vl'){view='list';page='tree';render()}
  else if(id=='add'&&can('edit'))form({name:'',g:'M',gen:get(sel)?.gen||1,by:'',dy:'',home:'',job:'',note:'',fid:0,mid:0,sids:[]},true);
@@ -386,12 +437,14 @@ document.addEventListener('click',e=>{
  else if(id=='ac'&&can('edit'))addRel('child',get(sel))
  else if(id=='asp'&&can('edit'))addRel('spouse',get(sel))
  else if(id=='fx'){focus=0;showDetail=false;render()}
+ else if(id=='nu'&&adm())userForm()
  else if(id=='pdf')exportPdf()
  else if((id=='exu'||id=='exc')&&adm())dlJson(id=='exu'?users:C,id=='exu'?'giapha_users_v1.json':'giapha_content_v1.json')
- else if(id=='dc'&&adm()){if(confirm('Bỏ các thay đổi chưa đưa lên GitHub trên trình duyệt này và tải lại dữ liệu mới nhất?')){['giapha_ngo_v1','giapha_users_v1','giapha_content_v1'].forEach(k=>{localStorage.removeItem(k);localStorage.removeItem('dirty_'+k)});location.reload()}}
- else if(id=='rl'&&adm()){fetch('./giapha_ngo_v1.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject('HTTP '+r.status)).then(t=>doImport(t)).catch(e=>alert('Không nạp được file giapha_ngo_v1.json: '+e))}
+ else if(id=='dc'&&adm()){if(confirm('Bỏ các thay đổi chưa đưa lên GitHub trên trình duyệt này và tải lại dữ liệu mới nhất?')){['giapha_ngo_v1','giapha_users_v1','giapha_content_v1'].forEach(k=>{localStorage.removeItem(k);localStorage.removeItem('dirty_'+k);sessionStorage.removeItem('sd_'+k)});location.reload()}}
+ else if(id=='rl'&&adm()){if(!confirm('Nạp lại toàn bộ dữ liệu (thành viên, tài khoản, nội dung) từ GitHub? Thay đổi chưa upload trên trình duyệt này sẽ mất.'))return;
+ Promise.all([['giapha_ngo_v1','./giapha_ngo_v1.json'],['giapha_users_v1','./giapha_users_v1.json'],['giapha_content_v1','./giapha_content_v1.json']].map(([k,p])=>fetch(p+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(p+' (HTTP '+r.status+')')).then(d=>{localStorage.setItem(k,JSON.stringify(d));localStorage.removeItem('dirty_'+k);sessionStorage.removeItem('sd_'+k);return 1}).catch(e=>{if(k=='giapha_ngo_v1')throw e;return 0}))).then(()=>location.reload()).catch(e=>alert('Không nạp được file: '+e))}
  else if(id=='rst'&&adm()){if(confirm('Xóa toàn bộ thành viên? Hãy xuất JSON để sao lưu trước.')){M=[];sel=undefined;save();render()}}
- else if(id=='exp'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(M,null,1)],{type:'application/json'}));a.download='giapha_ngo_v1.json';a.click()}
+ else if(id=='exp'&&adm()){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(M,null,1)],{type:'application/json'}));a.download='giapha_ngo_v1.json';a.click()}
 });
 const onq=e=>{q=e.target.value.trim().toLowerCase();$('#qs').value=$('#gs').value=e.target.value;showSr(e.target);render()};
 $('#qs').oninput=onq;$('#gs').oninput=onq;
@@ -407,8 +460,8 @@ addEventListener('resize',()=>{applyZoom();lines()});
  let reload=false,pend=FILES.length;
  FILES.forEach(([k,p,must])=>{
   fetch(p+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject('HTTP '+r.status)).then(d=>{
-   const loc=rd(k),dirty=localStorage.getItem('dirty_'+k),empty=loc==null||(Array.isArray(loc)&&!loc.length);
-   if(!empty&&canon(k,loc)==canon(k,d))localStorage.removeItem('dirty_'+k);
+   const loc=rd(k),dirty=k=='giapha_ngo_v1'?localStorage.getItem('dirty_'+k):sessionStorage.getItem('sd_'+k),empty=loc==null||(Array.isArray(loc)&&!loc.length);
+   if(!empty&&canon(k,loc)==canon(k,d)){localStorage.removeItem('dirty_'+k);sessionStorage.removeItem('sd_'+k)}
    else if(!dirty||empty){localStorage.setItem(k,JSON.stringify(d));localStorage.removeItem('dirty_'+k);reload=true}
   }).catch(e=>{if(must&&!(rd(k)||[]).length)window.__ld='Không nạp được '+p+' ('+e+'). Kiểm tra tên file, đường dẫn và định dạng JSON.'})
   .finally(()=>{if(--pend)return;const n=+sessionStorage.getItem('syncn')||0;
