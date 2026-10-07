@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cây Gia Phả dòng họ Ngô</title>
+<style>
+:root{--g:#1f7a57;--gd:#14543b;--gl:#e3f1ea;--bd:#dfe6e2;--tx:#1d2b25;--mu:#6b7a73;--m:#e8f1fb;--mb:#b9d3ee;--f:#fdeee6;--fb:#f2c9b3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{height:100%}
+body{margin:0;height:100%;font-family:"Segoe UI",system-ui,Roboto,sans-serif;background:#f4f7f5;color:var(--tx);display:flex;flex-direction:column;font-size:14px}
+header{display:flex;align-items:center;gap:24px;padding:10px 24px;background:linear-gradient(90deg,#eef5ee,#e6efe6 60%,#d9e6d6);border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px}.logo b{font-size:28px;color:var(--gd);display:block;line-height:1}.logo small{color:var(--g);font-style:italic}
+nav{display:flex;gap:6px;flex:1;justify-content:center;flex-wrap:wrap}
+nav a{padding:6px 14px;text-align:center;cursor:pointer;color:var(--tx);border-bottom:3px solid transparent;font-size:13px}
+nav a.on{color:var(--g);border-color:var(--g);font-weight:600}
+.hs{display:flex;align-items:center;gap:10px}
+.hs input{width:240px;padding:9px 14px;border:1px solid var(--bd);border-radius:20px;background:#fffc}
+main{flex:1;display:flex;gap:14px;padding:14px;min-height:0}
+aside{width:250px;background:#fff;border:1px solid var(--bd);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px;overflow:auto;flex:none}
+.mi{padding:11px 14px;border-radius:8px;cursor:pointer;display:flex;gap:10px}.mi:hover{background:#f1f6f3}.mi.on{background:var(--gl);color:var(--gd);font-weight:600}
+aside h4{margin:12px 0 4px}aside input{width:100%;padding:9px 12px;border:1px solid var(--bd);border-radius:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{padding:8px 14px;border:1px solid var(--bd);border-radius:8px;cursor:pointer;background:#fff;font-size:13px}.chip.on{background:var(--g);color:#fff;border-color:var(--g)}
+.quote{margin-top:auto;background:var(--gl);border-radius:10px;padding:18px 10px;text-align:center;font-style:italic;font-size:12.5px;color:#3c5a4c}
+.center{flex:1;background:#fff;border:1px solid var(--bd);border-radius:12px;display:flex;flex-direction:column;min-width:0}
+.ch{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:10px;flex-wrap:wrap}
+.ch h2{margin:0;font-size:21px;color:var(--gd)}
+.btn{padding:8px 14px;border:1px solid var(--bd);background:#fff;border-radius:8px;cursor:pointer;font:inherit}.btn.p{background:var(--g);color:#fff;border-color:var(--g)}.btn.d{color:#b3261e}
+.vpw{position:relative;flex:1;min-height:0;margin:0 12px 12px}.vp{position:absolute;inset:0;overflow:auto;border-radius:10px;background:#f7faf8;cursor:grab;user-select:none}.vp.dg{cursor:grabbing}
+#cv{position:relative;transform-origin:0 0;padding:20px 30px 60px;width:max-content}
+#lines{position:absolute;left:0;top:0;pointer-events:none}
+.row{display:flex;justify-content:center;gap:26px;margin-bottom:98px;position:relative;z-index:1}
+.rl{position:absolute;left:-6px;top:-20px;font-size:11px;color:var(--g);font-weight:700;background:var(--gl);padding:2px 10px;border-radius:10px;z-index:2}
+.pair{display:flex;gap:14px;position:relative}.rg{width:0;position:relative;align-self:stretch}.ring{position:absolute;left:-19px;top:38%;width:24px;height:16px;z-index:3}
+.card{width:158px;border-radius:8px;text-align:center;padding:10px 6px 8px;cursor:pointer;border:1px solid;position:relative;background:var(--m);border-color:var(--mb)}
+.card.F{background:var(--f);border-color:var(--fb)}.card.sel{border:2px solid var(--g);box-shadow:0 0 0 3px #1f7a5733}.card.dim{opacity:.3}
+.card svg,.card img,#f_pv svg,#f_pv img{width:56px;height:56px;border-radius:50%;object-fit:cover}.card b{display:block;font-size:13px;margin-top:4px;min-height:34px;display:flex;align-items:center;justify-content:center;line-height:1.25}
+.card span{font-size:12px;color:#444;display:block}
+.zc{position:absolute;right:16px;bottom:18px;display:flex;gap:6px;z-index:5}
+.zc button{width:36px;height:36px;border:1px solid var(--bd);background:#fff;border-radius:8px;cursor:pointer;font-size:16px}
+#side{width:340px;background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px;overflow:auto;flex:none}
+.ph{display:flex;gap:14px;align-items:center}.ph svg,.ph img{width:84px;height:84px;border-radius:50%;object-fit:cover}.ph h3{margin:0 0 4px;color:var(--gd);font-size:19px}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--bd);margin:16px 0}.tabs a{padding:8px 12px;cursor:pointer;color:var(--mu)}.tabs a.on{color:var(--g);border-bottom:3px solid var(--g);font-weight:600}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:10px 8px;margin:12px 0}.kv i{color:var(--mu);font-style:normal}
+.rel{display:flex;align-items:center;gap:8px;margin:6px 0;cursor:pointer}.rel svg,.rel img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+table{border-collapse:collapse;width:100%}th,td{padding:9px 10px;border-bottom:1px solid var(--bd);text-align:left}th{background:#f1f6f3;position:sticky;top:0}tr.r{cursor:pointer}tr.r:hover{background:#f7faf8}
+.tw{overflow:auto;flex:1;margin:0 12px 12px}
+dialog{border:none;border-radius:12px;padding:20px;width:min(520px,94vw)}dialog::backdrop{background:#0006}
+dialog label{display:block;margin:8px 0 2px;font-size:12px;color:var(--mu)}dialog input,dialog select,dialog textarea{width:100%;padding:8px;border:1px solid var(--bd);border-radius:6px;font:inherit}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+@media(max-width:1100px){main{flex-wrap:wrap}aside{width:100%}#side{width:100%}.center{min-height:520px}}
+.tb{display:flex;gap:12px;padding:0 16px 10px;flex-wrap:wrap;align-items:center}.tb input{width:240px;padding:8px 12px;border:1px solid var(--bd);border-radius:8px}.chip{padding:6px 12px}
+.hu{display:flex;align-items:center;gap:8px}.pg{flex:1;overflow:auto;padding:0 16px 16px}
+.hero{background:linear-gradient(120deg,#e3f1ea,#f4efe0);border-radius:12px;padding:24px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.grid figure{margin:0;border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:#fff;position:relative}.grid img{width:100%;height:160px;object-fit:cover;display:block}.grid figcaption{padding:8px;font-size:13px;min-height:34px}
+.ev{display:flex;gap:14px;border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:10px;background:#fff;flex-wrap:wrap}.ev img{width:150px;height:100px;object-fit:cover;border-radius:8px}.dt{font-weight:700;color:var(--g);min-width:90px}
+.x{position:absolute;top:6px;right:6px;background:#fffc;border:none;border-radius:50%;width:26px;height:26px;cursor:pointer}
+.adm{margin:0 16px 10px;border:1px solid var(--bd);border-radius:10px;padding:10px;background:#fbfdfc}
+#lb{position:fixed;inset:0;background:#000d;z-index:99;display:flex;align-items:center;justify-content:center}
+#lb .lbs{width:86vw;height:78vh;overflow:auto;display:flex}#lb .lbs img{margin:auto;display:block}
+#lb button{background:#fff2;color:#fff;border:1px solid #fff4;border-radius:8px;cursor:pointer;font-size:18px;padding:6px 12px}
+.lbx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px}.lbn{position:absolute;top:50%;font-size:30px!important}.lbn.l{left:8px}.lbn.r{right:8px}.lbc{position:absolute;bottom:calc(12px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#fff}
+.al{position:relative}.ac{display:block;width:100%;border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:#fff;padding:0;cursor:pointer;text-align:left;font:inherit;color:inherit}.ac img{width:100%;height:160px;object-fit:cover;display:block}
+.ib{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}.hd img{max-width:100%}
+
+.sx{display:block;margin:0 0 8px auto}.vp{touch-action:pan-x pan-y}button,a.btn{touch-action:manipulation}
+@media(max-width:800px){
+html,body{height:100dvh}input,select,textarea{font-size:16px}
+header{gap:6px 10px;padding:8px 12px}.logo{order:1;flex:1;min-width:0}.logo b{font-size:20px}.logo small{display:none}.logo svg{width:32px;height:36px}
+.hu{order:2}.hu .btn{padding:6px 10px;font-size:13px}.hu span{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+nav{order:3;width:100%;flex:none;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:2px}nav a{padding:6px 12px;white-space:nowrap;font-size:13px}
+.hs{order:4;width:100%}.hs input{width:100%}
+main{padding:8px;gap:8px}.center{min-height:0}
+.ch{padding:8px 10px}.ch h2{font-size:17px}#ctb .btn{padding:6px 10px;font-size:13px}
+.tb{padding:0 10px 8px}.tb input{width:100%}.tb>span{display:none}.chips{flex-wrap:nowrap;overflow-x:auto;width:100%}.chip{white-space:nowrap;flex:none}
+.vpw{margin:0 8px 8px}.zc{right:10px;bottom:10px}.zc button{width:44px;height:44px}
+#cv{padding:16px 14px 50px}.row{gap:14px;margin-bottom:82px}.pair{gap:8px}
+.card{width:118px;padding:8px 4px}.card svg,.card img{width:44px;height:44px}.card b{font-size:12px;min-height:30px}.card span{font-size:11px}
+#side{display:none;position:fixed;left:0;right:0;bottom:0;width:auto;max-height:62vh;z-index:30;border-radius:16px 16px 0 0;box-shadow:0 -6px 24px #0003;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+#side.open{display:block}.sx{display:block;margin:0 0 8px auto}
+.kv{grid-template-columns:96px 1fr}
+.pg{padding:0 10px 12px}.hero{padding:16px}.hero h1{font-size:22px}
+.grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.grid img,.ac img{height:120px}
+.ev img{width:100%;height:auto;max-height:200px}.dt{min-width:0}
+th,td{padding:6px}.adm{margin:0 8px 8px}
+dialog{padding:14px}.g2{grid-template-columns:1fr}
+#lb .lbs{width:100vw;height:70vh}.lbn{font-size:24px!important;padding:6px 10px!important}
+}
+.tg{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);min-width:24px;height:22px;border-radius:11px;border:1px solid var(--g);background:#fff;color:var(--g);font-size:12px;font-weight:700;cursor:pointer;padding:0 6px;z-index:4;line-height:1}.tg:hover{background:var(--g);color:#fff}
+#lines{z-index:0}.card.hl{border-color:#e8590c;box-shadow:0 0 0 3px #e8590c55}.card.fade{opacity:.4}.hlb{position:absolute;left:12px;top:10px;background:#fff;border:1px solid #e8590c;border-radius:8px;padding:4px 10px;font-size:12px;z-index:5;max-width:70%}
+.sr{display:none;position:fixed;z-index:60;background:#fff;border:1px solid var(--bd);border-radius:10px;box-shadow:0 8px 24px #0003;max-height:50vh;overflow:auto}.sri{padding:8px 12px;cursor:pointer;border-bottom:1px solid #eef2f0}.sri:hover{background:var(--gl)}.sri small{display:block;color:var(--mu)}
+#pr{display:none}
+@media print{html,body{height:auto!important;overflow:visible!important;background:#fff!important}body>*:not(#pr){display:none!important}#pr{display:block!important;overflow:hidden}#pr *{-webkit-print-color-adjust:exact;print-color-adjust:exact}#pr .tg{display:none}}
+</style></head><body>
+<header>
+<div class="logo"><svg width="46" height="52" viewBox="0 0 46 52"><circle cx="23" cy="18" r="16" fill="#1f7a57"/><circle cx="12" cy="24" r="9" fill="#2e8f69"/><circle cx="34" cy="24" r="9" fill="#2e8f69"/><rect x="20" y="28" width="6" height="22" fill="#14543b"/></svg><div><b>Cây Gia Phả</b><small>Gìn giữ cội nguồn - Kết nối yêu thương</small></div></div>
+<nav id="nav"></nav>
+<div class="hu" id="hu"></div>
+</header>
+<div id="bn" style="display:none;background:#fff4d6;border-bottom:1px solid #f0d58a;padding:8px 16px;font-size:13px"></div>
+<main>
+<section class="center">
+<div class="ch"><h2 id="ct">🌿 Cây gia phả dòng họ Ngô</h2>
+<div id="ctb" style="display:flex;gap:8px;flex-wrap:wrap"><span id="inf" style="display:contents"></span><button class="btn" id="fx" style="display:none" title="Quay lại toàn bộ cây">⤢ Toàn bộ cây</button><button class="btn" id="pdf" title="Xuất cây đang xem ra PDF">⬇ Xuất PDF</button><button class="btn p" id="vt">Dạng cây</button><button class="btn" id="vl">Dạng danh sách</button><button class="btn" id="add">+ Thêm</button><button class="btn" id="rl" title="Tải lại dữ liệu từ giapha_ngo_v1.json trên máy chủ">⟳ Nạp lại từ file</button><button class="btn" id="imp">Nhập JSON</button><button class="btn" id="exu" title="Tải giapha_users_v1.json">Xuất tài khoản</button><button class="btn" id="exc" title="Tải giapha_content_v1.json">Xuất nội dung</button><button class="btn" id="exp">Xuất JSON</button><button class="btn" id="rst">Xóa tất cả</button></div></div>
+<div class="tb"><div style="position:relative"><input id="qs" placeholder="Tìm kiếm nhanh theo tên..."></div><span style="color:var(--mu);font-size:13px">Thế hệ:</span><div class="chips" id="chips"></div></div>
+<div id="body" style="flex:1;display:flex;flex-direction:column;min-height:0;position:relative"></div>
+</section>
+<div id="side"></div>
+</main>
+<div id="sr" class="sr"></div>
+<dialog id="dlg"><form method="dialog" id="fm"></form></dialog>
+<script>
+const KEY='giapha_ngo_v1';
+const seed=()=>[];
+let M;try{M=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(M&&!Array.isArray(M))M=M.members||M.data||M.M;M=Array.isArray(M)?M.map(norm).filter(Boolean):seed();
+const save=()=>sv(KEY,M);
+let sel=M[0]?.id,view='tree',gen=0,q='',zoom=1,tab=0,page='home';if(innerWidth<800)zoom=.6;
+const $=s=>document.querySelector(s),get=id=>M.find(m=>m.id==id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const role=m=>m.g=='M'?'Nam':'Nữ';
+const years=m=>m.by||m.dy?`(${m.by||''} - ${m.dy||''})`:'';
+const av=m=>{if(m.img)return`<img src="${m.img}" alt="">`;const c=m.g=='M'?['#cfe3f6','#2f6fa3']:['#fad8c6','#c0643a'];return`<svg viewBox="0 0 60 60"><rect width="60" height="60" fill="${c[0]}"/><circle cx="30" cy="24" r="11" fill="#f1c9a5"/><path d="M18 22a12 12 0 0124 0c-4-6-18-6-24 0z" fill="#2b2b2b"/><path d="M8 60c2-16 12-22 22-22s20 6 22 22z" fill="${c[1]}"/></svg>`};
+const match=m=>!q||(m.name+' '+m.id+' '+m.by+' '+m.home).toLowerCase().includes(q);
+const MENU=[['set','','Cài đặt']];
+const NAV=[['home','🏠','Trang chủ'],['tree','🌳','Cây gia phả'],['img','🖼️','Hình ảnh'],['ev','📅','Sự kiện']];
+function ld(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));localStorage.setItem('dirty_'+k,'1');try{sessionStorage.setItem('sd_'+k,'1')}catch(e){}return true}catch(e){alert('Bộ nhớ trình duyệt đầy — hãy dùng ảnh nhỏ hơn hoặc xóa bớt ảnh.');return false}}
+const UK='giapha_users_v1';let users=ld(UK,[]),cur=null;if(!Array.isArray(users))users=users.users||[];
+try{cur=users.find(u=>u.u==localStorage.getItem('giapha_sess'))||null}catch(e){}
+const can=k=>!!cur&&(cur.role=='admin'||!!cur[k]),adm=()=>cur?.role=='admin';
+const hash=async(p,s)=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s+':'+p)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+let C=ld('giapha_content_v1',null)||{home:{title:'Gia phả dòng họ Ngô',text:'Gìn giữ cội nguồn - Kết nối yêu thương.',imgs:[]},gallery:[],events:[]};
+const csave=()=>sv('giapha_content_v1',C);
+function shrink(f,max,cb){const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.78))};im.src=r.result};r.readAsDataURL(f)}
+function pickImg(max,cb,multi){const i=document.createElement('input');i.type='file';i.accept='image/*';i.multiple=!!multi;i.onchange=()=>[...i.files].forEach(f=>shrink(f,max,cb));i.click()}
+const btns='<div style="margin-top:14px;text-align:right">';
+function userForm(){$('#fm').innerHTML=`<h3 style="margin-top:0">Thêm tài khoản</h3><label>Tên đăng nhập</label><input id="u_u" required autocomplete="off"><label>Tên hiển thị</label><input id="u_n"><label>Mật khẩu (≥ 6 ký tự)</label><input id="u_p" type="password" required autocomplete="new-password"><label>Vai trò</label><select id="u_r"><option value="user">Người dùng</option><option value="admin">Admin</option></select>${btns}<button type="button" class="btn" id="u_cx">Hủy</button> <button class="btn p">Lưu</button></div>`;
+ $('#dlg').showModal();$('#u_cx').onclick=()=>$('#dlg').close();
+ $('#fm').onsubmit=async e=>{e.preventDefault();if(!adm())return;const u=$('#u_u').value.trim().toLowerCase(),p=$('#u_p').value;
+  if(u.length<3||p.length<6)return alert('Tên đăng nhập ≥ 3 ký tự, mật khẩu ≥ 6 ký tự.');if(users.some(x=>x.u==u))return alert('Tên đăng nhập đã tồn tại.');
+  const salt=crypto.randomUUID();users.push({u,name:$('#u_n').value.trim()||u,salt,h:await hash(p,salt),role:$('#u_r').value,edit:false,content:false});sv(UK,users);$('#dlg').close();render()}}
+function pwForm(u){const x=users.find(y=>y.u==u);if(!x)return;$('#fm').innerHTML=`<h3 style="margin-top:0">Đổi mật khẩu: ${esc(x.u)}</h3><label>Mật khẩu mới (≥ 6 ký tự)</label><input id="w_p" type="password" required autocomplete="new-password">${btns}<button type="button" class="btn" id="w_cx">Hủy</button> <button class="btn p">Lưu</button></div>`;
+ $('#dlg').showModal();$('#w_cx').onclick=()=>$('#dlg').close();
+ $('#fm').onsubmit=async e=>{e.preventDefault();if(!adm())return;const p=$('#w_p').value;if(p.length<6)return alert('Mật khẩu phải có ít nhất 6 ký tự.');
+  x.salt=crypto.randomUUID();x.h=await hash(p,x.salt);sv(UK,users);$('#dlg').close();alert('Đã đổi mật khẩu cho '+x.u+'.')}}
+function authForm(reg){if(reg&&users.length)return;$('#fm').innerHTML=`<h3 style="margin-top:0">${reg?'Tạo tài khoản':'Đăng nhập'}</h3>${reg&&!users.length?'<p style="color:var(--g)">Tài khoản đầu tiên sẽ là Admin.</p>':''}${reg?'<label>Tên hiển thị</label><input id="a_n">':''}<label>Tên đăng nhập</label><input id="a_u" required autocomplete="username"><label>Mật khẩu</label><input id="a_p" type="password" required autocomplete="${reg?'new-password':'current-password'}">${btns}<button type="button" class="btn" id="a_cx">Hủy</button> <button class="btn p">${reg?'Đăng ký':'Đăng nhập'}</button></div>`;
+ $('#dlg').showModal();$('#a_cx').onclick=()=>$('#dlg').close();
+ $('#fm').onsubmit=async e=>{e.preventDefault();const u=$('#a_u').value.trim().toLowerCase(),p=$('#a_p').value;
+  if(reg){if(u.length<3||p.length<6)return alert('Tên đăng nhập ≥ 3 ký tự, mật khẩu ≥ 6 ký tự.');if(users.some(x=>x.u==u))return alert('Tên đăng nhập đã tồn tại.');const salt=crypto.randomUUID();users.push({u,name:$('#a_n').value.trim()||u,salt,h:await hash(p,salt),role:users.length?'user':'admin',edit:false,content:false});sv(UK,users);cur=users[users.length-1]}
+  else{const x=users.find(y=>y.u==u);if(!x||x.h!=await hash(p,x.salt))return alert('Sai tên đăng nhập hoặc mật khẩu.');cur=x}
+  try{localStorage.setItem('giapha_sess',cur.u)}catch(e){}$('#dlg').close();render()}}
+function adminPanel(){if(!adm())return'';const ck=(x,k)=>`<input type="checkbox" data-u="${esc(x.u)}" data-k="${k}" ${x[k]||x.role=='admin'?'checked':''} ${x.role=='admin'?'disabled':''}>`;
+ return`<div class="adm"><b>🛡️ Bảng điều khiển phân quyền</b> <button class="btn p" id="nu">+ Thêm tài khoản</button> <small style="color:var(--mu)">Admin: toàn quyền · Người dùng: chỉ xem trừ khi được cấp quyền</small><div style="max-height:190px;overflow:auto"><table><thead><tr><th>Tài khoản</th><th>Tên</th><th>Vai trò</th><th>Sửa thành viên</th><th>Sửa nội dung/ảnh</th><th></th></tr></thead><tbody>${users.map(x=>`<tr><td>${esc(x.u)}</td><td>${esc(x.name)}</td><td><select data-u="${esc(x.u)}" data-k="role"><option value="user" ${x.role=='user'?'selected':''}>Người dùng</option><option value="admin" ${x.role=='admin'?'selected':''}>Admin</option></select></td><td>${ck(x,'edit')}</td><td>${ck(x,'content')}</td><td><button class="btn" data-act="upw" data-i="${esc(x.u)}">Đổi mật khẩu</button> ${x.u==cur.u?'':`<button class="btn d" data-act="udel" data-i="${esc(x.u)}">Xóa</button>`}</td></tr>`).join('')}</tbody></table></div></div>`}
+document.addEventListener('change',e=>{const t=e.target,u=t.dataset&&t.dataset.u;if(!u||!adm())return;const x=users.find(y=>y.u==u);if(!x)return;
+ if(t.dataset.k=='role'){if(x.role=='admin'&&t.value!='admin'&&users.filter(y=>y.role=='admin').length<2){alert('Phải còn ít nhất một Admin.');render();return}x.role=t.value}else x[t.dataset.k]=t.checked;
+ sv(UK,users);render()});
+function act(a,i){const ct=can('content');
+ if(a=='upw'&&adm()){pwForm(i);return}
+ if(a=='bigimg'){const m=get(+i);if(m&&m.img)showLb({imgs:[{src:m.img,cap:m.name}]},0);return}
+ if(a=='sc'){showDetail=false;render();return}
+ if(a=='open'){showLb(curAlb(),+i);return}
+ if(a=='oa'){alb=+i;return render()}
+ if(a=='ob'){alb=0;return render()}
+ if(a=='aren'&&ct){const n=prompt('Tên album',curAlb().name);if(!n||!n.trim())return;curAlb().name=n.trim()}
+ else if(a=='adel'&&ct){if(!confirm('Xóa album và toàn bộ ảnh trong album?'))return;C.albums=C.albums.filter(x=>x.id!=i)}
+ else if(a=='hdel'&&ct)C.home.imgs.splice(i,1);
+ else if(a=='gdel'&&ct)curAlb().imgs.splice(i,1);
+ else if(a=='gcap'&&ct){const c=prompt('Chú thích ảnh',curAlb().imgs[i].cap||'');if(c==null)return;curAlb().imgs[i].cap=c}
+ else if(a=='edel'&&ct){if(!confirm('Xóa sự kiện này?'))return;C.events.splice(i,1)}
+ else if(a=='eedit'&&ct)return eform(+i);
+ else if(a=='udel'&&adm()){if(!confirm('Xóa tài khoản này?'))return;users=users.filter(x=>x.u!=i);sv(UK,users);return render()}
+ else return;
+ csave();render()}
+function hform(){const h=C.home;$('#fm').innerHTML=`<h3 style="margin-top:0">Chỉnh sửa trang chủ</h3><label>Tiêu đề</label><input id="h_t" value="${esc(h.title)}"><label>Giới thiệu (có thể dán mã HTML)</label><textarea id="h_x" rows="6">${esc(h.text)}</textarea>${btns}<button type="button" class="btn" id="h_cx">Hủy</button> <button class="btn p">Lưu</button></div>`;
+ $('#dlg').showModal();$('#h_cx').onclick=()=>$('#dlg').close();$('#fm').onsubmit=()=>{h.title=$('#h_t').value;h.text=$('#h_x').value;csave();render()}}
+function eform(i){const e=i==null?{date:'',title:'',desc:'',img:''}:{...C.events[i]};let im=e.img;
+ $('#fm').innerHTML=`<h3 style="margin-top:0">${i==null?'Thêm':'Sửa'} sự kiện</h3><label>Ngày</label><input id="e_d" type="date" value="${esc(e.date)}"><label>Tiêu đề</label><input id="e_t" required value="${esc(e.title)}"><label>Nội dung</label><textarea id="e_x" rows="4">${esc(e.desc)}</textarea><label>Ảnh</label><input type="file" id="e_i" accept="image/*">${btns}<button type="button" class="btn" id="e_cx">Hủy</button> <button class="btn p">Lưu</button></div>`;
+ $('#dlg').showModal();$('#e_cx').onclick=()=>$('#dlg').close();$('#e_i').onchange=ev=>ev.target.files[0]&&shrink(ev.target.files[0],900,d=>im=d);
+ $('#fm').onsubmit=()=>{const o={date:$('#e_d').value,title:$('#e_t').value.trim(),desc:$('#e_x').value,img:im};if(i==null)C.events.push(o);else C.events[i]=o;csave();render()}}
+const isH=t=>/<[a-z!\/]/i.test(t||'');
+function clean(h){const t=document.createElement('template');t.innerHTML=h;t.content.querySelectorAll('script,object,embed,link,meta,base,form').forEach(n=>n.remove());t.content.querySelectorAll('*').forEach(n=>[...n.attributes].forEach(a=>{if(/^on|^srcdoc$/i.test(a.name)||/^\s*javascript:/i.test(a.value))n.removeAttribute(a.name)}));return t.innerHTML}
+function norm(x){const k=(...n)=>{for(const a of n)if(x[a]!=null&&x[a]!=='')return x[a]};const num=v=>+String(v??'').replace(/\D/g,'')||0,str=(...n)=>String(k(...n)??'').trim();
+ const id=num(k('id','ID','Id')),gv=str('g','gender','Giới tính').normalize('NFC'),sp=k('sids','sid','spouses','Vợ/Chồng ID','Vợ/Chồng');
+ const sids=(Array.isArray(sp)?sp:String(sp??'').split(/[|,;\s]+/)).map(num).filter(Boolean);
+ return id&&str('name','Họ tên')?{id,name:str('name','Họ tên'),g:/^(f|nữ|nu$)/i.test(gv)?'F':'M',by:str('by','Năm sinh'),dy:str('dy','Năm mất'),home:str('home','Quê quán'),job:str('job','Nghề nghiệp'),note:str('note','Ghi chú'),fid:num(k('fid','Cha ID')),mid:num(k('mid','Mẹ ID')),sids,img:str('img','Ảnh'),gen:num(k('gen','Đời'))||Math.floor(id/10000)||1}:null}
+function doImport(txt){let j;try{j=JSON.parse(txt)}catch(e){return alert('Không đọc được JSON: '+e.message)}
+ const a=(Array.isArray(j)?j:j&&(j.members||j.data||j.M))||[],L=a.map(norm).filter(Boolean);if(!L.length)return alert('Không có thành viên hợp lệ (cần ít nhất id và name).');
+ if(M.length&&!confirm('Nhập '+L.length+' thành viên.\nOK = THAY THẾ toàn bộ dữ liệu hiện có.\nHủy = GỘP (ghi đè theo ID).')){const mp=new Map(M.map(m=>[m.id,m]));L.forEach(m=>mp.set(m.id,m));M=[...mp.values()]}else M=L;
+ sel=M[0]?.id;save();$('#dlg').close();render()}
+function impForm(){$('#fm').innerHTML=`<h3 style="margin-top:0">Nhập JSON</h3><p style="color:var(--mu);margin:0 0 8px">Dán JSON hoặc chọn file (mảng thành viên: id, name, g, fid, mid, sids…; cũng nhận tên cột tiếng Việt như “Họ tên”, “Cha ID”).</p><textarea id="i_t" rows="8" placeholder='[{"id":150010,"name":"Ngô Xuân Trường","g":"M","sids":[]}]'></textarea><label>Hoặc chọn file .json</label><input type="file" id="i_f" accept=".json,application/json">${btns}<button type="button" class="btn" id="i_cx">Hủy</button> <button class="btn p">Nhập</button></div>`;
+ $('#dlg').showModal();$('#i_cx').onclick=()=>$('#dlg').close();
+ $('#fm').onsubmit=async e=>{e.preventDefault();const f=$('#i_f').files[0];const t=f?await f.text():$('#i_t').value.trim();if(!t)return alert('Hãy dán JSON hoặc chọn file.');doImport(t)}}
+const kidsOf=id=>M.filter(c=>c.fid==id||c.mid==id);
+let collapsed=new Set(ld('giapha_col',[])),hid=new Set();
+const saveCol=()=>{try{localStorage.setItem('giapha_col',JSON.stringify([...collapsed]))}catch(e){}};
+function hiddenSet(){return new Set()}
+function tgBtn(){return''}
+let focus=0,FS=null,showDetail=false,HL=null,HLC=null,ctr=true;
+function focusSet(id){const S=new Set([id]);const up=x=>{const m=get(x);if(!m)return;[m.fid,m.mid].forEach(p=>{if(p&&!S.has(p)){S.add(p);up(p)}})};up(id);
+ const m=get(id);(m.sids||[]).forEach(sp=>S.add(sp));
+ const kidsFor=(who,ps)=>{const out=[];[who,...ps].forEach(p=>kidsOf(p).forEach(c=>{const o=c.fid==p?c.mid:c.fid;if(p==who||!o||o==who)out.push(c)}));return out};
+ const kids=kidsFor(id,m.sids||[]);kids.forEach(c=>S.add(c.id));
+ kids.forEach(c=>{const gk=kidsFor(c.id,c.sids||[]);if(gk.length){gk.forEach(x=>S.add(x.id));(c.sids||[]).forEach(sp=>S.add(sp))}});
+ return S}
+function pick(id){ctr=false;q='';$('#qs').value='';$('#sr').style.display='none';page='tree';view='tree';gen=0;sel=id;focus=id;showDetail=false;render()}
+function showSr(inp){const sr=$('#sr'),v=inp.value.trim().toLowerCase();if(!cur||!v){sr.style.display='none';sr.__L=[];return}
+ const L=M.filter(m=>(m.name+' '+m.id).toLowerCase().includes(v)).slice(0,12);sr.__L=L;
+ sr.innerHTML=L.length?L.map(m=>{const f=get(m.fid),mo=get(m.mid);return`<div class="sri" data-pick="${m.id}"><b>${esc(m.name)}</b><small>Đời ${m.gen} · ${role(m)}${f?' · Cha: '+esc(f.name):''}${mo?' · Mẹ: '+esc(mo.name):''}${m.by?' · '+esc(m.by):''} · ID ${m.id}</small></div>`}).join(''):'<div class="sri" style="color:var(--mu);cursor:default">Không tìm thấy</div>';
+ const r=inp.getBoundingClientRect();Object.assign(sr.style,{display:'block',left:Math.max(8,Math.min(r.left,innerWidth-Math.max(r.width,280)-8))+'px',top:r.bottom+4+'px',width:Math.max(r.width,280)+'px'})}
+function lineage(id){const S=new Set([id]);const up=x=>{const m=get(x);if(!m)return;[m.fid,m.mid].forEach(p=>{if(p&&!S.has(p)){S.add(p);up(p)}})};up(id);const dn=x=>kidsOf(x).forEach(c=>{if(!S.has(c.id)){S.add(c.id);dn(c.id)}});dn(id);return S}
+function exportPdf(){const cv=$('#cv');if(!cv||!cur)return alert('Hãy mở Cây gia phả (Dạng cây) để xuất PDF.');
+ const W=cv.offsetWidth,H=cv.offsetHeight,HD=64,s=Math.min(1,8000/Math.max(W,H+HD,1));
+ const c=cv.cloneNode(true);c.style.transform='none';c.style.minWidth='0';c.style.width=W+'px';c.style.height=H+'px';
+ const sub=FS&&get(focus)?'Nguồn gốc &amp; các con của '+esc(get(focus).name):'Toàn bộ cây'+(gen?' · Đời '+gen:'');
+ const pr=document.createElement('div');pr.id='pr';pr.style.cssText=`width:${W*s}px;height:${(H+HD)*s}px`;
+ pr.innerHTML=`<div style="width:${W}px;transform:scale(${s});transform-origin:0 0"><div style="height:${HD}px;padding:12px 30px 0;box-sizing:border-box"><div style="font-size:22px;font-weight:700;color:#14543b">${esc((C.home&&C.home.title)||'Gia phả')} — ${sub}</div><div style="font-size:12px;color:#666">Xuất ngày ${new Date().toLocaleDateString('vi-VN')} · ${cv.querySelectorAll('.card').length} thành viên hiển thị</div></div></div>`;
+ pr.firstChild.appendChild(c);
+ const st=document.createElement('style');st.id='pg';st.textContent=`@page{size:${Math.ceil(W*s)}px ${Math.ceil((H+HD)*s)}px;margin:0}`;
+ document.body.append(pr);document.head.append(st);
+ addEventListener('afterprint',()=>{pr.remove();st.remove()},{once:true});setTimeout(()=>print(),150)}
+let alb=0,lb=null;const curAlb=()=>C.albums.find(a=>a.id==alb);
+if(!C.albums){C.albums=[];if(C.gallery&&C.gallery.length)C.albums.push({id:1,name:'Ảnh chung',imgs:C.gallery})}delete C.gallery;
+function showLb(a,i){lb={a,i,z:1};drawLb()}
+function drawLb(){let o=document.getElementById('lb');if(!lb){if(o)o.remove();return}
+ if(!o){o=document.createElement('div');o.id='lb';o.addEventListener('wheel',e=>{if(e.ctrlKey&&lb){e.preventDefault();lbAct(e.deltaY<0?'+':'-')}},{passive:false});document.body.appendChild(o)}
+ const im=lb.a.imgs[lb.i];if(!im){lb=null;return drawLb()}
+ o.innerHTML=`<button class="lbx" data-lb="x">✕</button><button class="lbn l" data-lb="p">‹</button><div class="lbs"><img src="${im.src}" style="${lb.z==1?'width:100%;height:100%;object-fit:contain':`width:${lb.z*100}%;max-width:none;height:auto`}"></div><button class="lbn r" data-lb="n">›</button><div class="lbc">${esc(im.cap||'')} ${lb.i+1}/${lb.a.imgs.length} <button data-lb="-">−</button><button data-lb="0">${Math.round(lb.z*100)}%</button><button data-lb="+">+</button></div>`}
+function lbAct(k){if(!lb)return;const n=lb.a.imgs.length;if(k=='x')lb=null;else if(k=='p'){lb.i=(lb.i+n-1)%n;lb.z=1}else if(k=='n'){lb.i=(lb.i+1)%n;lb.z=1}else if(k=='+')lb.z=Math.min(5,lb.z+.5);else if(k=='-')lb.z=Math.max(1,lb.z-.5);else lb.z=1;drawLb()}
+addEventListener('keydown',e=>{if(!lb)return;if(e.key=='Escape')lbAct('x');else if(e.key=='ArrowLeft')lbAct('p');else if(e.key=='ArrowRight')lbAct('n')});
+if(typeof C.link!='string')C.link='';
+const INFO_LINK=''; // có thể điền sẵn link mặc định tại đây (ai cũng thấy), Admin vẫn gán/đổi được bằng nút 🔗
+const infoBtn=()=>{const u=C.link||INFO_LINK;
+ return(u?`<a class="btn p" href="${esc(u)}" target="_blank" rel="noopener noreferrer" style="text-decoration:none">➕ Thêm thông tin gia phả</a>`:'<button class="btn p" id="nl">➕ Thêm thông tin gia phả</button>')+(can('content')?'<button class="btn" id="lk" title="Gán/đổi link">🔗</button>':'')};
+function linkForm(){$('#fm').innerHTML=`<h3 style="margin-top:0">Gán link cho nút “Thêm thông tin gia phả”</h3><label>Đường dẫn (https://…) — để trống để gỡ link</label><input id="l_u" value="${esc(C.link)}" placeholder="https://forms.gle/...">${btns}<button type="button" class="btn" id="l_cx">Hủy</button> <button class="btn p">Lưu</button></div>`;
+ $('#dlg').showModal();$('#l_cx').onclick=()=>$('#dlg').close();
+ $('#fm').onsubmit=e=>{const v=$('#l_u').value.trim();let u='';if(v){try{const x=new URL(/^[a-z]+:/i.test(v)?v:'https://'+v);if(!/^https?:$/.test(x.protocol))throw 0;u=x.href}catch(_){e.preventDefault();return alert('Link không hợp lệ.')}}C.link=u;csave();render()}}
+function dlJson(o,n){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o,null,1)],{type:'application/json'}));a.download=n;a.click()}
+function banner(){const el=$('#bn');if(!el)return;const nm={giapha_ngo_v1:'thành viên',giapha_users_v1:'tài khoản',giapha_content_v1:'nội dung'},dk=Object.keys(nm).filter(k=>k=='giapha_ngo_v1'?localStorage.getItem('dirty_'+k):sessionStorage.getItem('sd_'+k));
+ el.innerHTML=adm()&&dk.length?`⚠ Trình duyệt này có thay đổi chưa đưa lên GitHub (${dk.map(k=>nm[k]).join(', ')}) nên trang chưa lấy dữ liệu mới (tài khoản và nội dung chưa upload sẽ mất ở lần mở trang sau). Hãy xuất file JSON rồi upload lên GitHub, hoặc <button class="btn" id="dc">Bỏ thay đổi &amp; lấy dữ liệu mới nhất</button>`:'';el.style.display=el.innerHTML?'':'none'}
+let formT='';
+function addRel(kind,p){if(!p||!can('edit'))return;
+ const b={name:'',g:'M',gen:p.gen,by:'',dy:'',home:'',job:'',note:'',fid:0,mid:0,sids:[],img:''};
+ if(kind=='child'){const sp=p.sids.map(get).filter(Boolean);b.gen=p.gen+1;
+  if(p.g=='M'){b.fid=p.id;if(sp.length==1)b.mid=sp[0].id}else{b.mid=p.id;if(sp.length==1)b.fid=sp[0].id}
+  formT='Thêm con của '+p.name}
+ else{b.g=p.g=='M'?'F':'M';b.sids=[p.id];formT='Thêm '+(p.g=='M'?'vợ':'chồng')+' của '+p.name}
+ form(b,true)}
+const xb=(a,i)=>can('content')?`<button class="x" data-act="${a}" data-i="${i}">✕</button>`:'';
+function renderHome(){const h=C.home,ct=can('content');
+ $('#body').innerHTML=`<div class="pg"><div class="hero"><div style="display:flex;justify-content:space-between;gap:10px"><h1 style="margin:0;color:var(--gd)">${esc(h.title)}</h1>${ct?'<button class="btn" id="eh">✏️ Chỉnh sửa</button>':''}</div><div class="hd" style="font-size:15px;line-height:1.6;${isH(h.text)?'':'white-space:pre-wrap'}">${isH(h.text)?clean(h.text):esc(h.text)}</div><div style="margin:12px 0;display:flex;gap:8px;flex-wrap:wrap">${infoBtn()}</div><div style="display:flex;gap:30px"><div><b style="font-size:26px;color:var(--g)">${M.length}</b><br>Thành viên</div><div><b style="font-size:26px;color:var(--g)">${new Set(M.map(m=>m.gen)).size}</b><br>Thế hệ</div></div></div>${ct?'<button class="btn p" id="ah" style="margin-bottom:10px">+ Thêm ảnh</button>':''}<div class="grid">${h.imgs.map((s,i)=>`<figure><img src="${s}">${xb('hdel',i)}</figure>`).join('')}</div>${cur?'':'<p style="color:var(--mu)">Đăng nhập để được cấp quyền chỉnh sửa.</p>'}</div>`}
+function renderGallery(){const ct=can('content'),a=C.albums.find(x=>x.id==alb);
+ if(!a){alb=0;$('#body').innerHTML=`<div class="pg">${ct?'<button class="btn p" id="aa">+ Tạo album</button>':''}<div class="grid" style="margin-top:12px">${C.albums.map(x=>`<div class="al"><button class="ac" data-act="oa" data-i="${x.id}">${x.imgs[0]?`<img src="${x.imgs[0].src}">`:'<div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:40px;background:#eef3f0">📁</div>'}<div style="padding:8px"><b>${esc(x.name)}</b><br><small style="color:var(--mu)">${x.imgs.length} ảnh</small></div></button>${ct?`<button class="x" data-act="adel" data-i="${x.id}">✕</button>`:''}</div>`).join('')||'<p style="color:var(--mu)">Chưa có album.</p>'}</div></div>`;return}
+ $('#body').innerHTML=`<div class="pg"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn" data-act="ob" data-i="0">← Tất cả album</button><b style="font-size:17px">${esc(a.name)}</b>${ct?'<button class="btn p" id="ag">+ Thêm ảnh</button><button class="btn" data-act="aren" data-i="0">Đổi tên</button>':''}</div><div class="grid" style="margin-top:12px">${a.imgs.map((g,i)=>`<figure><button class="ib" data-act="open" data-i="${i}"><img src="${g.src}"></button>${xb('gdel',i)}<figcaption ${ct?`data-act="gcap" data-i="${i}" style="cursor:pointer"`:''}>${esc(g.cap||(ct?'Bấm để thêm chú thích':''))}</figcaption></figure>`).join('')||'<p style="color:var(--mu)">Album chưa có ảnh.</p>'}</div></div>`}
+function renderEvents(){const ct=can('content');
+ $('#body').innerHTML=`<div class="pg">${ct?'<button class="btn p" id="ae">+ Thêm sự kiện</button>':''}<div style="margin-top:12px">${C.events.map((e,i)=>({...e,i})).sort((a,b)=>(b.date||'').localeCompare(a.date||'')).map(e=>`<div class="ev"><div class="dt">${esc(e.date)}</div>${e.img?`<img src="${e.img}">`:''}<div style="flex:1;min-width:180px"><b>${esc(e.title)}</b><p style="white-space:pre-wrap;margin:6px 0">${esc(e.desc)}</p></div>${ct?`<div><button class="btn" data-act="eedit" data-i="${e.i}">Sửa</button> <button class="btn d" data-act="edel" data-i="${e.i}">Xóa</button></div>`:''}</div>`).join('')||'<p style="color:var(--mu)">Chưa có sự kiện.</p>'}</div></div>`}
+function chrome(){
+ $('#nav').innerHTML=NAV.map((n,i)=>`<a data-p="${n[0]}" class="${n[0]==page?'on':''}">${n[1]}<br>${n[2]}</a>`).join('');
+ banner();const tl=(page=='tree'||page=='list')&&!!cur;$('.tb').style.display=tl?'':'none';$('#ctb').style.display=tl?'':'none';
+ $('#ct').textContent={home:'🏠 Trang chủ',tree:'🌿 Cây gia phả dòng họ Ngô',list:'👥 Danh sách thành viên',img:'🖼️ Hình ảnh',ev:'📅 Sự kiện',set:'⚙️ Cài đặt'}[page];
+ $('#inf').innerHTML=infoBtn();$('#exp').style.display=adm()?'':'none';$('#pdf').style.display=view=='tree'&&page=='tree'?'':'none';$('#fx').style.display=focus&&view=='tree'&&page=='tree'?'':'none';$('#add').style.display=can('edit')?'':'none';$('#rst').style.display=$('#rl').style.display=$('#exu').style.display=$('#exc').style.display=adm()?'':'none';$('#imp').style.display=can('edit')?'':'none';
+ $('#hu').innerHTML=cur?`<span>👤 ${esc(cur.name)} <small style="color:var(--mu)">(${adm()?'Admin':can('edit')||can('content')?'Biên tập':'Thành viên'})</small></span><button class="btn" id="lo">Đăng xuất</button>`:'<button class="btn" id="li">Đăng nhập</button>'+(users.length?'':'<button class="btn p" id="rg">Tạo tài khoản Admin</button>');
+ const gens=[...new Set(M.map(m=>m.gen))].sort((a,b)=>a-b);
+ $('#chips').innerHTML=`<div class="chip ${!gen?'on':''}" data-g="0">Tất cả</div>`+gens.map(g=>`<div class="chip ${gen==g?'on':''}" data-g="${g}">Đời ${g}</div>`).join('');
+ $('#vt').className='btn'+(view=='tree'?' p':'');$('#vl').className='btn'+(view=='list'?' p':'');
+}
+function orderBase(V,gens){
+ const pos={},rows=[];
+ gens.forEach(g=>{const L=V.filter(m=>m.gen==g),seen=new Set(),U=[];
+  const pp=m=>{const a=[m.fid,m.mid].filter(x=>x&&pos[x]!=null).map(x=>pos[x]);return a.length?Math.min(...a):null};
+  L.forEach(m=>{if(seen.has(m.id))return;const comp=[m];seen.add(m.id);
+   for(let i=0;i<comp.length;i++)comp[i].sids.forEach(s=>{const o=get(s);if(o&&o.gen==g&&!seen.has(o.id)&&!hid.has(o.id)&&(!FS||FS.has(o.id))){seen.add(o.id);comp.push(o)}});
+   const ks=comp.map(pp).filter(k=>k!=null);
+   comp.sort((a,b)=>(pp(b)!=null)-(pp(a)!=null)||(a.g=='M'?-1:1)-(b.g=='M'?-1:1)||a.id-b.id);
+   if(comp.length==2&&comp[0].g=='F'&&comp[1].g=='M')comp.reverse();
+   U.push({c:comp,k:ks.length?Math.min(...ks):9999,id:Math.min(...comp.map(x=>x.id))})});
+  U.sort((a,b)=>a.k-b.k||a.id-b.id);
+  let p=0;U.forEach(u=>u.c.forEach(m=>pos[m.id]=p++));
+  rows.push([g,U.map(u=>u.c)])});
+ return rows;
+}
+
+/* Sắp xếp lại thứ tự thẻ trong từng đời để giảm tối đa số đường nối cắt nhau.
+   Bắt đầu từ thứ tự gốc (orderBase), lặp các lượt quét xuống/lên theo "trọng tâm"
+   cha mẹ/con cái, tự lật chiều vợ-chồng khi giúp bớt cắt nhau, và chỉ giữ kết quả nếu ít cắt hơn. */
+function order(){
+ hid=hiddenSet();
+ const V=M.filter(m=>!hid.has(m.id)&&(!FS||FS.has(m.id))),gens=[...new Set(V.map(m=>m.gen))].sort((a,b)=>a-b);
+ const rows=orderBase(V,gens);
+ if(rows.length<2)return rows;
+ const gm=rows.map(r=>r[1].map(u=>u.slice())),n=gm.length,R={};
+ rows.forEach((r,i)=>r[1].forEach(u=>u.forEach(m=>R[m.id]=i)));
+ const kids={};V.forEach(m=>[m.fid,m.mid].forEach(p=>{if(p&&R[p]!=null&&R[m.id]==R[p]+1)(kids[p]=kids[p]||[]).push(m.id)}));
+ const place=()=>{const P={},N=[];gm.forEach((us,i)=>{let p=0;us.forEach(u=>u.forEach(m=>P[m.id]=p++));N[i]=p});return{P,N}};
+ const upA=(m,i,pl)=>{const a=[m.fid,m.mid].filter(x=>x&&R[x]==i-1&&pl.P[x]!=null).map(x=>(pl.P[x]+.5)/pl.N[i-1]);return a.length?a.reduce((x,y)=>x+y)/a.length:null};
+ const dnA=(m,i,pl)=>{const k=(kids[m.id]||[]).map(x=>(pl.P[x]+.5)/pl.N[i+1]);return k.length?k.reduce((x,y)=>x+y)/k.length:null};
+ const cost=()=>{const pl=place();let c=0;
+  for(let i=1;i<n;i++){const L=[];gm[i].forEach(u=>u.forEach(m=>{const a=upA(m,i,pl);if(a!=null)L.push([a,(pl.P[m.id]+.5)/pl.N[i]])}));
+   for(let x=0;x<L.length;x++)for(let y=x+1;y<L.length;y++)if((L[x][0]-L[y][0])*(L[x][1]-L[y][1])<-1e-9)c+=1000;
+   L.forEach(l=>c+=Math.abs(l[0]-l[1]))}
+  return c};
+ const inv=(v)=>{let a=0,b=0;for(let x=0;x<v.length;x++)for(let y=x+1;y<v.length;y++){if(v[x]==null||v[y]==null)continue;if(v[x]>v[y]+1e-9)a++;else if(v[x]<v[y]-1e-9)b++}return[a,b]};
+ const sweep=(i,A)=>{const pl=place();
+  const key=u=>{const v=u.map(m=>A(m,i,pl)).filter(x=>x!=null);return v.length?v.reduce((x,y)=>x+y)/v.length:null};
+  gm[i].forEach(u=>{if(u.length<2)return;const[a,b]=inv(u.map(m=>A(m,i,pl)));if(b<a)u.reverse()});
+  const cur=new Map();let p=0;gm[i].forEach(u=>{cur.set(u,(p+u.length/2)/pl.N[i]);p+=u.length});
+  gm[i]=gm[i].map((u,j)=>({u,j,k:key(u)??cur.get(u)})).sort((x,y)=>x.k-y.k||x.j-y.j).map(o=>o.u)};
+ const snap=()=>gm.map(us=>us.map(u=>u.slice()));
+ let best=snap(),bc=cost();
+ for(let it=0;it<8;it++){
+  for(let i=1;i<n;i++)sweep(i,upA);
+  let c=cost();if(c<bc-1e-9){bc=c;best=snap()}
+  for(let i=n-2;i>=0;i--)sweep(i,dnA);
+  c=cost();if(c<bc-1e-9){bc=c;best=snap()}
+ }
+ return rows.map((r,i)=>[r[0],best[i]]);
+}
+const ring='<svg class="ring" viewBox="0 0 24 16"><circle cx="8" cy="8" r="6" fill="#fff" stroke="#1f7a57" stroke-width="2"/><circle cx="16" cy="8" r="6" fill="none" stroke="#1f7a57" stroke-width="2"/></svg>';
+const card=m=>`<div class="card ${m.g} ${m.id==sel?'sel':''} ${match(m)?'':'dim'} ${HLC?(HLC.has(m.id)?'hl':'fade'):''}" data-id="${m.id}">${av(m)}<b>${esc(m.name)}</b><span>${years(m)||'&nbsp;'}</span><span>Đời ${m.gen} · ${role(m)}</span>${tgBtn(m)}</div>`;
+function renderTree(){
+ if(!M.length){$('#body').innerHTML='<div class="pg" style="padding:60px;text-align:center;color:var(--mu)">Chưa có thành viên nào.<br>Đăng nhập tài khoản có quyền sửa rồi bấm “+ Thêm” hoặc “Nhập JSON”.<br><small>'+(window.__ld||'')+'</small></div>';return}
+ const old=$('#vp'),sl=old?old.scrollLeft:0,st=old?old.scrollTop:0;
+ const first=ctr;if(ctr){zoom=.3;ctr=false}
+ FS=focus&&get(focus)?focusSet(focus):null;
+ const rows=order().filter(r=>!gen||r[0]==gen);
+ let h='<div class="vpw"><div class="vp" id="vp"><div id="sz"><div id="cv"><svg id="lines"></svg>';
+ rows.forEach(([g,U])=>{let c='',n=0;U.forEach(u=>{n+=u.length;c+=u.length>1?`<div class="pair">${u.map((m,i)=>(i?'<i class="rg">'+ring+'</i>':'')+card(m)).join('')}</div>`:card(u[0])});
+  h+=`<div class="row"><span class="rl">Đời ${g} · ${n}</span>${c}</div>`});
+ h+='</div></div></div><div class="zc"><button id="zo" title="Thu nhỏ">−</button><button id="zr" title="Về 100%">100%</button><button id="zi" title="Phóng to">+</button><button id="zf" title="Vừa khung">⛶</button></div>'+''+'</div>';
+ $('#body').innerHTML=h;applyZoom();const nv=$('#vp');nv.scrollLeft=first?Math.max(0,(nv.scrollWidth-nv.clientWidth)/2):sl;nv.scrollTop=first?0:st;lines();bindZoom();
+}
+function applyZoom(){const vp=$('#vp'),cv=$('#cv'),sz=$('#sz');if(!vp||!cv)return;cv.style.transform=`scale(${zoom})`;cv.style.minWidth=vp.clientWidth/zoom+'px';sz.style.width=cv.offsetWidth*zoom+'px';sz.style.height=cv.offsetHeight*zoom+'px';$('#zr').textContent=Math.round(zoom*100)+'%'}
+function setZoom(nz,px,py){const vp=$('#vp');if(!vp)return;nz=Math.max(.2,Math.min(2.5,nz));if(px==null){px=vp.clientWidth/2;py=vp.clientHeight/2}const ox=(vp.scrollLeft+px)/zoom,oy=(vp.scrollTop+py)/zoom;zoom=nz;applyZoom();vp.scrollLeft=ox*zoom-px;vp.scrollTop=oy*zoom-py;lines()}
+function fitZoom(){const vp=$('#vp'),cv=$('#cv');if(!vp)return;cv.style.minWidth='0';const w=cv.offsetWidth,h=cv.offsetHeight;setZoom(Math.min(vp.clientWidth/w,vp.clientHeight/h,1.5)*.97);vp.scrollLeft=vp.scrollTop=0}
+function bindZoom(){const vp=$('#vp');if(!vp)return;let dr=null,mv=0,pd=0,pz=1;
+ vp.addEventListener('wheel',e=>{if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();const r=vp.getBoundingClientRect();setZoom(zoom*(e.deltaY<0?1.1:1/1.1),e.clientX-r.left,e.clientY-r.top)},{passive:false});
+ vp.addEventListener('mousedown',e=>{if(e.button)return;dr=[e.clientX,e.clientY,vp.scrollLeft,vp.scrollTop];mv=0});
+ vp.addEventListener('mousemove',e=>{if(!dr)return;const dx=e.clientX-dr[0],dy=e.clientY-dr[1];mv=Math.max(mv,Math.abs(dx)+Math.abs(dy));if(mv>4){vp.classList.add('dg');vp.scrollLeft=dr[2]-dx;vp.scrollTop=dr[3]-dy}});
+ const up=()=>{dr=null;vp.classList.remove('dg')};vp.addEventListener('mouseup',up);vp.addEventListener('mouseleave',up);
+ vp.addEventListener('click',e=>{if(mv>4){e.stopPropagation();mv=0}},true);
+ const td=e=>Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+ vp.addEventListener('touchstart',e=>{if(e.touches.length==2){pd=td(e);pz=zoom}},{passive:true});
+ vp.addEventListener('touchmove',e=>{if(e.touches.length==2&&pd){e.preventDefault();const r=vp.getBoundingClientRect();setZoom(pz*td(e)/pd,(e.touches[0].clientX+e.touches[1].clientX)/2-r.left,(e.touches[0].clientY+e.touches[1].clientY)/2-r.top)}},{passive:false});
+ vp.addEventListener('touchend',()=>{pd=0})}
+function lines(pass=0){
+ const cv=$('#cv'),svg=$('#lines');if(!cv)return;const o=cv.getBoundingClientRect(),z=zoom;
+ const R=id=>{if(!id)return null;const e=cv.querySelector(`.card[data-id="${id}"]`);if(!e)return null;const r=e.getBoundingClientRect();return{x:(r.left-o.left)/z,y:(r.top-o.top)/z,w:r.width/z,h:r.height/z,row:e.closest('.row')}};
+ const G={};
+ M.forEach(c=>{if(!(c.fid||c.mid))return;const rc=R(c.id);if(!rc)return;const rf=R(c.fid),rm=R(c.mid);if(!rf&&!rm)return;const k=c.fid+'|'+c.mid,g=(G[k]=G[k]||{rf,rm,k:[],ids:[],g:c.gen,row:rc.row});g.k.push(rc);g.ids.push(c.id)});
+ const byG={};Object.values(G).forEach(g=>(byG[g.g]=byG[g.g]||[]).push(g));
+ const Ls=Object.values(byG);let chg=0;
+ Ls.forEach(L=>{const lanes=[];
+  L.forEach(g=>{const both=g.rf&&g.rm,p=g.rf||g.rm;
+   g.ax=both?((g.rf.x+g.rf.w/2)+(g.rm.x+g.rm.w/2))/2:p.x+p.w/2;
+   g.sy=both?Math.max(g.rf.y,g.rm.y)+g.rf.h*.5:p.y+p.h;
+   g.cx=g.k.map(r=>r.x+r.w/2);g.top=Math.min(...g.k.map(r=>r.y));
+   g.lo=Math.min(g.ax,...g.cx);g.hi=Math.max(g.ax,...g.cx);g.lv=0});
+  const ab=(a,b)=>a!==b&&((a.ax>=b.lo-3&&a.ax<=b.hi+3)||b.cx.some(x=>x>=a.lo-3&&x<=a.hi+3));
+  for(let it=0;it<L.length;it++)L.forEach(a=>L.forEach(b=>{if(ab(a,b)&&a.lv<=b.lv&&a.lv<10)a.lv=b.lv+1}));
+  L.sort((a,b)=>a.lv-b.lv||a.lo-b.lo);let mx=0;
+  L.forEach(g=>{let n=0;L.forEach(b=>{if(b.n!=null&&ab(g,b))n=Math.max(n,b.n+1)});
+   for(;;n++){const u=(lanes[n]=lanes[n]||[]);if(!u.some(b=>g.lo<b.hi+26&&g.hi>b.lo-26))break}
+   g.n=n;lanes[n].push(g);mx=Math.max(mx,n)});
+  const need=Math.max(70,50+14*mx),pr=L[0].row&&L[0].row.previousElementSibling;
+  if(pr&&pr.classList.contains('row')&&Math.abs((parseFloat(pr.style.marginBottom)||0)-need)>1){pr.style.marginBottom=need+'px';chg=1}});
+ if(chg&&pass<3){applyZoom();return lines(pass+1)}
+ svg.setAttribute('width',cv.scrollWidth);svg.setAttribute('height',cv.scrollHeight);
+ const all=[];
+ Ls.forEach(L=>L.forEach(g=>{g.by=g.top-24-g.n*14;all.push(g)}));
+ const T=all.map(g=>({x:g.ax,y1:g.sy,y2:g.by,g})),V=[...T];
+ all.forEach(g=>{g.dx=g.cx.map((x0,i)=>{const r=g.k[i],lim=Math.max(0,r.w/2-14);let best=x0;
+   for(const off of [0,12,-12,24,-24,36,-36]){if(Math.abs(off)>lim)continue;const x=x0+off;
+    if(!T.some(t=>t.g!==g&&Math.abs(t.x-x)<9&&t.y1<r.y&&t.y2>g.by)){best=x;break}}
+   V.push({x:best,y1:g.by,y2:r.y,g});return best});
+  g.lo=Math.min(g.ax,...g.dx);g.hi=Math.max(g.ax,...g.dx)});
+ let d='';
+ all.forEach(g=>{const own=[g.ax,...g.dx];
+  d+=`M${g.ax},${g.sy}V${g.by}M${g.lo},${g.by}`;let x0=g.lo;
+  V.filter(v=>v.g!==g&&v.y1<g.by-1&&v.y2>g.by+1&&v.x>g.lo+8&&v.x<g.hi-8&&!own.some(x=>Math.abs(x-v.x)<12)).map(v=>v.x).sort((a,b)=>a-b).forEach(x=>{if(x-6>x0+1){d+=`H${x-6}A6 6 0 0 1 ${x+6} ${g.by}`;x0=x+6}});
+  d+=`H${g.hi}`;g.dx.forEach((x,i)=>{d+=`M${x},${g.by}V${g.k[i].y}`})});
+ svg.innerHTML=`<path d="${d}" fill="none" stroke="#1f7a57" stroke-width="1.6" stroke-linejoin="round"/>`;
+}
+function renderList(){
+ const L=M.filter(m=>(!gen||m.gen==gen)&&match(m)).sort((a,b)=>a.gen-b.gen||a.id-b.id);
+ $('#body').innerHTML=`${adminPanel()}<div class="tw"><table><thead><tr><th>#</th><th>Họ tên</th><th>Giới tính</th><th>Đời</th><th>Cha</th><th>Mẹ</th><th>Vợ/Chồng</th></tr></thead><tbody>${L.map((m,i)=>`<tr class="r" data-id="${m.id}" style="${m.id==sel?'background:var(--gl)':''}"><td>${i+1}</td><td>${esc(m.name)}</td><td>${role(m)}</td><td>${m.gen}</td><td>${esc(get(m.fid)?.name||'')}</td><td>${esc(get(m.mid)?.name||'')}</td><td>${esc(m.sids.map(i=>get(i)?.name).join(', '))}</td></tr>`).join('')}</tbody></table></div>`;
+}
+function renderSide(){
+ const m=get(sel);if(!m){$('#side').innerHTML='<p>Chọn một thành viên.</p>';return}
+ const kids=M.filter(c=>c.fid==m.id||c.mid==m.id);
+ const rel=(x)=>x?`<div class="rel" data-id="${x.id}">${av(x)}<span>${esc(x.name)}<br><small style="color:var(--mu)">${years(x)}</small></span></div>`:'';
+ let b;
+ if(tab==0)b=`<h4>Thông tin cá nhân</h4><div class="kv"><i>Mã ID</i><span>${m.id}</span><i>Họ và tên</i><span>${esc(m.name)}</span><i>Năm sinh</i><span>${esc(m.by||'—')}</span><i>Năm mất</i><span>${esc(m.dy||'—')}</span><i>Giới tính</i><span>${role(m)}</span><i>Đời thứ</i><span>${m.gen}</span><i>Quê quán</i><span>${esc(m.home||'—')}</span><i>Nghề nghiệp</i><span>${esc(m.job||'—')}</span></div>`;
+ else if(tab==1)b=`<h4>Quan hệ gia đình</h4><div class="kv" style="grid-template-columns:90px 1fr"><i>Là con của</i><div>${rel(get(m.fid))}${rel(get(m.mid))}${!m.fid&&!m.mid?'<span style="color:var(--mu)">Chưa có thông tin</span>':''}</div><i>Vợ/Chồng</i><div>${m.sids.map(i=>rel(get(i))).join('')}${m.sids.length?'':'<span style="color:var(--mu)">Chưa có thông tin</span>'}</div><i>Con cái</i><div>${kids.map(rel).join('')||'<span style="color:var(--mu)">Chưa có thông tin</span>'}</div></div>`;
+ else b=`<h4>Ghi chú</h4><p style="white-space:pre-wrap">${esc(m.note||'Chưa có ghi chú.')}</p>`;
+ $('#side').innerHTML=`<button class="btn sx" data-act="sc">✕ Đóng</button><div class="ph">${m.img?`<span data-act="bigimg" data-i="${m.id}" title="Bấm để xem ảnh lớn" style="cursor:zoom-in">${av(m)}</span>`:av(m)}<div style="flex:1"><h3>${esc(m.name)}</h3><div>${years(m)}</div><div style="color:var(--mu)">Đời ${m.gen} · ${role(m)}</div></div>${can('edit')?'<button class="btn" id="ed">✏️ Chỉnh sửa</button>':''}</div><div class="tabs">${['Thông tin','Quan hệ','Ghi chú'].map((t,i)=>`<a data-t="${i}" class="${i==tab?'on':''}">${t}</a>`).join('')}</div>${b}${can('edit')?'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" id="ac" style="flex:1">➕ Thêm con</button><button class="btn" id="asp" style="flex:1">💍 Thêm vợ/chồng</button></div>':''}${can('edit')?'<button class="btn p" id="full" style="width:100%;margin-top:12px">Chỉnh sửa đầy đủ</button>':''}`;
+}
+function renderPlaceholder(){const t=MENU.find(x=>x[0]==page)[2];$('#body').innerHTML=`<div style="padding:60px;text-align:center;color:var(--mu)">Mục “${t}” đang được phát triển.<br>Hãy dùng Cây gia phả hoặc Danh sách thành viên.</div>`}
+function render(){chrome();$('#side').style.display=(page=='tree'||page=='list')&&cur&&showDetail?'':'none';$('#side').classList.toggle('open',showDetail);
+ if((page=='tree'||page=='list')&&!cur){ctr=true;$('#body').innerHTML='<div class="pg" style="padding:60px 16px;text-align:center;color:var(--mu)"><div style="font-size:42px">🔒</div><p>Cây gia phả chỉ dành cho thành viên đã đăng nhập. Liên hệ Admin để được cấp tài khoản.</p><p style="font-size:12px">Đã nạp '+M.length+' thành viên · '+users.length+' tài khoản.</p><button class="btn p" id="li">Đăng nhập</button></div>';return}
+ if(page=='tree'||page=='list'){view=page=='list'?'list':view;chrome();view=='tree'?renderTree():renderList();renderSide()}
+ else if(page=='home')renderHome();else if(page=='img')renderGallery();else if(page=='ev')renderEvents();else renderPlaceholder()}
+function select(id){sel=+id;tab=tab;render();}
+function form(m,isNew){
+ let timg=m.img||'';
+ const opts=(sel_,f)=>'<option value="0">— Không —</option>'+M.filter(x=>x.id!=m.id&&(!f||f(x))).map(x=>`<option value="${x.id}" ${x.id==sel_?'selected':''}>${esc(x.name)} (Đời ${x.gen})</option>`).join('');
+ $('#fm').innerHTML=`<h3 style="margin-top:0">${isNew?(formT||'Thêm thành viên'):'Chỉnh sửa thành viên'}</h3><label>Họ và tên</label><input id="f_name" required value="${esc(m.name)}"><div class="g2"><div><label>Giới tính</label><select id="f_g"><option value="M" ${m.g=='M'?'selected':''}>Nam</option><option value="F" ${m.g=='F'?'selected':''}>Nữ</option></select></div><div><label>Đời thứ</label><input id="f_gen" type="number" min="1" value="${m.gen}"></div><div><label>Năm sinh</label><input id="f_by" value="${esc(m.by)}"></div><div><label>Năm mất</label><input id="f_dy" value="${esc(m.dy)}"></div><div><label>Quê quán</label><input id="f_home" value="${esc(m.home)}"></div><div><label>Nghề nghiệp</label><input id="f_job" value="${esc(m.job)}"></div><div><label>Cha</label><select id="f_fid">${opts(m.fid,x=>x.g=='M')}</select></div><div><label>Mẹ</label><select id="f_mid">${opts(m.mid,x=>x.g=='F')}</select></div></div><label>Vợ/Chồng (giữ Ctrl/Cmd để chọn nhiều)</label><select id="f_sid" multiple size="4">${M.filter(x=>x.id!=m.id&&x.g!=m.g).map(x=>`<option value="${x.id}" ${m.sids.includes(x.id)?'selected':''}>${esc(x.name)} (${x.id})</option>`).join('')}</select><label>Ảnh đại diện</label><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span id="f_pv">${av({g:m.g,img:timg})}</span><input type="file" id="f_img" accept="image/*" style="width:auto"><button type="button" class="btn" id="f_rm">Xóa ảnh</button></div><label>Ghi chú</label><textarea id="f_note" rows="3">${esc(m.note)}</textarea><div style="display:flex;gap:8px;margin-top:14px;justify-content:space-between"><span>${isNew?'':'<button type="button" class="btn d" id="f_del">Xóa</button>'}</span><span><button type="button" class="btn" id="f_cx">Hủy</button> <button class="btn p" id="f_ok" value="ok">Lưu</button></span></div>`;
+ $('#dlg').showModal();formT='';
+ $('#f_cx').onclick=()=>$('#dlg').close();
+ $('#f_img').onchange=e=>e.target.files[0]&&shrink(e.target.files[0],480,d=>{timg=d;$('#f_pv').innerHTML=av({g:$('#f_g').value,img:d})});$('#f_rm').onclick=()=>{timg='';$('#f_pv').innerHTML=av({g:$('#f_g').value})};
+ const dl=$('#f_del');if(dl)dl.onclick=()=>{if(!confirm('Xóa thành viên này?'))return;M=M.filter(x=>x.id!=m.id);M.forEach(x=>{['fid','mid'].forEach(k=>{if(x[k]==m.id)x[k]=0});x.sids=x.sids.filter(i=>i!=m.id)});sel=M[0]?.id;save();$('#dlg').close();render()};
+ $('#fm').onsubmit=e=>{const v=k=>$('#f_'+k).value.trim();if(!v('name'))return;
+  Object.assign(m,{name:v('name'),g:v('g'),gen:+v('gen')||m.gen,by:v('by'),dy:v('dy'),home:v('home'),job:v('job'),note:v('note'),fid:+v('fid'),mid:+v('mid'),img:timg});
+  const ns=[...$('#f_sid').selectedOptions].map(o=>+o.value);if(isNew){const p0=ns.length==1&&get(ns[0]),cand=p0&&p0.gen==m.gen&&p0.id%10==0&&!get(p0.id+1)?p0.id+1:0;m.id=cand||Math.floor(Math.max(m.gen*10000,...M.filter(x=>x.gen==m.gen).map(x=>x.id))/10)*10+10;collapsed.delete(m.fid);collapsed.delete(m.mid);saveCol()}
+  m.sids.filter(i=>!ns.includes(i)).forEach(i=>{const o=get(i);if(o)o.sids=o.sids.filter(j=>j!=m.id)});ns.forEach(i=>{const o=get(i);if(o&&!o.sids.includes(m.id))o.sids.push(m.id)});m.sids=ns;
+  if(isNew)M.push(m);sel=m.id;save();render()};
+}
+document.addEventListener('click',e=>{
+ if(e.target.id=='lb'||e.target.className=='lbs'){lb=null;drawLb();return}
+ if(!e.target.closest('#sr')&&!e.target.closest('#qs'))$('#sr').style.display='none';
+ if(focus&&e.target.closest('#vp')&&!e.target.closest('.card')&&!e.target.closest('button')){focus=0;showDetail=false;render();return}
+ const t=e.target.closest('[data-id],[data-p],[data-g],[data-t],[data-act],[data-lb],[data-pick],button');if(!t)return;
+ if(t.dataset.pick){pick(+t.dataset.pick);return}
+ if(t.dataset.lb){lbAct(t.dataset.lb);return}
+ if(t.dataset.act){act(t.dataset.act,t.dataset.i);return}
+ if(t.dataset.id&&!t.closest('dialog')){const id=+t.dataset.id;
+  if(t.tagName=='TR'){sel=id;showDetail=true}
+  else if(t.closest('#side')){sel=id;focus=id;showDetail=true}
+  else if(focus==id){sel=id;showDetail=true}
+  else{sel=id;focus=id;showDetail=false}
+  render();return}
+ if(t.dataset.p){page=t.dataset.p;if(page=='tree')ctr=true;render();return}
+ if(t.dataset.g!=null){gen=+t.dataset.g;render();return}
+ if(t.dataset.t!=null){tab=+t.dataset.t;renderSide();return}
+ const id=t.id;
+ if(id=='li')authForm(0);else if(id=='rg')authForm(1);else if(id=='lo'){cur=null;try{localStorage.removeItem('giapha_sess')}catch(e){}render()}
+ else if(id=='eh')hform();else if(id=='ah')pickImg(900,d=>{C.home.imgs.push(d);csave();render()},1);else if(id=='ag')pickImg(900,d=>{curAlb().imgs.push({src:d,cap:''});csave();render()},1);else if(id=='ae')eform();else if(id=='lk'&&can('content'))linkForm();else if(id=='nl')alert('Quản trị viên chưa gán link cho nút này.');else if(id=='aa'&&can('content')){const n=prompt('Tên album');if(n&&n.trim()){C.albums.push({id:Math.max(0,...C.albums.map(x=>x.id))+1,name:n.trim(),imgs:[]});csave();render()}}
+ else if(id=='vt'){view='tree';page='tree';render()}
+ else if(id=='vl'){view='list';page='tree';render()}
+ else if(id=='add'&&can('edit'))form({name:'',g:'M',gen:get(sel)?.gen||1,by:'',dy:'',home:'',job:'',note:'',fid:0,mid:0,sids:[]},true);
+ else if((id=='ed'||id=='full')&&can('edit'))form(get(sel),false);
+ else if(id=='zi')setZoom(zoom*1.2);else if(id=='zf')fitZoom()
+ else if(id=='zo')setZoom(zoom/1.2)
+ else if(id=='zr')setZoom(1)
+ else if(id=='imp'&&can('edit'))impForm()
+ else if(id=='ac'&&can('edit'))addRel('child',get(sel))
+ else if(id=='asp'&&can('edit'))addRel('spouse',get(sel))
+ else if(id=='fx'){focus=0;showDetail=false;render()}
+ else if(id=='nu'&&adm())userForm()
+ else if(id=='pdf')exportPdf()
+ else if((id=='exu'||id=='exc')&&adm())dlJson(id=='exu'?users:C,id=='exu'?'giapha_users_v1.json':'giapha_content_v1.json')
+ else if(id=='dc'&&adm()){if(confirm('Bỏ các thay đổi chưa đưa lên GitHub trên trình duyệt này và tải lại dữ liệu mới nhất?')){['giapha_ngo_v1','giapha_users_v1','giapha_content_v1'].forEach(k=>{localStorage.removeItem(k);localStorage.removeItem('dirty_'+k);sessionStorage.removeItem('sd_'+k)});location.reload()}}
+ else if(id=='rl'&&adm()){if(!confirm('Nạp lại toàn bộ dữ liệu (thành viên, tài khoản, nội dung) từ GitHub? Thay đổi chưa upload trên trình duyệt này sẽ mất.'))return;
+ Promise.all([['giapha_ngo_v1','./giapha_ngo_v1.json'],['giapha_users_v1','./giapha_users_v1.json'],['giapha_content_v1','./giapha_content_v1.json']].map(([k,p])=>fetch(p+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(p+' (HTTP '+r.status+')')).then(d=>{localStorage.setItem(k,JSON.stringify(d));localStorage.removeItem('dirty_'+k);sessionStorage.removeItem('sd_'+k);return 1}).catch(e=>{if(k=='giapha_ngo_v1')throw e;return 0}))).then(()=>location.reload()).catch(e=>alert('Không nạp được file: '+e))}
+ else if(id=='rst'&&adm()){if(confirm('Xóa toàn bộ thành viên? Hãy xuất JSON để sao lưu trước.')){M=[];sel=undefined;save();render()}}
+ else if(id=='exp'&&adm()){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(M,null,1)],{type:'application/json'}));a.download='giapha_ngo_v1.json';a.click()}
+});
+const onq=e=>{q=e.target.value.trim().toLowerCase();$('#qs').value=e.target.value;showSr(e.target);render()};
+$('#qs').oninput=onq;
+[$('#qs')].forEach(i=>i.addEventListener('keydown',e=>{if(e.key=='Enter'){const L=$('#sr').__L||[];if(L.length==1)pick(L[0].id)}}));
+addEventListener('resize',()=>{applyZoom();lines()});
+
+// Đồng bộ với file JSON trên máy chủ/GitHub mỗi lần tải trang
+(function syncRemote(){
+ window.__ld='';
+ const FILES=[['giapha_ngo_v1','./giapha_ngo_v1.json',1],['giapha_users_v1','./giapha_users_v1.json',0],['giapha_content_v1','./giapha_content_v1.json',0]];
+ const canon=(k,j)=>{if(k=='giapha_ngo_v1'){const a=Array.isArray(j)?j:(j&&(j.members||j.data||j.M))||[];return JSON.stringify(a.map(norm).filter(Boolean))}return JSON.stringify(j)};
+ const rd=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+ let reload=false,pend=FILES.length;
+ FILES.forEach(([k,p,must])=>{
+  fetch(p+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject('HTTP '+r.status)).then(d=>{
+   const loc=rd(k),dirty=k=='giapha_ngo_v1'?localStorage.getItem('dirty_'+k):sessionStorage.getItem('sd_'+k),empty=loc==null||(Array.isArray(loc)&&!loc.length);
+   if(!empty&&canon(k,loc)==canon(k,d)){localStorage.removeItem('dirty_'+k);sessionStorage.removeItem('sd_'+k)}
+   else if(!dirty||empty){localStorage.setItem(k,JSON.stringify(d));localStorage.removeItem('dirty_'+k);reload=true}
+  }).catch(e=>{if(must&&!(rd(k)||[]).length)window.__ld='Không nạp được '+p+' ('+e+'). Kiểm tra tên file, đường dẫn và định dạng JSON.'})
+  .finally(()=>{if(--pend)return;const n=+sessionStorage.getItem('syncn')||0;
+   if(reload&&n<3){sessionStorage.setItem('syncn',n+1);location.reload()}else{if(!reload)sessionStorage.removeItem('syncn');render()}})});
+})();
+
+
+render();
+</script></body></html>
