@@ -16,5 +16,14 @@
   "role": "user",
   "edit": false,
   "content": false
+ },
+ {
+  "u": "quantri",
+  "name": "Quản trị",
+  "salt": "fb4ae0d4-ab80-470f-98ef-d01245dd66eb",
+  "h": "e83452a1d08ebc810203ce41b17b92890754f0704f342a25bbd97dbab5caec1e",
+  "role": "user",
+  "edit": false,
+  "content": true
  }
 ]
